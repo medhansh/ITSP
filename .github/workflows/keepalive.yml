@@ -1,0 +1,26 @@
+name: Keep schedule alive
+
+# GitHub DISABLES scheduled workflows after 60 days without repository
+# activity, silently. A fully automated repo with no human commits will
+# therefore stop running about two months in, with no notification.
+# This weekly no-op commit resets that timer.
+on:
+  schedule:
+    - cron: "0 6 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+          git add .keepalive
+          git diff --staged --quiet || git commit -m "keepalive"
+          git push

@@ -1,0 +1,91 @@
+name: Paper trading
+
+# NSE closes 15:30 IST = 10:00 UTC. Runs at 12:30 UTC (18:00 IST) to leave
+# room for yfinance to publish the day's close.
+#
+# GitHub's scheduled runs are best-effort and are frequently delayed under
+# load, so this must not assume it fires at an exact time. The engine keys
+# off trading days present in the price file, not off the clock, so a late
+# or skipped run simply catches up on the next one.
+on:
+  schedule:
+    - cron: "30 12 * * 1-5"
+  workflow_dispatch:        # manual trigger, also used to keep the schedule alive
+
+permissions:
+  contents: write           # to commit the updated ledger back
+  pages: write
+  id-token: write
+
+concurrency:
+  group: paper-trading      # never let two runs mutate the ledger at once
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          pip install --upgrade pip
+          pip install pandas numpy scikit-learn scipy pyyaml joblib requests \
+                      beautifulsoup4 lxml yfinance
+          # vectorbt and matplotlib are deliberately omitted: the paper trader
+          # uses neither, and both are slow to install.
+
+      - name: Update prices
+        run: python scripts/fetch_data.py prices
+        # Not fail-fast: yfinance throttles datacenter IPs and intermittent
+        # failures are expected. A failed fetch leaves yesterday's prices in
+        # place and the engine reports no new trading days rather than
+        # corrupting the ledger.
+        continue-on-error: true
+
+      - name: Refresh fundamentals (Mondays only)
+        run: |
+          # Quarterly filings change a few times a year, so re-scraping them
+          # daily is wasted requests against Screener and a good way to get
+          # rate-limited. Weekly is well inside the update frequency.
+          if [ "$(date -u +%u)" = "1" ]; then
+            python scripts/fetch_data.py fundamentals || echo "fundamentals refresh failed, using cached"
+            python scripts/fetch_data.py quarterly-history || true
+          fi
+        continue-on-error: true
+
+      - name: Advance paper trading
+        run: |
+          if [ -f data/processed/paper_ledger.json ]; then
+            python scripts/run_paper_trading.py
+          else
+            python scripts/run_paper_trading.py --init --start 2025-01-01
+          fi
+
+      - name: Commit ledger and dashboard
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p site && cp reports/paper_trading.html site/index.html
+          git add -f data/processed/paper_ledger.json site/index.html
+          git diff --staged --quiet || git commit -m "Paper trading: $(date -u +%Y-%m-%d)"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: run
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

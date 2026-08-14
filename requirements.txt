@@ -1,0 +1,16 @@
+numpy>=1.26
+pandas>=2.1
+scikit-learn>=1.4
+scipy>=1.11
+hmmlearn>=0.3.2
+joblib>=1.3
+PyYAML>=6.0
+matplotlib>=3.8
+yfinance>=0.2.40
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+pytest>=8.0
+vectorbt>=0.26        # primary backtest engine (src/backtesting/vbt_engine.py) — the
+                       # custom engine.py stays as a dependency-free fallback if this
+                       # isn't installed (see backtesting.engine in configs/config.yaml)

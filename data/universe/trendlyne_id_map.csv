@@ -1,0 +1,9 @@
+symbol,trendlyne_id,slug
+# Trendlyne URLs use an internal numeric ID + slug, not the NSE symbol
+# directly: https://trendlyne.com/equity/<trendlyne_id>/<symbol>/<slug>/
+# No reliable public search/resolver endpoint was confirmed during
+# development (see src/fundamental_analysis/data_fetchers/trendlyne_fetcher.py
+# docstring) — populate this file by visiting trendlyne.com, searching each
+# NIFTY500 constituent, and copying the id/slug from the resulting URL.
+# One confirmed example to start from:
+RELIANCE,1127,reliance-industries-ltd

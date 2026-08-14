@@ -1,0 +1,340 @@
+# Central configuration for Team DAC's regime-aware trading system.
+# Every tunable that experiments touch should live here, not hardcoded in src/.
+
+universe:
+  list_path: "data/universe/nifty500_list.csv"
+  index_symbol: "NIFTY500"          # broad index used for regime features
+  benchmark_symbol: "NIFTY50"       # benchmark for relative-return style features
+
+regime_detection:
+  lookback_years: 10
+  feature_windows:                 # trading-day windows for rolling features
+    returns: [5, 21, 63]
+    realized_vol: [21, 63]
+    breadth: [21]
+    range_vol: [21, 63]             # Parkinson/Garman-Klass windows — only used if the
+                                     # price CSV has high/low (Parkinson) or open+high+low
+                                     # (Garman-Klass) columns; defaults to realized_vol's
+                                     # windows if omitted. See features.py.
+    volume_zscore: [21, 63]         # only used if the price CSV has a volume column
+    obv_trend: [21, 63]             # only used if the price CSV has a volume column
+  model:
+    type: "gmm"                    # one of: gmm, kmeans, hmm
+    n_regimes: 4                   # e.g. low-vol uptrend / high-vol uptrend / low-vol downtrend / high-vol downtrend
+    random_state: 42
+  vix_proxy_symbol: "INDIAVIX"
+  geometric_signal:                 # wedge-product crash-risk feature — see
+                                     # src/regime_detection/geometric_signal.py
+                                     # for the full write-up AND the caveat on
+                                     # the source blog's unverified 16.7%/98%
+                                     # claims (do not repeat those numbers
+                                     # without independently reproducing them).
+    enabled: false                  # off by default until validate_against_known_crises
+                                     # has been run on real (not synthetic) data
+    window: 60                      # trading days per rolling wedge-volume window
+    smoothing_window: 10
+    percentile_window: 252          # ~1yr self-relative percentile lookback
+    crash_percentile_threshold: 0.15
+    sector_price_csv: "data/raw/sector_prices.csv"
+    sector_tickers:                 # used by scripts/fetch_data.py sector-prices; VERIFY before relying on them
+      IT: "^CNXIT"
+      BANK: "^NSEBANK"
+      AUTO: "^CNXAUTO"
+      PHARMA: "^CNXPHARMA"
+      FMCG: "^CNXFMCG"
+      METAL: "^CNXMETAL"
+      ENERGY: "^CNXENERGY"
+      REALTY: "^CNXREALTY"
+      FIN_SERVICE: "^CNXFIN"
+  consensus_governor:                # Hybrid HMM + Wasserstein state governor — see
+                                       # src/regime_detection/wasserstein_proximity.py and
+                                       # state_governor.py; entropy-gated consensus between
+                                       # the model.type posterior and Wasserstein-1 proximity
+                                       # to training-time regime templates, with persistence +
+                                       # hysteresis gating to reduce over-switching. Purely
+                                       # additive — adds active_regime/consensus_entropy/etc.
+                                       # columns, does not change regime/regime_name/p_regime_*.
+    enabled: false                    # CONFIRMED NEGATIVE on real NIFTY500 data (2026-07-24 run):
+                                       # governed_regime_only underperformed regime_only on CAGR
+                                       # (9.2% vs 10.0%), Sharpe (0.79 vs 0.85), AND max drawdown
+                                       # (-23.2% vs -20.7%) simultaneously -- worse on every axis,
+                                       # not a risk/return tradeoff. Same pattern held through to
+                                       # governed_combined vs combined. Likely cause: the
+                                       # persistence_window/hysteresis_epsilon defaults lag both
+                                       # INTO and OUT OF regime changes, costing return on both
+                                       # transitions rather than smoothing genuine noise. Leave
+                                       # off unless you specifically want to spend time re-tuning
+                                       # entropy_limit/persistence_window/hysteresis_epsilon
+                                       # against real data -- not recommended as a first priority
+                                       # given the effect size found here.
+    wasserstein_columns:               # null -> defaults to return_5d/21d + realized_vol_21d/63d
+    wasserstein_window: 21            # rolling window (trading days) for the empirical distribution
+    entropy_limit: 0.85               # bits; above this, bar is flagged "transitional"
+    persistence_window: 5             # consecutive bars a new regime must lead before activating
+    hysteresis_epsilon: 0.05          # required probability margin to switch active regime
+
+fundamental_analysis:
+  universe: "NIFTY500"
+  as_of: null                       # null = latest available; else YYYY-MM-DD
+  sector_relative: true             # z-score within sector, not across the whole universe
+  dimensions:                       # toggle dimensions on/off without touching code
+    valuation: true
+    profitability_quality: true
+    growth: true
+    leverage_solvency: true
+    cashflow_quality: true
+    ownership_governance: true
+    earnings_surprise: true
+    options_earnings: true          # pre-earnings IV/skew — see metrics/options_earnings.py;
+                                     # NOTE: needs option_summary_history + earnings_calendar
+                                     # merged onto the snapshot upstream (run_full_pipeline.py) —
+                                     # degrades to all-NaN (harmless, renormalized away) without them.
+    technical_momentum: true        # Ichimoku conviction AS A SELECTION INPUT (see
+                                     # metrics/technical_momentum.py) — added 2026-07-24 after two
+                                     # POST-selection mechanisms (gating and reallocating an
+                                     # already-built portfolio, see technical_signals.ichimoku
+                                     # below) were both confirmed negative on real data despite the
+                                     # underlying signal being the single best-performing standalone
+                                     # component found. This tests whether the edge is a stock-
+                                     # picking signal instead. NEEDS technical_signals.ichimoku.enabled
+                                     # to also be true (that's what builds the conviction panel this
+                                     # dimension consumes) — degrades to all-NaN (harmless,
+                                     # renormalized away) if that's off, same convention as
+                                     # options_earnings above.
+  composite_weights:                # must sum to 1.0; validated at load time. Rebalanced
+                                     # 2026-07-24 when technical_momentum was added: every other
+                                     # weight scaled by 0.95, technical_momentum given 0.05 --
+                                     # deliberately small, same "newest/least-validated dimension"
+                                     # convention as options_earnings below.
+    valuation: 0.135375
+    profitability_quality: 0.1805
+    growth: 0.135375
+    leverage_solvency: 0.135375
+    cashflow_quality: 0.135375
+    ownership_governance: 0.09025
+    earnings_surprise: 0.09025
+    options_earnings: 0.0475        # deliberately small: newest, least-validated dimension
+    technical_momentum: 0.05        # deliberately small: newest, least-validated dimension —
+                                     # see the dimensions.technical_momentum comment above for why
+                                     # this exists and what real-data evidence motivated it.
+  technical_momentum_regime_conditioning:  # Added after walk-forward validation (2026-07-27) found
+                                     # technical_momentum's out-of-sample edge was real on average but
+                                     # concentrated unevenly across folds, with a real (if imperfect —
+                                     # one flat-market fold broke the pattern) positive correlation
+                                     # between edge size and how much the benchmark was trending during
+                                     # that period. Ichimoku is architecturally a trend-following
+                                     # signal, so this isn't shocking, but it means a single STATIC
+                                     # weight either overpays for it in choppy/high-vol conditions
+                                     # where it's least reliable, or underuses it when conditions are
+                                     # genuinely favorable. See point_in_time.apply_regime_conditional_weight
+                                     # and docs/fundamental_analysis_spec.md's technical_momentum section.
+    enabled: false                  # off by default -- NOT yet validated itself; this is a NEW,
+                                     # untested mechanism motivated by real evidence, not a proven fix.
+                                     # Compare against the static-weight baseline (this block disabled)
+                                     # with scripts/walk_forward_technical_momentum.py before trusting it.
+    multipliers:                    # scales the composite_weights.technical_momentum value above,
+                                     # per CURRENT regime at each rebalance date, before rebalancing the
+                                     # rest to compensate. Regime labels must match
+                                     # regime_detection.models.REGIME_LABELS_4 (or your model's n_regimes
+                                     # mapping) -- any regime not listed here falls back to 1.0 (no
+                                     # adjustment), logged, rather than silently guessing an extreme.
+      low_vol_calm: 1.0              # full weight -- calm/trending conditions are where the walk-forward
+                                     # evidence was strongest
+      moderate_vol: 0.6
+      elevated_vol: 0.3
+      high_vol_stress: 0.0          # zero weight during high-vol stress -- exactly the kind of
+                                     # condition where a trend-following signal is least trustworthy
+  point_in_time:                    # see src/fundamental_analysis/point_in_time.py
+    enabled: true
+    reporting_lag_days: 45          # SEBI LODR Reg. 33 filing deadline used as the
+                                     # conservative "known as of" heuristic — see
+                                     # screener_fetcher.fetch_quarterly_history docstring
+    quarterly_history_path: "data/raw/fundamentals_quarterly_history.csv"
+    rebalance_frequency: "MS"       # pandas offset alias: MS=month start. Used to build
+                                     # the rebalance-date schedule for scores_by_date.
+
+data_fetchers:
+  price_source: "yfinance"          # only supported price source currently
+  price_start_date: "2015-01-01"
+  benchmark_ticker: "^CRSLDX"       # NIFTY500 Total Return proxy on Yahoo Finance — verify before relying on it
+  fundamentals:
+    sources: ["screener", "yfinance", "trendlyne"]   # which sources to query
+    source_priority: ["screener", "yfinance", "trendlyne"]  # field-level fallback order when merging
+    min_delay_seconds: 2.0          # politeness delay between requests to the same domain
+    cache_dir: "data/raw/.cache"
+    cache_ttl_days: 7
+    trendlyne_mapping_path: "data/universe/trendlyne_id_map.csv"
+  options:                          # see src/fundamental_analysis/data_fetchers/options_fetcher.py —
+                                     # NO free bulk NSE options source is wired in; this section only
+                                     # controls where run_full_pipeline.py looks for/caches a
+                                     # pre-built option_summary_history + earnings_calendar CSV.
+    enabled: false
+    option_summary_history_path: "data/raw/option_summary_history.csv"
+    earnings_calendar_path: "data/raw/earnings_calendar.csv"
+    pre_earnings_window_days: 5
+    max_lookback_days: 10
+    iv_percentile_lookback_days: 252
+
+sentiment_analysis:
+  enabled: false                    # intentionally out of scope for this pass
+
+technical_signals:
+  ichimoku:                         # src/backtesting/adaptive_ichimoku.py -- see
+                                     # docs/backtesting_spec.md's "Ichimoku" section
+                                     # for the real-data results this default is based on.
+    enabled: false                  # off by default -- STILL EXPERIMENTAL/UNVALIDATED on
+                                     # real NIFTY500 data (only synthetic-data tested so far).
+                                     # Turning this on adds ichimoku_only/combined_with_ichimoku
+                                     # to the attribution table -- see attribution.py.
+    variant: "static"                # "static" (fixed-period baseline), "shrink_when_high", or
+                                     # "shrink_when_low" (adaptive). "static" is the current
+                                     # default because it was the least-bad of the three in
+                                     # every run so far, real and synthetic (both adaptive
+                                     # directions underperformed it) -- NOT because it's been
+                                     # validated as actually good; run
+                                     # scripts/run_adaptive_ichimoku_backtest.py --variant all
+                                     # yourself on real data before trusting this choice.
+    signal_mode: "conviction_score"   # "conviction_score" (default) or "triple_confirmation".
+                                     # triple_confirmation is the traditional binary AND-of-3
+                                     # reading (cloud + Tenkan/Kijun + Chikou all agree) -- low
+                                     # day-to-day hit rate by construction, which is why
+                                     # combined_with_ichimoku collapsed to near-zero exposure in
+                                     # the first real run regardless of confirmation_mode below.
+                                     # conviction_score sums 4 continuous, normalized versions of
+                                     # the same 4 relationships and squashes with tanh into
+                                     # [0,1] -- a symbol can register real conviction without
+                                     # every single sub-check individually agreeing, AND weights
+                                     # are conviction-sized (not equal-split) among active names.
+                                     # See adaptive_ichimoku.compute_ichimoku_conviction_score.
+    t: 10                            # base SMA window for the dispersion score driving adaptivity
+                                     # (only used by the two adaptive variants)
+    zscore_window: 252
+    scale_min: 0.5
+    scale_max: 1.5
+    base_tenkan: 9
+    base_kijun: 26
+    base_senkou_b: 52
+    allow_short: false               # backtest engines here are long-only/no-leverage; see
+                                     # adaptive_ichimoku.build_ichimoku_weights's docstring
+    confirmation_mode: "breadth_scalar"  # "breadth_scalar" (recommended, default) or "hard_gate".
+                                     # hard_gate zeroes out individual unconfirmed names from
+                                     # `combined` -- in the first real backtest this collapsed
+                                     # combined_with_ichimoku to beta ~0.19 (mostly cash), because
+                                     # ANDing two independently-narrow selections (fundamentals'
+                                     # ~20% of universe x Ichimoku's own confirmed subset) nearly
+                                     # always leaves a tiny overlap. breadth_scalar instead scales
+                                     # TOTAL exposure by what fraction of currently-held names are
+                                     # confirmed, keeping every selected name in the portfolio. See
+                                     # src/backtesting/strategies.py's apply_ichimoku_gate warning
+                                     # and apply_ichimoku_breadth_scalar docstring.
+    confirmation_floor: 0.0          # only used by confirmation_mode=breadth_scalar -- minimum
+                                     # exposure fraction even on a zero-confirmation day.
+    tilt_strength: 0.0                # CONFIRMED NEGATIVE on real NIFTY500 data (2026-07-24, after
+                                     # the mechanism below was fixed and verified actually working):
+                                     # combined_ichimoku_tilted underperformed combined on CAGR
+                                     # (-0.57pp), Sharpe (-0.097), AND max drawdown (4.7pp worse)
+                                     # simultaneously. Conviction spread within the fundamentals-
+                                     # selected basket was checked and is NOT meaningfully
+                                     # compressed vs the full universe (0.0036 vs 0.0041 std) --
+                                     # so this isn't a "not enough signal to act on" problem.
+                                     # Combined with confirmation_mode's gate ALSO being confirmed
+                                     # negative (see above), the likely explanation: ichimoku_only's
+                                     # real edge (21.7% CAGR standalone, best of any component) is a
+                                     # stock-picking/rotation signal across the FULL universe, not a
+                                     # within-basket conviction/timing enhancer -- reallocating or
+                                     # gating an already-fixed ~100-name selection can't recover
+                                     # that. Set to nonzero only if testing this further; the more
+                                     # promising remaining direction is feeding conviction into
+                                     # stock SELECTION itself (an 8th fundamentals composite
+                                     # dimension) rather than any post-selection mechanism -- see
+                                     # docs/backtesting_spec.md's "Ichimoku conviction tilt" section
+                                     # for the full history of what's been tried.
+                                     #
+                                     # Mechanism (re-calibrated 2026-07-24 after a real bug fix):
+                                     # z-scores conviction cross-sectionally each day before
+                                     # applying tilt_strength, instead of a raw demeaned term -- the
+                                     # raw version was silently a no-op on real data, because it was
+                                     # fed build_ichimoku_weights's OUTPUT (an already-normalized
+                                     # ~1/n_active-scale weight matrix, e.g. ~0.002 for 500 symbols),
+                                     # not raw [0,1] conviction, making the old demeaned term two
+                                     # orders of magnitude too small to matter. See
+                                     # strategies.apply_ichimoku_conviction_tilt's docstring and
+                                     # tests/test_ichimoku_backtest_wiring.py's dedicated regression
+                                     # test. At nonzero values: e.g. 0.5 means a name 1 std above
+                                     # that day's mean conviction gets 1.5x its base weight before
+                                     # renormalization; values above ~1.0 start zeroing out names
+                                     # more than ~1 std below the mean entirely.
+                                     # ALWAYS computed ALONGSIDE
+                                     # combined_with_ichimoku, not instead of it -- adds a
+                                     # combined_ichimoku_tilted component that REALLOCATES
+                                     # combined's capital among its already-selected names by
+                                     # relative Ichimoku conviction, holding TOTAL exposure fixed
+                                     # (see strategies.apply_ichimoku_conviction_tilt). Real-data
+                                     # finding (2026-07-24): ichimoku_only standalone was the best
+                                     # component found (21.8% CAGR), but gating combined by it
+                                     # (confirmation_mode above) still lost 6.6pp of CAGR vs plain
+                                     # combined despite better Sharpe/drawdown -- gating can only
+                                     # ever cut exposure, never redirect it. Tilting can only ever
+                                     # reallocate, never cut total exposure -- test whether that
+                                     # captures the signal's real information better. Set to 0.0
+                                     # to disable (no combined_ichimoku_tilted computed).
+    min_history_days_warning: true   # log a warning if price history is too short for the
+                                     # z-score lookback + base periods to be fully warmed up
+
+backtesting:
+  engine: "vectorbt"                # "vectorbt" (default) or "custom" — see
+                                     # src/backtesting/vbt_engine.py. Falls back to
+                                     # the custom engine.py automatically (with a
+                                     # logged warning) if vectorbt isn't installed.
+  top_quantile: 0.2                 # fraction of the universe held long, by composite_score
+  min_positions: 5                  # floor on position count regardless of top_quantile x universe size
+  max_sector_weight: 0.30           # NEW 2026-07-27: caps any single sector at this fraction of the
+                                     # fundamentals selection -- addresses a real, previously-unaddressed
+                                     # problem: fundamentals_only's max drawdown has consistently been
+                                     # WORSE than the raw benchmark's across every real run so far
+                                     # (e.g. -45% vs -38%), a sector-concentration signature. Greedy,
+                                     # rank-preserving: a capped sector's excess candidates are skipped
+                                     # in favor of the next-best idea from elsewhere, not dropped outright
+                                     # -- see strategies.build_fundamental_portfolio_weights. Set to null
+                                     # to disable (exact pre-cap behavior).
+  max_position_weight: null         # caps any single symbol's weight. With the current equal-weighting
+                                     # scheme this only bites if min_positions is small enough that
+                                     # 1/min_positions alone exceeds the cap -- mostly future-proofing
+                                     # for if/when position sizing stops being purely equal-weighted.
+                                     # null (default) = no cap.
+  transaction_cost_bps: 10          # one-way cost in bps, charged on daily turnover
+  lag_days: 1                       # trading days between a weight being "decided" (using
+                                     # data through that day's close) and it earning returns.
+                                     # Default 1 -- the standard no-look-ahead convention; a
+                                     # signal computed using day T's close cannot be acted on
+                                     # until day T+1 (you can't observe today's close before
+                                     # today ends). Do NOT set to 0 without a specific reason
+                                     # (e.g. weights already lagged upstream) -- see
+                                     # src/backtesting/engine.py's run_backtest docstring for
+                                     # the same-day-spike bug this prevents.
+  rolling_sharpe_window: 63         # trading days (~1 quarter)
+  exposure_by_regime:                # benchmark exposure fraction per regime label (0=calmest)
+    0: 1.00                          # low-vol calm      -> fully invested
+    1: 0.85                          # moderate vol       -> slightly de-risked
+    2: 0.55                          # elevated vol        -> materially de-risked
+    3: 0.25                          # high-vol stress       -> mostly in cash
+    transitional: 0.25               # only used by governed_regime_only/governed_combined (see
+                                       # attribution.py) when regime_detection.consensus_governor
+                                       # is enabled -- active_regime can be the string
+                                       # "transitional" on ambiguous/high-entropy bars, which has
+                                       # no int key above. Per the research doc's "Transitional"
+                                       # target row (0.25x). If omitted, defaults to full (1.0)
+                                       # exposure with a logged warning -- see
+                                       # strategies.build_regime_exposure_weights.
+  geometric_crash_exposure_multiplier: 0.5  # exposure cut applied ONLY on days the geometric
+                                             # wedge-product crash-risk flag is active (see
+                                             # regime_detection.geometric_signal above) — applied
+                                             # as a standalone overlay (geometric_overlay_only
+                                             # component) AND on top of `combined`, independent of
+                                             # the GMM regime label. No effect if the signal is
+                                             # disabled. See src/backtesting/strategies.py.
+  report_dir: "reports"
+
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"

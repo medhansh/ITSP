@@ -47,18 +47,12 @@ In your browser, on the new repo:
 
 1. `Actions` tab → if prompted, click **I understand my workflows, enable
    them**.
-2. Left sidebar → **Paper trading** → **Run workflow** → **Run workflow**.
-
-The first run takes roughly 5–10 minutes: it installs dependencies, fetches
-prices, seeds the ledger with `--init`, and publishes the dashboard.
-
-Your site appears at:
-
-```
-https://<your-username>.github.io/<repo-name>/
-```
-
-Give Pages 2–3 minutes after the first successful run.
+2. Left sidebar → **Paper trading** → **Run workflow**. A panel opens with
+   two optional inputs:
+   - **force_init** — leave unchecked for the first run; the workflow
+     already auto-seeds when no ledger exists.
+   - **start_date** — leave blank.
+3. Click **Run workflow**.
 
 ---
 
@@ -187,3 +181,30 @@ activity. Leave it as insurance, or disable it under `Actions` if you prefer.
 If a run reports **0 positions**, the log carries a warning explaining why —
 usually that the fundamentals snapshot is missing, so no scores could be
 produced.
+
+
+---
+
+## Force-restarting the ledger
+
+Sometimes you want to wipe history and replay from a different date —
+after a strategy change, or to fix a bad seed. Use the same **Run
+workflow** panel:
+
+1. `Actions` → **Paper trading** → **Run workflow**
+2. Check **force_init**
+3. **start_date**: e.g. `2025-01-01`. Leave blank to fall back to roughly a
+   one-year replay window.
+4. **Run workflow**
+
+**This destroys the current ledger and fill history — there is no undo.**
+The old dashboard state is gone once the new commit lands.
+
+Two safeguards are built in:
+
+- `force_init` only exists on the manual **workflow_dispatch** trigger.
+  The external `repository_dispatch` trigger and the cron fallback never
+  set it, so nothing but a human deliberately checking the box can wipe
+  the ledger.
+- `start_date` is silently ignored unless `force_init` is checked, so
+  typing a date without ticking the box does nothing.

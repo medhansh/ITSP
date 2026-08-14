@@ -46,6 +46,81 @@ regime_detection:
       ENERGY: "^CNXENERGY"
       REALTY: "^CNXREALTY"
       FIN_SERVICE: "^CNXFIN"
+  factor_dispersion:                 # Alternative/supplementary regime-detection feature — see
+                                     # src/regime_detection/factor_dispersion.py's module
+                                     # docstring. Motivated by three separate attempts to make the
+                                     # price-vol regime label interact more cleverly with stock
+                                     # selection (consensus_governor below, regime-conditional
+                                     # technical_momentum weighting, and the plain exposure-scaling
+                                     # combination itself) all coming back flat-to-negative —
+                                     # consistent with (not proof of) price volatility not being
+                                     # the right axis for what stock-selection actually needs.
+                                     # Requires a pre-built daily factor_dispersion Series (see
+                                     # factor_dispersion.compute_cross_sectional_dispersion +
+                                     # resample_dispersion_to_daily) passed into
+                                     # regime_detection.pipeline.run_pipeline -- these config
+                                     # values alone don't build that series; NOT wired into
+                                     # scripts/run_full_pipeline.py's orchestration yet, since doing
+                                     # so requires fundamentals PIT scoring to run BEFORE regime
+                                     # detection instead of after (the current ordering), and that
+                                     # reordering hasn't been done/tested yet either.
+    enabled: false                  # off by default -- NOT yet validated on real data
+    use_price_features: true        # true: ADD dispersion features alongside existing price-vol
+                                     # features. false: REPLACE the clustering feature set with
+                                     # ONLY factor_dispersion features -- the "alternative
+                                     # framework" mode (refit regime detection on cross-sectional
+                                     # factor-score spread INSTEAD OF price volatility). Compare
+                                     # both against the price-vol-only baseline (this whole block
+                                     # disabled) as separate, clearly-labeled runs -- don't assume
+                                     # either beats the baseline without checking.
+    windows: [63, 252]               # rolling z-score lookback window(s) for
+                                     # compute_factor_dispersion_features; matches this project's
+                                     # existing convention of a ~1yr self-relative lookback
+                                     # (e.g. vix_zscore_1y)
+    min_symbols: 10                 # minimum symbols with a non-NaN composite_score on a given
+                                     # rebalance date before that date's dispersion is trusted; see
+                                     # compute_cross_sectional_dispersion docstring
+  supervised:                        # Walk-forward SUPERVISED prediction of the regime label,
+                                     # trained on the labels the unsupervised model already
+                                     # produces -- see src/regime_detection/supervised_regime.py's
+                                     # module docstring. Does NOT replace GMM/HMM: the
+                                     # unsupervised model still discovers WHAT the states are,
+                                     # this layer learns WHEN transitions happen. Targets the
+                                     # same over-switching problem consensus_governor below
+                                     # tried and failed to fix, from the opposite direction
+                                     # (anticipate the change rather than smooth the label
+                                     # after the fact).
+                                     # Uses LightGBM when installed, else sklearn's
+                                     # HistGradientBoostingClassifier (same algorithm family;
+                                     # the fallback exists because LightGBM isn't installable
+                                     # in the build sandbox). Which backend ran is logged.
+    enabled: false                  # off by default -- NOT yet validated on real data. Note
+                                     # the prior: four previous regime-side attempts
+                                     # (consensus_governor, regime-conditional weighting,
+                                     # factor_dispersion, and the combined-strategy interaction
+                                     # effect itself) have all come back flat-to-negative.
+                                     # Only used by scripts/compare_regime_feature_sets.py's
+                                     # "supervised" arm; not wired into run_full_pipeline.py.
+    horizon: 5                      # trading days ahead to predict. This is what makes the
+                                     # model anticipatory rather than a relabelling of today.
+    retrain_every: 63               # refit cadence in trading days (~1 quarter)
+    min_train: 504                  # minimum training rows (~2yr) before the first prediction;
+                                     # earlier rows are NaN, never backfilled with the
+                                     # unsupervised label (mixing the two would make the arm a
+                                     # blend of both approaches and the comparison meaningless)
+    random_state: 42
+                                     # HONEST CAVEAT, worth reading before interpreting any
+                                     # result: the TARGET labels come from a full-history
+                                     # RegimeModel.fit, exactly as the existing regime_only /
+                                     # combined baseline already does. The supervised model is
+                                     # trained strictly walk-forward, but its target carries
+                                     # full-sample information. That keeps this comparable to
+                                     # the baseline (same labels, different consumption) and
+                                     # means a win here is NOT evidence of live tradability on
+                                     # its own. Judge by backtest attribution, never by label
+                                     # agreement/classification accuracy -- a model 85% accurate
+                                     # at reproducing labels can still be worthless if the 15%
+                                     # it misses are the transitions that matter.
   consensus_governor:                # Hybrid HMM + Wasserstein state governor — see
                                        # src/regime_detection/wasserstein_proximity.py and
                                        # state_governor.py; entropy-gated consensus between
@@ -117,6 +192,38 @@ fundamental_analysis:
     technical_momentum: 0.05        # deliberately small: newest, least-validated dimension —
                                      # see the dimensions.technical_momentum comment above for why
                                      # this exists and what real-data evidence motivated it.
+                                     #
+                                     # *** DO NOT RAISE THIS. CONFIRMED NEGATIVE 2026-08-11. ***
+                                     # An in-sample sweep (scripts/sweep_technical_momentum_weight.py,
+                                     # 0.0 to 0.30) looked extremely inviting: against
+                                     # fundamentals_beta_rotated it showed CAGR rising 15.2% -> 20.4%
+                                     # and flagged an apparent interior optimum at 0.275. It did not
+                                     # survive walk-forward (scripts/walk_forward_technical_momentum.py,
+                                     # 6 ROLLING folds, target fundamentals_beta_rotated):
+                                     #   - OOS CAGR better in 4/6 folds (+3.26pp mean) BUT
+                                     #   - OOS Sharpe WORSE in 4/6 folds (-0.15 mean), and
+                                     #   - OOS max drawdown better in only 1/6 folds.
+                                     # Higher weight buys return and more than pays for it in risk.
+                                     # Two details that matter more than the headline:
+                                     #   1. The CAGR gain is almost entirely ONE fold. Excluding fold
+                                     #      0 (2020 test window) drops the mean delta from +3.26pp to
+                                     #      +0.98pp -- that single crisis year carries the result.
+                                     #   2. The recent folds are uniformly NEGATIVE: folds 4 and 5
+                                     #      (2024 and 2025 test windows) lost to the zero-weight
+                                     #      baseline on BOTH CAGR and Sharpe. Whatever edge upweighting
+                                     #      had was concentrated in 2020-21 and has been absent or
+                                     #      negative since 2022. That is temporal decay, not a stable
+                                     #      factor.
+                                     # Selected weights scattered across folds (0.15, 0.1, 0.2, 0.3,
+                                     # 0.2, 0.2) and never once landed on 0.275 -- a flat, noisy
+                                     # objective surface, consistent with the in-sample "peak" being a
+                                     # plateau varying by ~2bp across 0.25-0.30.
+                                     # NOTE the distinction: technical_momentum is still validated as
+                                     # worth INCLUDING at a small weight (that earlier walk-forward
+                                     # result stands). It is upweighting that fails. Running with
+                                     # --max-drawdown-floor will not rescue this: the problem is not a
+                                     # breached drawdown floor, it is a bad risk-adjusted trade at
+                                     # essentially every weight above baseline.
   technical_momentum_regime_conditioning:  # Added after walk-forward validation (2026-07-27) found
                                      # technical_momentum's out-of-sample edge was real on average but
                                      # concentrated unevenly across folds, with a real (if imperfect —
@@ -144,6 +251,64 @@ fundamental_analysis:
       elevated_vol: 0.3
       high_vol_stress: 0.0          # zero weight during high-vol stress -- exactly the kind of
                                      # condition where a trend-following signal is least trustworthy
+  technical_momentum_beta_orthogonalization:  # Added after walk-forward validation found the
+                                     # Ichimoku conviction score's edge correlates with benchmark
+                                     # trend strength (rho ~ 0.66) but imperfectly -- part of the
+                                     # raw score is plain systematic market-beta momentum, part is
+                                     # idiosyncratic stock-specific conviction. This cross-
+                                     # sectionally residualizes conviction against trailing beta at
+                                     # each rebalance date (see
+                                     # src/fundamental_analysis/orthogonalization.py) before it
+                                     # enters the technical_momentum dimension. Deliberately does
+                                     # NOT also residualize against sector -- sector effects are
+                                     # already handled downstream by
+                                     # scoring.composite_score.sector_relative_zscore; doing it
+                                     # again here would be redundant, not extra-safe.
+    enabled: false                  # off by default -- NOT yet validated on real data; this is a
+                                     # NEW, untested mechanism. Requires beta_panel to be built and
+                                     # passed to run_pit_fundamental_pipeline (see
+                                     # orthogonalization.compute_rolling_beta_panel) -- degrades to
+                                     # exact pre-orthogonalization behavior if beta_panel is None
+                                     # regardless of this flag, so this flag alone (without wiring
+                                     # beta_panel into your run script) does nothing yet.
+    beta_window: 252                # trailing trading days for the rolling beta estimate
+    min_obs: 10                     # minimum symbols with both a score and a beta needed to run
+                                     # the cross-sectional regression on a given date; below this,
+                                     # that date's scores pass through unresidualized (see
+                                     # orthogonalization.residualize_against_beta docstring)
+  forensic_gates:                    # Hard PRE-FILTER exclusion gates, applied BEFORE quantile
+                                     # ranking rather than as a soft scoring input -- see
+                                     # src/fundamental_analysis/forensic_gates.py's module
+                                     # docstring for the full motivation (fundamentals-only
+                                     # drawdown has been worse than the raw benchmark's in every
+                                     # real-data run so far, -44.56% vs -38%, even after the
+                                     # Altman-NaN and negative-equity-ROE fixes -- linear rank
+                                     # aggregation lets a bad governance/accrual reading be
+                                     # outweighed by a good valuation/growth reading, which this
+                                     # is meant to put a hard floor under).
+    enabled: false                  # off by default -- NOT yet validated on real data; this is a
+                                     # NEW, untested mechanism. An overly aggressive threshold can
+                                     # shrink the eligible universe enough to break
+                                     # min_positions/sector-cap assumptions downstream -- watch the
+                                     # per-gate trip-count log line before trusting a result.
+    promoter_pledge_threshold_pct: 50.0   # matches this project's existing soft-flag convention
+                                     # (ownership_governance.HIGH_PLEDGE_THRESHOLD_PCT), NOT the
+                                     # lower ~20% figure sometimes cited in generic literature --
+                                     # left at the already-established value rather than
+                                     # second-guessed without evidence.
+    accrual_ratio_threshold: 0.10   # (net_income - cfo) / total_assets; Sloan (1996) convention
+    piotroski_max_score_for_exclusion: 3   # exclude if Piotroski F-score <= this (0-9 scale)
+    piotroski_min_coverage: 6       # only apply the Piotroski gate when at least this many of
+                                     # the 9 signals were actually computable that row -- avoids
+                                     # excluding a stock for "low score" that's really just
+                                     # sparse data (see forensic_gates.piotroski_operational_gate)
+                                     # NOTE: the related_party_transaction gate has no threshold --
+                                     # it uses only the boolean related_party_transactions_flag,
+                                     # since the continuous RPT-transactions/sales intensity ratio
+                                     # a fuller forensic screen would use isn't available from any
+                                     # of Screener/yfinance/Trendlyne (see
+                                     # docs/data_sourcing_spec.md). Reduced-fidelity substitute,
+                                     # not the full formula -- see forensic_gates.py's docstring.
   point_in_time:                    # see src/fundamental_analysis/point_in_time.py
     enabled: true
     reporting_lag_days: 45          # SEBI LODR Reg. 33 filing deadline used as the
@@ -179,109 +344,69 @@ sentiment_analysis:
   enabled: false                    # intentionally out of scope for this pass
 
 technical_signals:
-  ichimoku:                         # src/backtesting/adaptive_ichimoku.py -- see
-                                     # docs/backtesting_spec.md's "Ichimoku" section
-                                     # for the real-data results this default is based on.
-    enabled: false                  # off by default -- STILL EXPERIMENTAL/UNVALIDATED on
-                                     # real NIFTY500 data (only synthetic-data tested so far).
-                                     # Turning this on adds ichimoku_only/combined_with_ichimoku
-                                     # to the attribution table -- see attribution.py.
-    variant: "static"                # "static" (fixed-period baseline), "shrink_when_high", or
-                                     # "shrink_when_low" (adaptive). "static" is the current
-                                     # default because it was the least-bad of the three in
-                                     # every run so far, real and synthetic (both adaptive
-                                     # directions underperformed it) -- NOT because it's been
-                                     # validated as actually good; run
-                                     # scripts/run_adaptive_ichimoku_backtest.py --variant all
-                                     # yourself on real data before trusting this choice.
-    signal_mode: "conviction_score"   # "conviction_score" (default) or "triple_confirmation".
-                                     # triple_confirmation is the traditional binary AND-of-3
-                                     # reading (cloud + Tenkan/Kijun + Chikou all agree) -- low
-                                     # day-to-day hit rate by construction, which is why
-                                     # combined_with_ichimoku collapsed to near-zero exposure in
-                                     # the first real run regardless of confirmation_mode below.
-                                     # conviction_score sums 4 continuous, normalized versions of
-                                     # the same 4 relationships and squashes with tanh into
-                                     # [0,1] -- a symbol can register real conviction without
-                                     # every single sub-check individually agreeing, AND weights
-                                     # are conviction-sized (not equal-split) among active names.
-                                     # See adaptive_ichimoku.compute_ichimoku_conviction_score.
-    t: 10                            # base SMA window for the dispersion score driving adaptivity
-                                     # (only used by the two adaptive variants)
-    zscore_window: 252
-    scale_min: 0.5
-    scale_max: 1.5
-    base_tenkan: 9
-    base_kijun: 26
-    base_senkou_b: 52
-    allow_short: false               # backtest engines here are long-only/no-leverage; see
-                                     # adaptive_ichimoku.build_ichimoku_weights's docstring
-    confirmation_mode: "breadth_scalar"  # "breadth_scalar" (recommended, default) or "hard_gate".
-                                     # hard_gate zeroes out individual unconfirmed names from
-                                     # `combined` -- in the first real backtest this collapsed
-                                     # combined_with_ichimoku to beta ~0.19 (mostly cash), because
-                                     # ANDing two independently-narrow selections (fundamentals'
-                                     # ~20% of universe x Ichimoku's own confirmed subset) nearly
-                                     # always leaves a tiny overlap. breadth_scalar instead scales
-                                     # TOTAL exposure by what fraction of currently-held names are
-                                     # confirmed, keeping every selected name in the portfolio. See
-                                     # src/backtesting/strategies.py's apply_ichimoku_gate warning
-                                     # and apply_ichimoku_breadth_scalar docstring.
-    confirmation_floor: 0.0          # only used by confirmation_mode=breadth_scalar -- minimum
-                                     # exposure fraction even on a zero-confirmation day.
-    tilt_strength: 0.0                # CONFIRMED NEGATIVE on real NIFTY500 data (2026-07-24, after
-                                     # the mechanism below was fixed and verified actually working):
-                                     # combined_ichimoku_tilted underperformed combined on CAGR
-                                     # (-0.57pp), Sharpe (-0.097), AND max drawdown (4.7pp worse)
-                                     # simultaneously. Conviction spread within the fundamentals-
-                                     # selected basket was checked and is NOT meaningfully
-                                     # compressed vs the full universe (0.0036 vs 0.0041 std) --
-                                     # so this isn't a "not enough signal to act on" problem.
-                                     # Combined with confirmation_mode's gate ALSO being confirmed
-                                     # negative (see above), the likely explanation: ichimoku_only's
-                                     # real edge (21.7% CAGR standalone, best of any component) is a
-                                     # stock-picking/rotation signal across the FULL universe, not a
-                                     # within-basket conviction/timing enhancer -- reallocating or
-                                     # gating an already-fixed ~100-name selection can't recover
-                                     # that. Set to nonzero only if testing this further; the more
-                                     # promising remaining direction is feeding conviction into
-                                     # stock SELECTION itself (an 8th fundamentals composite
-                                     # dimension) rather than any post-selection mechanism -- see
-                                     # docs/backtesting_spec.md's "Ichimoku conviction tilt" section
-                                     # for the full history of what's been tried.
+  conviction_source: "blend"        # WHICH signal feeds the technical_momentum dimension.
+                                     #   "ichimoku" -- historical default
+                                     #   "mom121"   -- plain 12-1 momentum
+                                     #   "blend"    -- 12-1 momentum blended with mean reversion,
+                                     #                 weighted by market stress  <- CURRENT
                                      #
-                                     # Mechanism (re-calibrated 2026-07-24 after a real bug fix):
-                                     # z-scores conviction cross-sectionally each day before
-                                     # applying tilt_strength, instead of a raw demeaned term -- the
-                                     # raw version was silently a no-op on real data, because it was
-                                     # fed build_ichimoku_weights's OUTPUT (an already-normalized
-                                     # ~1/n_active-scale weight matrix, e.g. ~0.002 for 500 symbols),
-                                     # not raw [0,1] conviction, making the old demeaned term two
-                                     # orders of magnitude too small to matter. See
-                                     # strategies.apply_ichimoku_conviction_tilt's docstring and
-                                     # tests/test_ichimoku_backtest_wiring.py's dedicated regression
-                                     # test. At nonzero values: e.g. 0.5 means a name 1 std above
-                                     # that day's mean conviction gets 1.5x its base weight before
-                                     # renormalization; values above ~1.0 start zeroing out names
-                                     # more than ~1 std below the mean entirely.
-                                     # ALWAYS computed ALONGSIDE
-                                     # combined_with_ichimoku, not instead of it -- adds a
-                                     # combined_ichimoku_tilted component that REALLOCATES
-                                     # combined's capital among its already-selected names by
-                                     # relative Ichimoku conviction, holding TOTAL exposure fixed
-                                     # (see strategies.apply_ichimoku_conviction_tilt). Real-data
-                                     # finding (2026-07-24): ichimoku_only standalone was the best
-                                     # component found (21.8% CAGR), but gating combined by it
-                                     # (confirmation_mode above) still lost 6.6pp of CAGR vs plain
-                                     # combined despite better Sharpe/drawdown -- gating can only
-                                     # ever cut exposure, never redirect it. Tilting can only ever
-                                     # reallocate, never cut total exposure -- test whether that
-                                     # captures the signal's real information better. Set to 0.0
-                                     # to disable (no combined_ichimoku_tilted computed).
-    min_history_days_warning: true   # log a warning if price history is too short for the
-                                     # z-score lookback + base periods to be fully warmed up
+                                     # *** WHY THE DEFAULT CHANGED (2026-08-13). ***
+                                     # A direct information-coefficient measurement
+                                     # (scripts/diagnose_signal_ic_by_regime.py) found the Ichimoku
+                                     # conviction score has essentially NO cross-sectional
+                                     # predictive power on this universe: IC -0.0010, t = -0.10,
+                                     # correct sign on 49.6% of rebalance dates -- a coin flip.
+                                     # Plain 12-1 momentum measured IC +0.0383, t = 2.88.
+                                     # Walk-forward (6 rolling folds, 17bps) confirmed it:
+                                     #   ichimoku_only  -> mom121_only:  Sharpe +0.156 in 6/6 folds,
+                                     #                     CAGR +0.024 in 6/6, and LOWER turnover
+                                     #                     (4.25x vs 4.80x annualized).
+                                     #   mom121_only    -> blend:        Sharpe +0.053 in 5/6 folds,
+                                     #                     CAGR +0.011.
+                                     # Note this does NOT mean the earlier walk-forward validation
+                                     # of the Ichimoku dimension was wrong. That test compared it
+                                     # against a ZERO-weight baseline -- "something beats nothing"
+                                     # -- and never against a competing signal. It answered a
+                                     # weaker question than it appeared to.
+                                     # HONEST CAVEAT: roughly three quarters of the total gain comes
+                                     # from the SIGNAL SWAP, not from blending. Blending is a real
+                                     # but modest addition (+0.053 Sharpe, 5/6 folds) and its
+                                     # drawdown effect is weak (3/6 folds). This is a RETURN
+                                     # improvement, not a risk improvement.
+  blend:                             # only used when conviction_source: "blend"
+    reversal_kind: "dist_from_ma"   # negative z-score of price vs its own 63d moving average.
+                                     # Preferred over "short_term" because it had better sample
+                                     # support in the IC diagnostic (25-31 dates in the elevated
+                                     # regime vs 4 in the stressed one) and does not share its
+                                     # lookback with the monthly rebalance interval.
+    ma_window: 63
+    stress_mode: "continuous"       # "continuous" = rolling percentile of trailing realized
+                                     # volatility (smooth, uses every date); "rigid" = discrete
+                                     # regime ladder (a step function whose stressed level rests
+                                     # on ~4 rebalance dates).
+                                     # Walk-forward could NOT separate them: continuous beat rigid
+                                     # on Sharpe in 4/6 folds (ichimoku leg) and 3/6 (mom121 leg),
+                                     # mean deltas +0.036 and +0.020 -- a coin flip. Continuous is
+                                     # chosen on PRINCIPLE, not on evidence: it uses all 139
+                                     # rebalance dates rather than resting on 4, and it matches the
+                                     # separate finding that the feature space is a volatility
+                                     # continuum rather than separable states (DBSCAN finds exactly
+                                     # one cluster at every eps; silhouette prefers n=2 at every
+                                     # backend). Do not report continuous as empirically superior.
+    vol_window: 21                  # trailing window for the realized-volatility stress measure
+    max_reversal_weight: 1.0        # reversal weight at maximum stress. 1.0 = full flip to pure
+                                     # reversal at peak stress, which is what the measured IC sign
+                                     # flip implies (momentum IC goes NEGATIVE under stress:
+                                     # -0.125 for ichimoku, -0.095 for 12-1, while reversal goes
+                                     # +0.107 to +0.145). Lower values tilt without inverting --
+                                     # worth testing, since the full flip leans on the thin
+                                     # stressed bucket.
 
 backtesting:
+  # NOTE: the `ichimoku` block was removed from technical_signals in the lean build. The signal measured
+  # IC -0.0010 (t = -0.10) versus 12-1 momentum's +0.0383 (t = 2.88) and lost on 6/6
+  # walk-forward folds, so its modules and its OHLC fetch are gone. `conviction_source`
+  # above is the replacement. data/raw/stock_prices_ohlc_long.csv is no longer used.
   engine: "vectorbt"                # "vectorbt" (default) or "custom" — see
                                      # src/backtesting/vbt_engine.py. Falls back to
                                      # the custom engine.py automatically (with a
@@ -312,6 +437,126 @@ backtesting:
                                      # (e.g. weights already lagged upstream) -- see
                                      # src/backtesting/engine.py's run_backtest docstring for
                                      # the same-day-spike bug this prevents.
+  beta_rotation:                     # COMPOSITIONAL de-risking -- see
+                                     # strategies.apply_beta_rotation's docstring. Adds a
+                                     # `fundamentals_beta_rotated` component when a beta_panel is
+                                     # passed to run_backtest_pipeline; `combined` is never
+                                     # modified by this.
+                                     #
+                                     # *** CONFIRMED POSITIVE, WALK-FORWARD VALIDATED. ***
+                                     # The first regime-side mechanism on this project to survive
+                                     # out-of-sample testing, after SIX label-focused attempts
+                                     # failed (consensus_governor, factor_dispersion, supervised
+                                     # regime prediction, regime-conditional technical_momentum
+                                     # weighting, adaptive-Ichimoku period driving, and the
+                                     # combined-strategy interaction effect itself).
+                                     #
+                                     # WHY IT WORKS WHERE THOSE DIDN'T: all six changed the regime
+                                     # LABEL -- smoothed it, refit it on different features,
+                                     # predicted it with a gradient-boosted tree -- while the
+                                     # CONSUMPTION mechanism never changed once: a single scalar
+                                     # exposure multiplier applied uniformly to every holding.
+                                     # One degree of freedom, one failure mode. This changes the
+                                     # consumption instead: stay 100% invested ALWAYS and de-risk
+                                     # by rotating toward low-beta names within the existing
+                                     # selection. Total exposure is preserved to machine precision
+                                     # every day (verified 2.22e-16), which makes the diagnosed
+                                     # Cov(E_t, R_p) < 0 rebound drag structurally impossible --
+                                     # E_t is constant. The regime label was never the bottleneck.
+    rotation_strength: 3.0          # relative weight moved per standard deviation of beta spread,
+                                     # AT FULL STRESS. Calm regimes have stress=0, so this is an
+                                     # exact no-op there regardless of the value.
+                                     #
+                                     # WHY 3.0 -- two independent criteria converged on it in
+                                     # scripts/sweep_beta_rotation_strength.py (0.0..10.0 grid):
+                                     #   (a) it is the LAST strength still flagged "still a tilt"
+                                     #       rather than "CONCENTRATION BET" (effective_n 50.9 of
+                                     #       an unrotated 100.0, 28% of held names floored to
+                                     #       zero). 4.0+ breaches the 50%-breadth floor.
+                                     #   (b) it is the DRAWDOWN MINIMUM (-32.60% @17bps); 4.0
+                                     #       onward gets worse again.
+                                     # Sharpe keeps rising past 3.0 (to 1.1188 at strength 10),
+                                     # so 3.0 is optimal only once you refuse to buy Sharpe with
+                                     # breadth. That refusal is deliberate: this mechanism's
+                                     # asymptote is a |z|-weighted book over the below-average-beta
+                                     # HALF of the selection, which can post a fine backtest
+                                     # drawdown while being a materially less diversified thing
+                                     # than the selection engine actually chose. Drawdown alone
+                                     # cannot detect that failure mode -- watch effective_n.
+                                     #
+                                     # WALK-FORWARD EVIDENCE (scripts/walk_forward_beta_rotation.py,
+                                     # 6 ROLLING folds, 5yr train / 1yr test, 17bps one-way):
+                                     #   - Selected 3.0 in 5/6 folds (fold 1 picked 2.0, where the
+                                     #     train-window breadth guard had excluded 3.0 -- so 3.0
+                                     #     was offered in 5 folds and won all 5). std 0.41.
+                                     #     Rolling folds matter here: folds 1 and 6 share NO
+                                     #     training data and still landed adjacent.
+                                     #   - OOS max drawdown better in 5/6 folds (mean +0.98pp)
+                                     #   - OOS Sharpe better in 4/6 folds (mean +0.182)
+                                     #   - OOS CAGR better in 3/6 folds (mean +0.33pp) -- a coin
+                                     #     flip, which is the CORRECT shape: this is a risk
+                                     #     mechanism, not a return mechanism.
+                                     #
+                                     # HONEST CAVEAT ON THE SHARPE NUMBER: the +0.182 mean is NOT
+                                     # "typically +0.182". It is driven by a minority of folds --
+                                     # fold 1 (2020, COVID) alone contributes +0.42, while folds 3
+                                     # and 6 are slightly NEGATIVE. Calm folds are near-identical
+                                     # to baseline (fold 4 matched to 4dp). That concentration is
+                                     # expected and arguably reassuring for a tail-risk mechanism:
+                                     # it did its best work in the fold with the most actual
+                                     # stress. But describe it as tail protection, not as a broad
+                                     # improvement.
+                                     #
+                                     # BEFORE TRUSTING IN DEPLOYMENT:
+                                     #   1. Turnover is 3.26x annualized at strength 3.0 vs 1.03x
+                                     #      unrotated. Execution quality matters more here than
+                                     #      anywhere else in this strategy -- re-run at a higher
+                                     #      cost if real fills are worse than 17bps one-way.
+                                     #   2. Re-run with --test-years 2 to check fold 1's outsized
+                                     #      contribution survives when 2020 is not a fold of its own.
+    stress_by_regime: null          # regime label -> stress level in [0,1]. null (default) =
+                                     # linear ramp over observed labels (calmest 0.0 -> most
+                                     # stressed 1.0). Deliberately NOT the same numbers as
+                                     # exposure_by_regime above: that says how much to DISINVEST,
+                                     # this says how hard to ROTATE. Conflating them would make the
+                                     # two mechanisms look more comparable than they are.
+  report_components:                 # which components appear in the printed summary and the
+                                     # report. The full decomposition is ALWAYS written to
+                                     # reports/tables/attribution_table_full.csv regardless -- this
+                                     # only controls what is surfaced.
+                                     # benchmark              buy and hold the index
+                                     # fundamentals_beta_rotated  THE STRATEGY: score-selected,
+                                     #                        always fully invested, de-risked by
+                                     #                        rotating toward low beta under stress
+                                     # The three hidden by default are diagnostics:
+                                     # fundamentals_only      selection with no de-risking at all
+                                     # regime_only            exposure timing with no selection
+                                     # combined               selection + exposure CUTTING, the
+                                     #                        mechanism beta rotation superseded
+                                     # Restore the full list if something needs explaining -- that
+                                     # decomposition is what exposed the negative interaction
+                                     # effect between exposure timing and stock selection.
+    - benchmark
+    - fundamentals_beta_rotated
+  report_components:                 # which components appear in the printed summary and the
+                                     # markdown report. The FULL decomposition is always written to
+                                     # reports/tables/attribution_table_full.csv regardless; this
+                                     # only controls what is surfaced.
+                                     #   benchmark                 buy and hold the index
+                                     #   fundamentals_beta_rotated THE STRATEGY: score-selected,
+                                     #                             always fully invested, de-risked
+                                     #                             by rotating toward low beta
+                                     #                             under stress
+                                     # The three hidden by default are DIAGNOSTICS, not failures:
+                                     #   fundamentals_only  selection with no de-risking
+                                     #   regime_only        exposure timing with no selection
+                                     #   combined           selection + exposure CUTTING, the
+                                     #                      mechanism beta rotation superseded
+                                     # Restore the full list when something needs explaining --
+                                     # that decomposition is what exposed the negative interaction
+                                     # effect between exposure timing and stock selection.
+    - benchmark
+    - fundamentals_beta_rotated
   rolling_sharpe_window: 63         # trading days (~1 quarter)
   exposure_by_regime:                # benchmark exposure fraction per regime label (0=calmest)
     0: 1.00                          # low-vol calm      -> fully invested

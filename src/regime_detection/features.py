@@ -147,6 +147,31 @@ def compute_volume_features(
     return pd.DataFrame(out, index=close.index)
 
 
+def compute_factor_dispersion_features(
+    factor_dispersion: pd.Series, windows: list[int] | None = None
+) -> pd.DataFrame:
+    """Level + optional smoothed/z-scored features from a cross-sectional
+    fundamental factor-score dispersion series (see
+    ``regime_detection.factor_dispersion.compute_cross_sectional_dispersion``),
+    already forward-filled to the same daily index as every other
+    ``build_feature_matrix`` input.
+
+    Deliberately parallel in shape to ``compute_vix_features`` (a raw
+    level, a short-window change, and a rolling self-relative z-score) --
+    a genuinely different AXIS (cross-sectional factor-score spread,
+    not price volatility) is being fed through the same kind of transform
+    so it's directly comparable/combinable in the clustering feature
+    matrix, not a special case.
+    """
+    out = {"factor_dispersion_level": factor_dispersion}
+    out["factor_dispersion_change_5d"] = factor_dispersion.diff(5)
+    zwindow = max(windows) if windows else TRADING_DAYS_PER_YEAR
+    out["factor_dispersion_zscore"] = (
+        factor_dispersion - factor_dispersion.rolling(zwindow).mean()
+    ) / factor_dispersion.rolling(zwindow).std()
+    return pd.DataFrame(out, index=factor_dispersion.index)
+
+
 def build_feature_matrix(
     prices: pd.Series,
     return_windows: list[int],
@@ -162,6 +187,9 @@ def build_feature_matrix(
     range_vol_windows: list[int] | None = None,
     volume_zscore_windows: list[int] | None = None,
     obv_trend_windows: list[int] | None = None,
+    factor_dispersion: pd.Series | None = None,
+    factor_dispersion_windows: list[int] | None = None,
+    use_price_features: bool = True,
     dropna: bool = True,
 ) -> pd.DataFrame:
     """Assemble the regime-detection **clustering** feature matrix — i.e.
@@ -188,6 +216,29 @@ def build_feature_matrix(
     ``range_vol_windows``/``volume_zscore_windows``/``obv_trend_windows``
     default to ``vol_windows`` if not given.
 
+    ``factor_dispersion`` (optional): a daily cross-sectional fundamental
+    factor-score dispersion series, already forward-filled to this
+    function's daily index (see
+    ``regime_detection.factor_dispersion.compute_cross_sectional_dispersion``
+    + ``resample_dispersion_to_daily``). If given, adds
+    ``compute_factor_dispersion_features``'s columns -- a genuinely
+    different axis from every other feature here (cross-sectional
+    fundamental-score spread, not price volatility) motivated by three
+    separate price-vol-regime interaction attempts all coming back
+    flat-to-negative (see ``factor_dispersion.py``'s module docstring).
+    Independently optional, same graceful-degradation convention as
+    breadth/VIX/volume above -- omitting it exactly reproduces
+    pre-factor-dispersion behavior.
+
+    ``use_price_features`` (default ``True``): set ``False`` to build the
+    clustering feature matrix from ONLY ``factor_dispersion`` (which must
+    then be provided) -- the "alternative framework" mode: refit regime
+    detection on cross-sectional factor dispersion INSTEAD OF price
+    volatility, rather than alongside it. Returns/drawdown/vol/breadth/VIX/
+    volume features are all skipped in this mode. Useful for an apples-to-
+    apples A/B test against the existing price-vol-only default without
+    conflating "added a feature" with "replaced the feature set".
+
     NOTE on the geometric wedge-product crash-risk signal
     (``geometric_signal.py``): it is intentionally NOT assembled here. By
     explicit design decision, it is computed separately in
@@ -198,28 +249,38 @@ def build_feature_matrix(
     signal" section for why: it never gets a chance to influence the GMM/
     KMeans/HMM regime label, by construction, not just by convention.
     """
-    parts = [
-        compute_returns(prices, return_windows),
-        compute_realized_vol(prices, vol_windows),
-        compute_drawdown(prices),
-    ]
-    if advances is not None and declines is not None:
-        parts.append(compute_breadth(advances, declines, breadth_windows or [21]))
-    if vix is not None:
-        parts.append(compute_vix_features(vix))
-    if high is not None and low is not None:
-        rv_windows = range_vol_windows or vol_windows
-        parts.append(compute_parkinson_volatility(high, low, rv_windows))
-        if open_ is not None:
-            parts.append(compute_garman_klass_volatility(open_, high, low, prices, rv_windows))
-    if volume is not None:
-        parts.append(
-            compute_volume_features(
-                prices, volume,
-                zscore_windows=volume_zscore_windows or vol_windows,
-                obv_trend_windows=obv_trend_windows or vol_windows,
-            )
+    if not use_price_features and factor_dispersion is None:
+        raise ValueError(
+            "build_feature_matrix: use_price_features=False requires factor_dispersion to "
+            "be provided -- there would be no features left to cluster on otherwise."
         )
+
+    parts = []
+    if use_price_features:
+        parts.extend([
+            compute_returns(prices, return_windows),
+            compute_realized_vol(prices, vol_windows),
+            compute_drawdown(prices),
+        ])
+        if advances is not None and declines is not None:
+            parts.append(compute_breadth(advances, declines, breadth_windows or [21]))
+        if vix is not None:
+            parts.append(compute_vix_features(vix))
+        if high is not None and low is not None:
+            rv_windows = range_vol_windows or vol_windows
+            parts.append(compute_parkinson_volatility(high, low, rv_windows))
+            if open_ is not None:
+                parts.append(compute_garman_klass_volatility(open_, high, low, prices, rv_windows))
+        if volume is not None:
+            parts.append(
+                compute_volume_features(
+                    prices, volume,
+                    zscore_windows=volume_zscore_windows or vol_windows,
+                    obv_trend_windows=obv_trend_windows or vol_windows,
+                )
+            )
+    if factor_dispersion is not None:
+        parts.append(compute_factor_dispersion_features(factor_dispersion, factor_dispersion_windows))
 
     features = pd.concat(parts, axis=1)
     if dropna:

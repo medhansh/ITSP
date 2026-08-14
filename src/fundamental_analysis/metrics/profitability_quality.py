@@ -22,10 +22,43 @@ import pandas as pd
 
 
 def return_on_equity(df: pd.DataFrame) -> pd.Series:
-    return df["net_income"] / df["total_equity"].replace(0, np.nan)
+    """Return on equity. Same negative-denominator problem as
+    ``leverage_solvency.debt_to_equity`` (see that function's docstring for
+    the original diagnosis): NEGATIVE total_equity (technically insolvent
+    -- liabilities exceed assets) combined with negative net_income (the
+    common case for a company distressed enough to have negative equity)
+    produces a POSITIVE ratio via negative/negative division -- making a
+    genuinely lossmaking, insolvent company look PROFITABLE.
+
+    Confirmed as a live, real bug via scripts/diagnose_fundamentals_drawdown.py:
+    profitability_quality showed suspiciously high, favorable, and (for
+    several distinct companies) exactly-IDENTICAL scores for names that
+    went on to crash 80-98% during a real historical crash, including IDEA
+    (Vodafone Idea), which had deeply negative equity at the time.
+
+    Negative-or-zero equity now maps to a large NEGATIVE sentinel (clearly
+    below any realistic positive-equity ROE) rather than letting the sign
+    flip invert the true signal -- applied regardless of net_income's own
+    sign, since chronic negative book equity is a serious solvency concern
+    on its own, not something a single profitable-looking period offsets.
+    """
+    equity = df["total_equity"]
+    ratio = df["net_income"] / equity.replace(0, np.nan)
+    NEGATIVE_EQUITY_SENTINEL = -10.0  # -1000% ROE-equivalent -- clearly worse than any realistic positive-equity value
+    return ratio.where(equity > 0, NEGATIVE_EQUITY_SENTINEL)
 
 
 def return_on_capital_employed(df: pd.DataFrame) -> pd.Series:
+    """NOTE: depends on ``current_liabilities``, which was confirmed
+    universally missing in the real dataset this project has been tested
+    against (see scripts/diagnose_fundamentals_drawdown.py's Check 7) --
+    meaning this currently returns NaN for every row until that upstream
+    data gap is fixed. That's the CORRECT behavior for missing data (honest
+    NaN, gracefully excluded from the dimension average via skipna), not a
+    bug in this function itself -- but it does mean ROCE isn't actually
+    contributing to profitability_quality at all right now. Worth revisiting
+    once current_assets/current_liabilities are populated upstream.
+    """
     capital_employed = df["total_assets"] - df["current_liabilities"]
     return df["ebit"] / capital_employed.replace(0, np.nan)
 
@@ -56,10 +89,21 @@ def _gt(a: pd.Series, b) -> pd.Series:
     return result.where(a.notna() & b.notna())
 
 
-def piotroski_f_score(df: pd.DataFrame) -> pd.Series:
+def piotroski_f_score(df: pd.DataFrame, return_coverage: bool = False):
     """9-point Piotroski F-score. Each signal contributes 0 or 1; a signal
     that can't be computed (missing current or prior-year data) is skipped
-    for that row rather than counted as a failure."""
+    for that row rather than counted as a failure.
+
+    ``return_coverage=True`` also returns ``n_signals`` (how many of the 9
+    checks were actually computable for each row, 0-9) alongside the score
+    -- added for ``forensic_gates.piotroski_operational_gate``, which needs
+    to know coverage to avoid penalizing a row for a low score that's
+    really just low DATA coverage (e.g. only 4/9 signals computable, all 4
+    passed -> raw score 4, which looks identical to a row with full 9/9
+    coverage that only passed 4). Default ``False`` preserves the original
+    single-Series return for every existing caller
+    (``compute_profitability_quality_metrics``).
+    """
     score = pd.Series(0, index=df.index, dtype=float)
     n_signals = pd.Series(0, index=df.index, dtype=float)
 
@@ -102,7 +146,7 @@ def piotroski_f_score(df: pd.DataFrame) -> pd.Series:
         asset_turnover_prior = df["revenue_prior"] / df["total_assets_prior"].replace(0, np.nan)
         add(_gt(asset_turnover, asset_turnover_prior))               # 9. improving efficiency
 
-    return score  # 0-9; scoring layer can normalize by n_signals if desired
+    return (score, n_signals) if return_coverage else score  # score: 0-9; scoring layer can normalize by n_signals if desired
 
 
 def compute_profitability_quality_metrics(df: pd.DataFrame) -> pd.DataFrame:

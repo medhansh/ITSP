@@ -22,7 +22,6 @@ import pandas as pd
 
 from src.common.logging_utils import get_logger
 from src.common.scraping_utils import DiskCache, build_session
-from src.fundamental_analysis.data_fetchers import screener_fetcher, trendlyne_fetcher, yfinance_fetcher
 from src.fundamental_analysis.data_fetchers.merge import merge_sources
 
 logger = get_logger(__name__)

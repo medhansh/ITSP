@@ -87,6 +87,17 @@ def load_config(
 
 
 def _validate_config(cfg: dict[str, Any]) -> None:
+    # A missing top-level section means an edit merged two sections together --
+    # which YAML accepts silently, and which then surfaces far away as a
+    # KeyError or, worse, as settings quietly falling back to defaults.
+    for _section in ("universe", "regime_detection", "fundamental_analysis",
+                     "technical_signals", "backtesting", "paths"):
+        if _section not in cfg:
+            raise ValueError(
+                f"config is missing the top-level '{_section}' section. This usually means a "
+                f"block was deleted along with its header and its keys are now nested under the "
+                f"previous section."
+            )
     weights = cfg.get("fundamental_analysis", {}).get("composite_weights", {})
     if weights:
         total = sum(weights.values())

@@ -42,6 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 
 from src.backtesting.pipeline import run_backtest_pipeline
+from src.fundamental_analysis.orthogonalization import compute_rolling_beta_panel
 from src.common.io_utils import load_config
 from src.common.logging_utils import get_logger
 from src.fundamental_analysis.data_fetchers import fundamentals_fetcher, nse_fetcher, screener_fetcher
@@ -200,154 +201,120 @@ def step_options(cfg: dict, args: argparse.Namespace) -> tuple[pd.DataFrame, pd.
     return history, calendar
 
 
-def step_ichimoku_ohlc(cfg: dict, args: argparse.Namespace, universe_csv: str) -> dict[str, pd.DataFrame] | None:
-    """Fetch/cache true OHLC data for the universe. Returns ``None`` if
-    ``technical_signals.ichimoku.enabled`` is false, or if fetching failed.
+def step_conviction_panel(cfg, stock_prices, benchmark_prices, regime):
+    """Build the conviction panel that feeds the ``technical_momentum``
+    dimension, honouring ``technical_signals.conviction_source``.
 
-    Cached as a single long-format CSV (date,symbol,open,high,low,close),
-    same convention as ``scripts/run_adaptive_ichimoku_backtest.py --price-csv``
-    expects, so the exact same file can be fed to that standalone comparison
-    script too.
+    Sources:
+      ``mom121``   -- plain 12-1 momentum: trailing 12-month return skipping
+                      the most recent month.
+      ``blend``    -- 12-1 momentum blended with a mean-reversion signal,
+                      weighted by market stress.
 
-    Split out from weight-building (``step_ichimoku_weights``) so the same
-    fetched panel can feed BOTH the backtest weight matrix AND the
-    ``technical_momentum`` fundamentals dimension's conviction panel
-    (``step_ichimoku_conviction``) without fetching OHLC twice — this
-    means fundamentals scoring (which needs the conviction panel) has to
-    run AFTER this step now, not before it; see ``main()``'s ordering.
+    **Why the default changed.** A direct information-coefficient
+    measurement (scripts/diagnose_signal_ic_by_regime.py) found the
+    Ichimoku conviction score has essentially NO cross-sectional
+    predictive power on this universe: IC -0.0010, t = -0.10, correct sign
+    on 49.6% of rebalance dates. Plain 12-1 momentum measured IC +0.0383,
+    t = 2.88. Walk-forward backtesting confirmed it: swapping Ichimoku for
+    12-1 momentum improved out-of-sample Sharpe in 6/6 folds (+0.156) and
+    CAGR in 6/6 folds, at LOWER turnover (4.25x vs 4.80x annualized).
+    Blending on top added a further +0.053 Sharpe in 5/6 folds.
+
+    Note this does not mean the earlier walk-forward validation of the
+    Ichimoku dimension was wrong -- that test compared it against a
+    ZERO-weight baseline ("something beats nothing"), never against a
+    competing signal. It answered a weaker question than it appeared to.
     """
-    ich_cfg = cfg.get("technical_signals", {}).get("ichimoku", {})
-    if not ich_cfg.get("enabled"):
-        return None
-
-    out = "data/raw/stock_prices_ohlc_long.csv"
-    dcfg = cfg["data_fetchers"]
-
-    if args.offline:
-        logger.info("[ichimoku] --offline: using existing OHLC file at %s as-is", out)
-    elif _stale(out, 1, args.force_refresh):
-        from src.fundamental_analysis.data_fetchers import yfinance_fetcher
-
-        universe = pd.read_csv(universe_csv, comment="#")
-        symbols = universe["symbol"].tolist()
-        logger.info("[ichimoku] fetching true OHLC panel for %d symbols via yfinance", len(symbols))
-        price_panel_ohlc = yfinance_fetcher.fetch_price_panel_ohlc(symbols, start=dcfg["price_start_date"])
-        if not price_panel_ohlc:
-            logger.warning("[ichimoku] no OHLC data fetched for any symbol -- disabling Ichimoku for this run")
-            return None
-        rows = []
-        for symbol, ohlc in price_panel_ohlc.items():
-            frame = ohlc.reset_index().rename(columns={ohlc.index.name or "index": "date"})
-            frame["symbol"] = symbol
-            rows.append(frame)
-        long_df = pd.concat(rows, ignore_index=True)
-        Path(out).parent.mkdir(parents=True, exist_ok=True)
-        long_df.to_csv(out, index=False)
-    else:
-        logger.info("[ichimoku] OHLC panel is fresh (< 1 day old) — skipping re-fetch")
-
-    if not Path(out).exists():
-        logger.warning("[ichimoku] %s not found (likely --offline with no prior fetch) -- disabling Ichimoku for this run", out)
-        return None
-
-    long_df = pd.read_csv(out, parse_dates=["date"])
-    required = {"date", "symbol", "open", "high", "low", "close"}
-    missing = required - set(long_df.columns)
-    if missing:
-        logger.warning("[ichimoku] %s is missing columns %s -- disabling Ichimoku for this run", out, missing)
-        return None
-
-    price_panel_ohlc = {
-        symbol: g.set_index("date")[["open", "high", "low", "close"]].sort_index()
-        for symbol, g in long_df.groupby("symbol")
-    }
-
-    min_required = 8 * ich_cfg.get("t", 10) + ich_cfg.get("zscore_window", 252) + ich_cfg.get("base_senkou_b", 52)
-    max_history = max((len(ohlc) for ohlc in price_panel_ohlc.values()), default=0)
-    if ich_cfg.get("min_history_days_warning", True) and max_history < min_required:
-        logger.warning(
-            "[ichimoku] only %d days of price history available (longest symbol) -- need ~%d "
-            "for variant=%s to be fully warmed up (z-score lookback + base periods). Results "
-            "will mostly show a flat/inactive signal until enough history accumulates.",
-            max_history, min_required, ich_cfg.get("variant", "static"),
-        )
-    return price_panel_ohlc
-
-
-def step_ichimoku_conviction(cfg: dict, price_panel_ohlc: dict[str, pd.DataFrame] | None) -> pd.DataFrame | None:
-    """Build the raw per-symbol daily conviction panel
-    (``adaptive_ichimoku.build_ichimoku_conviction_panel``) feeding the
-    ``technical_momentum`` fundamentals dimension. ``None`` if
-    ``price_panel_ohlc`` is ``None`` (Ichimoku disabled/unavailable) or if
-    ``fundamental_analysis.dimensions.technical_momentum`` isn't enabled —
-    no point building it if nothing will consume it.
-    """
-    if price_panel_ohlc is None:
-        return None
+    ts_cfg = cfg.get("technical_signals", {})
+    source = ts_cfg.get("conviction_source", "blend")
     if not cfg.get("fundamental_analysis", {}).get("dimensions", {}).get("technical_momentum", False):
         return None
 
-    ich_cfg = cfg.get("technical_signals", {}).get("ichimoku", {})
-    from src.backtesting.adaptive_ichimoku import build_ichimoku_conviction_panel
+    from src.backtesting.momentum_reversal_blend import (
+        build_blend, build_momentum_panel, build_reversal_panel,
+        stress_from_regime, stress_from_volatility,
+    )
 
-    logger.info(
-        "[ichimoku] building conviction panel (variant=%s) for technical_momentum dimension across %d symbols",
-        ich_cfg.get("variant", "static"), len(price_panel_ohlc),
-    )
-    conviction_panel = build_ichimoku_conviction_panel(
-        price_panel_ohlc,
-        t=ich_cfg.get("t", 10),
-        zscore_window=ich_cfg.get("zscore_window", 252),
-        variant=ich_cfg.get("variant", "static"),
-        scale_min=ich_cfg.get("scale_min", 0.5),
-        scale_max=ich_cfg.get("scale_max", 1.5),
-        base_tenkan=ich_cfg.get("base_tenkan", 9),
-        base_kijun=ich_cfg.get("base_kijun", 26),
-        base_senkou_b=ich_cfg.get("base_senkou_b", 52),
-    )
+    momentum = build_momentum_panel(stock_prices, kind="12_1")
+    if source == "mom121":
+        logger.info("[conviction] source=mom121 (12-1 momentum, no blending)")
+        panel = momentum
+    elif source == "blend":
+        b_cfg = ts_cfg.get("blend", {})
+        mode = b_cfg.get("stress_mode", "continuous")
+        reversal = build_reversal_panel(
+            stock_prices, kind=b_cfg.get("reversal_kind", "dist_from_ma"),
+            ma_window=b_cfg.get("ma_window", 63),
+        )
+        if mode == "continuous":
+            stress = stress_from_volatility(
+                benchmark_prices, stock_prices.index,
+                vol_window=b_cfg.get("vol_window", 21),
+            )
+        else:
+            stress = stress_from_regime(regime, stock_prices.index)
+        logger.info("[conviction] source=blend (12-1 momentum x %s reversal, stress_mode=%s)",
+                    b_cfg.get("reversal_kind", "dist_from_ma"), mode)
+        panel = build_blend(momentum, reversal, stress, mode=mode,
+                            max_reversal_weight=b_cfg.get("max_reversal_weight", 1.0))
+    else:
+        raise ValueError(
+            f"technical_signals.conviction_source must be 'mom121' or 'blend', got {source!r}. "
+            f"The 'ichimoku' source was retired from this build: it measured IC -0.0010 "
+            f"(t = -0.10) against 12-1 momentum's +0.0383 (t = 2.88), and lost on 6/6 "
+            f"walk-forward folds. Its OHLC fetch and modules are gone."
+        )
+
     Path("data/processed").mkdir(parents=True, exist_ok=True)
-    conviction_panel.to_csv("data/processed/ichimoku_conviction_panel.csv")
-    return conviction_panel
+    panel.to_csv("data/processed/conviction_panel.csv")
+    return panel
 
 
-def step_ichimoku_weights(cfg: dict, price_panel_ohlc: dict[str, pd.DataFrame] | None) -> pd.DataFrame | None:
-    """Build the configured Ichimoku variant's daily portfolio weight
-    matrix (``adaptive_ichimoku.build_ichimoku_weights``) for the backtest
-    components (``ichimoku_only``/``combined_with_ichimoku``/
-    ``combined_ichimoku_tilted``). ``None`` if ``price_panel_ohlc`` is
-    ``None`` (Ichimoku disabled/unavailable).
+def step_beta_panel(cfg: dict, stock_prices: pd.DataFrame, benchmark_prices: pd.Series):
+    """Build the trailing rolling-beta panel that COMPOSITIONAL de-risking
+    (``strategies.apply_beta_rotation``) needs. Returns ``None`` when
+    ``backtesting.beta_rotation.rotation_strength`` is 0 or unset, in which
+    case the backtest behaves exactly as it did before rotation existed.
+
+    **Why this step exists at all**: ``rotation_strength`` in config does
+    NOTHING on its own -- ``run_backtest_pipeline`` no-ops the rotation
+    unless it is actually handed a ``beta_panel``. Before this step was
+    added, setting the config value produced an attribution table with the
+    usual 4 components and no ``fundamentals_beta_rotated`` row at all, and
+    the silence looked exactly like a normal run. Anyone changing that
+    config value and seeing 4 components instead of 5 is looking at a
+    rotation that never ran.
+
+    Built from the daily close panel already loaded for the backtest rather
+    than from the Ichimoku OHLC file, so this works whether or not
+    the retired Ichimoku signal is present -- beta rotation has no
+    dependency on the Ichimoku signal and should not inherit one.
     """
-    if price_panel_ohlc is None:
+    rot_cfg = cfg["backtesting"].get("beta_rotation", {})
+    strength = rot_cfg.get("rotation_strength", 0.0)
+    if not strength:
+        logger.info("[beta_rotation] rotation_strength=%s -> disabled, no beta panel built", strength)
         return None
 
-    ich_cfg = cfg.get("technical_signals", {}).get("ichimoku", {})
-    from src.backtesting.adaptive_ichimoku import build_ichimoku_weights
-
-    logger.info(
-        "[ichimoku] building weights for variant=%s signal_mode=%s across %d symbols",
-        ich_cfg.get("variant", "static"), ich_cfg.get("signal_mode", "conviction_score"), len(price_panel_ohlc),
+    window = (cfg["fundamental_analysis"]
+              .get("technical_momentum_beta_orthogonalization", {})
+              .get("beta_window", 252))
+    logger.info("[beta_rotation] building trailing %dd beta panel for %d symbols (strength=%.2f)",
+                window, stock_prices.shape[1], strength)
+    beta_panel = compute_rolling_beta_panel(
+        {s: stock_prices[s].dropna() for s in stock_prices.columns},
+        benchmark_prices, window=window,
     )
-    weights = build_ichimoku_weights(
-        price_panel_ohlc,
-        t=ich_cfg.get("t", 10),
-        zscore_window=ich_cfg.get("zscore_window", 252),
-        variant=ich_cfg.get("variant", "static"),
-        scale_min=ich_cfg.get("scale_min", 0.5),
-        scale_max=ich_cfg.get("scale_max", 1.5),
-        base_tenkan=ich_cfg.get("base_tenkan", 9),
-        base_kijun=ich_cfg.get("base_kijun", 26),
-        base_senkou_b=ich_cfg.get("base_senkou_b", 52),
-        long_only=not ich_cfg.get("allow_short", False),
-        signal_mode=ich_cfg.get("signal_mode", "conviction_score"),
-    )
-    n_active_days = (weights.abs().sum(axis=1) > 0).sum()
-    logger.info(
-        "[ichimoku] weights built: active (nonzero) on %d/%d days (%.1f%%)",
-        n_active_days, len(weights), 100 * n_active_days / max(len(weights), 1),
-    )
-    Path("data/processed").mkdir(parents=True, exist_ok=True)
-    weights.to_csv("data/processed/ichimoku_weights.csv")
-    return weights
+    n_usable = int(beta_panel.iloc[-1].notna().sum())
+    logger.info("[beta_rotation] beta panel: %d symbols, %d with a usable beta at the latest date",
+                beta_panel.shape[1], n_usable)
+    if n_usable == 0:
+        logger.warning(
+            "[beta_rotation] NO symbol has a usable beta -- rotation would be a silent no-op. "
+            "Check that stock_prices has at least %d rows of history.", window,
+        )
+    return beta_panel
 
 
 def step_regime(cfg: dict, price_csv: str, sector_price_csv: str | None) -> pd.DataFrame:
@@ -506,13 +473,13 @@ def main() -> None:
 
     # OHLC fetch happens BEFORE fundamentals scoring now (it didn't used to)
     # so the technical_momentum dimension's conviction panel can be threaded
-    # into step_pit_fundamentals -- see step_ichimoku_ohlc's docstring for
     # why this reordering was necessary.
-    price_panel_ohlc = step_ichimoku_ohlc(cfg, args, universe_csv)
-    conviction_panel = step_ichimoku_conviction(cfg, price_panel_ohlc)
+    conviction_panel = step_conviction_panel(
+        cfg, stock_prices, benchmark_prices, regime_result["regime"],
+    )
     if conviction_panel is not None:
         logger.info(
-            "[ichimoku] technical_momentum dimension: conviction panel covers %d symbols",
+            "[conviction] technical_momentum dimension: conviction panel covers %d symbols",
             conviction_panel.shape[1],
         )
 
@@ -522,13 +489,7 @@ def main() -> None:
         regime=regime_result.get("regime_name", regime_result.get("regime")),
     )
 
-    ichimoku_weights = step_ichimoku_weights(cfg, price_panel_ohlc)
-    if ichimoku_weights is not None:
-        logger.info(
-            "[ichimoku] wired into backtest: %d symbols with OHLC coverage out of %d in the "
-            "fundamentals-eligible universe", ichimoku_weights.shape[1], stock_prices.shape[1],
-        )
-    ich_cfg = cfg.get("technical_signals", {}).get("ichimoku", {})
+    beta_panel = step_beta_panel(cfg, stock_prices, benchmark_prices)
 
     out_dir = args.out_dir or cfg["backtesting"].get("report_dir", "reports")
     logger.info("[backtest] running component backtests + attribution + report -> %s", out_dir)
@@ -536,10 +497,7 @@ def main() -> None:
         cfg["backtesting"], stock_prices, benchmark_prices, regime, scores_by_date, out_dir=out_dir,
         geometric_crash_flag=geometric_crash_flag,
         active_regime=active_regime,
-        ichimoku_weights=ichimoku_weights,
-        ichimoku_mode=ich_cfg.get("confirmation_mode", "breadth_scalar"),
-        ichimoku_confirmation_floor=ich_cfg.get("confirmation_floor", 0.0),
-        ichimoku_tilt_strength=ich_cfg.get("tilt_strength", 0.0),
+        beta_panel=beta_panel,
     )
 
     elapsed = time.time() - t0
@@ -547,6 +505,18 @@ def main() -> None:
     print(f"Report: {result['report_path']}")
     print("\nPerformance by component:")
     print(result["attribution_table"][["cagr", "sharpe_ratio", "max_drawdown"]])
+
+    # Surface whether compositional de-risking actually ran. Its absence is
+    # otherwise indistinguishable from a normal run: you just get the usual
+    # 4 components and no error.
+    rot_strength = cfg["backtesting"].get("beta_rotation", {}).get("rotation_strength", 0.0)
+    if "fundamentals_beta_rotated" in result["attribution_table"].index:
+        print(f"\n[beta_rotation] ACTIVE at rotation_strength={rot_strength:g} "
+              f"-- see the fundamentals_beta_rotated row above.")
+    elif rot_strength:
+        print(f"\n[beta_rotation] WARNING: rotation_strength={rot_strength:g} is set but the "
+              f"fundamentals_beta_rotated component is MISSING -- the rotation did not run. "
+              f"Check the [beta_rotation] log lines above for why.")
 
 
 if __name__ == "__main__":

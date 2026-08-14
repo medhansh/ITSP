@@ -11,17 +11,15 @@ from src.common.logging_utils import get_logger
 from src.regime_detection.data_loader import load_from_csv, load_sector_prices_from_csv
 from src.regime_detection.features import build_feature_matrix
 from src.regime_detection.models import RegimeModel, describe_regimes
-from src.regime_detection.wasserstein_proximity import (
-    build_regime_templates,
-    rolling_wasserstein_proximity,
-)
-from src.regime_detection.state_governor import run_governor_over_history
 
 logger = get_logger(__name__)
 
 
 def run_pipeline(
-    config: dict[str, Any], price_csv: str, sector_price_csv: str | None = None
+    config: dict[str, Any],
+    price_csv: str,
+    sector_price_csv: str | None = None,
+    factor_dispersion: pd.Series | None = None,
 ) -> tuple[pd.DataFrame, RegimeModel]:
     """Fit a regime model and return (labeled history, fitted model).
 
@@ -51,9 +49,22 @@ def run_pipeline(
     ``apply_geometric_overlay``) — see ``docs/regime_detection_spec.md``'s
     "Geometric wedge-product crash-risk signal" section for the reasoning,
     and ``docs/backtesting_spec.md`` for how it flows into the backtest.
+
+    ``factor_dispersion`` (optional): a daily cross-sectional fundamental
+    factor-score dispersion series, already aligned/forward-filled to
+    ``price_csv``'s daily index (see
+    ``factor_dispersion.compute_cross_sectional_dispersion`` +
+    ``resample_dispersion_to_daily``). Passed straight through to
+    ``build_feature_matrix``, joined by ``config["factor_dispersion"]``'s
+    ``use_price_features``/``windows`` settings — see that function's
+    docstring for the "add as an extra feature" vs. "replace price-vol
+    features entirely" modes. ``None`` (default) reproduces exact
+    pre-factor-dispersion behavior, i.e. the existing price-vol-only
+    clustering feature set.
     """
     raw = load_from_csv(price_csv)
 
+    dispersion_cfg = config.get("factor_dispersion", {})
     features = build_feature_matrix(
         prices=raw["close"],
         return_windows=config["feature_windows"]["returns"],
@@ -69,8 +80,15 @@ def run_pipeline(
         range_vol_windows=config["feature_windows"].get("range_vol"),
         volume_zscore_windows=config["feature_windows"].get("volume_zscore"),
         obv_trend_windows=config["feature_windows"].get("obv_trend"),
+        factor_dispersion=factor_dispersion,
+        factor_dispersion_windows=dispersion_cfg.get("windows"),
+        use_price_features=dispersion_cfg.get("use_price_features", True) if factor_dispersion is not None else True,
     )
-    logger.info("Built feature matrix: %d rows x %d cols (geometric signal excluded by design)", *features.shape)
+    logger.info(
+        "Built feature matrix: %d rows x %d cols (geometric signal excluded by design; "
+        "factor_dispersion %s)", *features.shape,
+        "included" if factor_dispersion is not None else "not provided",
+    )
 
     model_cfg = config["model"]
     model = RegimeModel(
@@ -177,7 +195,6 @@ def _attach_geometric_overlay(
     sector_returns = np.log(sector_prices).diff()
     gcfg = {k: v for k, v in geo_cfg.items() if k not in ("enabled", "sector_price_csv", "sector_tickers")}
 
-    from src.regime_detection.geometric_signal import compute_geometric_crash_features
 
     overlay = compute_geometric_crash_features(sector_returns, **gcfg)
     logger.info(

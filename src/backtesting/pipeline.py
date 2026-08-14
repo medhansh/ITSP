@@ -46,6 +46,9 @@ def run_backtest_pipeline(
     ichimoku_mode: str = "breadth_scalar",
     ichimoku_confirmation_floor: float = 0.0,
     ichimoku_tilt_strength: float = 0.0,
+    beta_panel: pd.DataFrame | None = None,
+    risk_panel: pd.DataFrame | None = None,
+    vol_target_exposure: pd.Series | None = None,
 ) -> dict[str, Any]:
     """Run the full backtest + attribution + reporting pipeline.
 
@@ -138,9 +141,17 @@ def run_backtest_pipeline(
         regime=regime,
         exposure_by_regime=exposure_by_regime,
         top_quantile=config.get("top_quantile", 0.2),
+        exclude_bottom_quantile=config.get("exclude_bottom_quantile"),
+        weighting=config.get("weighting", "equal"),
+        risk_panel=risk_panel,
+        exclude_riskiest_quantile=config.get("exclude_riskiest_quantile"),
+        vol_target_exposure=vol_target_exposure,
         min_positions=config.get("min_positions", 5),
         max_sector_weight=config.get("max_sector_weight"),
         max_position_weight=config.get("max_position_weight"),
+        beta_panel=beta_panel,
+        stress_by_regime=config.get("beta_rotation", {}).get("stress_by_regime"),
+        rotation_strength=config.get("beta_rotation", {}).get("rotation_strength", 1.0),
         transaction_cost_bps=config.get("transaction_cost_bps", 0.0),
         stock_prices=stock_prices,
         benchmark_prices=benchmark_prices,
@@ -156,6 +167,27 @@ def run_backtest_pipeline(
     )
 
     attribution_table = compute_attribution_table(component_results, benchmark_returns=benchmark_returns)
+
+    # The full table is the ATTRIBUTION decomposition: regime_only and
+    # fundamentals_only exist to show WHERE return comes from, and are what
+    # exposed the negative interaction effect between exposure timing and
+    # stock selection. They are diagnostics, not deliverables.
+    # `backtesting.report_components` narrows what is reported without
+    # changing what is computed, so the headline shows the strategy while the
+    # decomposition stays available in the CSV for when something needs
+    # explaining. Unknown names are ignored rather than raising, and an empty
+    # intersection falls back to the full table rather than reporting nothing.
+    wanted = config.get("report_components")
+    full_attribution_table = attribution_table
+    if wanted:
+        keep = [c for c in wanted if c in attribution_table.index]
+        if keep:
+            attribution_table = attribution_table.loc[keep]
+        else:
+            logger.warning(
+                "report_components %s matched no computed component; reporting all of %s",
+                wanted, list(full_attribution_table.index),
+            )
     decomposition = compute_return_decomposition(component_results)
     logger.info("Return decomposition: %s", decomposition)
 
@@ -182,7 +214,9 @@ def run_backtest_pipeline(
     # Report links should be relative to the report file (which sits in out_dir).
     figure_paths_rel = {k: f"figures/{Path(v).name}" for k, v in figure_paths_abs.items()}
 
+    # Narrowed table for the report; full decomposition always written beside it.
     attribution_table.to_csv(table_dir / "attribution_table.csv")
+    full_attribution_table.to_csv(table_dir / "attribution_table_full.csv")
     with open(table_dir / "return_decomposition.json", "w") as f:
         json.dump(decomposition, f, indent=2, default=float)
 
@@ -198,6 +232,7 @@ def run_backtest_pipeline(
 
     return {
         "attribution_table": attribution_table,
+        "attribution_table_full": full_attribution_table,
         "decomposition": decomposition,
         "report_path": report_path,
         "component_results": component_results,

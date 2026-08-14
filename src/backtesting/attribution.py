@@ -101,6 +101,7 @@ from src.backtesting.engine import align_weights_to_returns
 from src.backtesting.engine import run_backtest as run_backtest_custom
 from src.backtesting.metrics import cagr, performance_summary
 from src.backtesting.strategies import (
+    apply_beta_rotation,
     apply_geometric_overlay,
     apply_ichimoku_breadth_scalar,
     apply_ichimoku_conviction_tilt,
@@ -165,6 +166,14 @@ def run_component_backtests(
     ichimoku_tilt_strength: float = 0.0,
     max_sector_weight: float | None = None,
     max_position_weight: float | None = None,
+    beta_panel: pd.DataFrame | None = None,
+    stress_by_regime: dict | None = None,
+    rotation_strength: float = 1.0,
+    exclude_bottom_quantile: float | None = None,
+    weighting: str = "equal",
+    risk_panel: pd.DataFrame | None = None,
+    exclude_riskiest_quantile: float | None = None,
+    vol_target_exposure: pd.Series | None = None,
 ) -> dict[str, dict[str, pd.Series]]:
     """Run all component backtests and return {component_name: run_backtest output}.
 
@@ -287,6 +296,9 @@ def run_component_backtests(
     fundamental_weights_sparse = build_fundamental_portfolio_weights(
         scores_by_date, top_quantile=top_quantile, min_positions=min_positions,
         max_sector_weight=max_sector_weight, max_position_weight=max_position_weight,
+        exclude_bottom_quantile=exclude_bottom_quantile,
+        weighting=weighting, risk_panel=risk_panel,
+        exclude_riskiest_quantile=exclude_riskiest_quantile,
     )
     fundamental_weights_daily = align_weights_to_returns(
         fundamental_weights_sparse, common_index, stock_returns.columns
@@ -312,12 +324,58 @@ def run_component_backtests(
         combined_weights_daily, stock_returns, stock_prices_aligned, transaction_cost_bps, engine, lag_days,
     )
 
+    # --- volatility-targeted arms: the no-regime-model alternative to
+    # regime exposure scaling. `vol_target_only` is the direct
+    # apples-to-apples counterpart of `regime_only` (both scale benchmark
+    # exposure, one from clustered states and one from raw trailing vol),
+    # and `combined_vol_target` is the counterpart of `combined`. If these
+    # match or beat their regime equivalents, the clustering subsystem is
+    # not earning its complexity. Purely additive -- regime arms unchanged. ---
+    if vol_target_exposure is not None:
+        vt = vol_target_exposure.reindex(common_index).ffill().fillna(0.0)
+        vt_bench = pd.DataFrame({"benchmark": vt}, index=common_index)
+        results_vt_only = _run_backtest(
+            vt_bench, pd.DataFrame({"benchmark": benchmark_returns}),
+            None, transaction_cost_bps, engine, lag_days,
+        )
+        vt_for_stocks = pd.DataFrame(
+            np.tile(vt.values[:, None], (1, len(stock_returns.columns))),
+            index=common_index, columns=stock_returns.columns,
+        )
+        vt_combined = fundamental_weights_daily * vt_for_stocks
+
     results = {
         "benchmark": benchmark_result,
         "regime_only": regime_only_result,
         "fundamentals_only": fundamentals_only_result,
         "combined": combined_result,
     }
+    if vol_target_exposure is not None:
+        results["vol_target_only"] = results_vt_only
+        results["combined_vol_target"] = _run_backtest(
+            vt_combined, stock_returns, stock_prices_aligned,
+            transaction_cost_bps, engine, lag_days,
+        )
+
+    # --- fundamentals_beta_rotated: COMPOSITIONAL de-risking. Same
+    # fundamentals selection, ALWAYS 100% invested (no regime exposure
+    # scaling at all), but rotated toward low-beta names within the
+    # selection during stressed regimes. This is the first regime mechanism
+    # in this project that changes WHAT is held rather than HOW MUCH --
+    # see strategies.apply_beta_rotation's docstring. Compare it against
+    # `fundamentals_only` (same selection, no rotation) to isolate the
+    # rotation effect, and against `combined` (same regime info consumed as
+    # exposure cuts instead) to compare the two mechanisms head to head.
+    # Purely additive: `combined` is never modified by this. ---
+    if beta_panel is not None:
+        beta_rotated_weights = apply_beta_rotation(
+            fundamental_weights_daily, beta_panel, regime,
+            stress_by_regime=stress_by_regime, rotation_strength=rotation_strength,
+        )
+        results["fundamentals_beta_rotated"] = _run_backtest(
+            beta_rotated_weights, stock_returns, stock_prices_aligned,
+            transaction_cost_bps, engine, lag_days,
+        )
 
     # --- geometric_overlay_only: pure benchmark exposure driven by the crash
     # flag ALONE (not the GMM regime) — only produced when the signal was

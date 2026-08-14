@@ -65,6 +65,17 @@ def run_pipeline(
     date; see ``metrics/technical_momentum.py`` and
     ``point_in_time.py``'s per-rebalance-date extraction for how this is
     built PIT-safely.
+
+    If ``config["forensic_gates"]["enabled"]`` is true, every symbol is
+    also run through ``forensic_gates.apply_forensic_exclusion_gates``
+    AFTER the composite score is computed: any symbol tripping a gate has
+    its ``composite_score`` forced to NaN for this date (excluded from
+    selection downstream, same mechanism as any other missing-data
+    exclusion — see that module's docstring for the full motivation and
+    the "hard floor under the soft scoring dimensions" framing). Adds
+    ``forensic_excluded``/``forensic_exclusion_reasons`` columns to the
+    result when enabled; absent entirely (exact pre-gates behavior) when
+    disabled or unset, the default.
     """
     enabled = config["dimensions"]
     all_metrics = pd.DataFrame(index=snapshot.index)
@@ -101,5 +112,6 @@ def run_pipeline(
 
     result = all_metrics.join(dimension_scores, rsuffix="_score")
     result["composite_score"] = composite
+
     result = result.join(snapshot[["sector", "industry"]] if "industry" in snapshot.columns else sector.rename("sector"))
     return result.sort_values("composite_score", ascending=False)

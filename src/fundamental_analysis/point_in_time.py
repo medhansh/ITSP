@@ -297,6 +297,7 @@ def run_pit_fundamental_pipeline(
     conviction_panel: pd.DataFrame | None = None,
     regime: pd.Series | None = None,
     regime_weight_multipliers: dict | None = None,
+    beta_panel: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """Run ``fundamental_analysis.pipeline.run_pipeline`` once per rebalance
     date, each time using the PIT snapshot as-of that date instead of the
@@ -325,6 +326,20 @@ def run_pit_fundamental_pipeline(
     computation from OHLC data, same as every other PIT-scored input in
     this module. ``None`` (default, or if ``technical_momentum`` isn't
     enabled) reproduces the exact pre-Ichimoku-dimension behavior.
+
+    ``beta_panel`` (optional): a daily (date x symbol) trailing-beta panel
+    from ``orthogonalization.compute_rolling_beta_panel``. When given
+    (and ``conviction_panel`` is also given), each rebalance date's raw
+    Ichimoku conviction values are cross-sectionally residualized against
+    that date's beta values before being handed to the fundamentals
+    pipeline (``orthogonalization.residualize_against_beta``) -- this
+    isolates idiosyncratic, stock-specific conviction from conviction that's
+    really just systematic market-beta momentum riding the tape. See
+    ``orthogonalization.py``'s module docstring for why this residualizes
+    against beta only, not sector (sector is already handled downstream by
+    ``scoring.composite_score.sector_relative_zscore``). ``None`` (default)
+    reproduces the exact pre-orthogonalization behavior -- purely opt-in,
+    same convention as every other optional input in this function.
 
     ``regime`` (optional) + ``regime_weight_multipliers`` (optional):
     when BOTH are given, ``technical_momentum``'s composite weight is
@@ -366,10 +381,16 @@ def run_pit_fundamental_pipeline(
         dates = pd.DatetimeIndex(sorted(pd.to_datetime(rebalance_dates).unique()))
         regime_at_rebalance = regime.sort_index().reindex(dates, method="ffill")
 
+    beta_at_rebalance = None
+    if beta_panel is not None and conviction_panel is not None:
+        dates = pd.DatetimeIndex(sorted(pd.to_datetime(rebalance_dates).unique()))
+        beta_at_rebalance = beta_panel.sort_index().reindex(dates, method="ffill")
+
     results = []
     n_dates_with_growth = 0
     n_dates_with_conviction = 0
     n_dates_regime_conditioned = 0
+    n_dates_beta_orthogonalized = 0
     for date, group in panel_long.groupby("date"):
         pit_fields = group.pivot(index="symbol", columns="field", values="value")
         snapshot_as_of = merge_pit_into_snapshot(base_snapshot, pit_fields)
@@ -383,6 +404,12 @@ def run_pit_fundamental_pipeline(
             if not row.empty:
                 technical_conviction = row
                 n_dates_with_conviction += 1
+                if beta_at_rebalance is not None and date in beta_at_rebalance.index:
+                    from src.fundamental_analysis.orthogonalization import residualize_against_beta
+
+                    beta_row = beta_at_rebalance.loc[date]
+                    technical_conviction = residualize_against_beta(technical_conviction, beta_row)
+                    n_dates_beta_orthogonalized += 1
 
         run_config = config
         if regime_at_rebalance is not None and date in regime_at_rebalance.index and "technical_momentum" in config.get("composite_weights", {}):
@@ -423,6 +450,14 @@ def run_pit_fundamental_pipeline(
             "%d/%d rebalance dates (dates without a matching regime label fell back to the "
             "unconditioned base weight, logged individually above if any occurred)",
             n_dates_regime_conditioned, n_dates,
+        )
+    if beta_panel is not None:
+        logger.info(
+            "run_pit_fundamental_pipeline: technical_momentum conviction scores were "
+            "beta-orthogonalized on %d/%d rebalance dates that had usable conviction data "
+            "(dates/symbols without a usable beta kept the raw conviction score, logged "
+            "individually above if any occurred)",
+            n_dates_beta_orthogonalized, n_dates_with_conviction,
         )
 
     if not results:

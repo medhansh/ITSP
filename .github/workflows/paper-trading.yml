@@ -8,9 +8,29 @@ name: Paper trading
 # off trading days present in the price file, not off the clock, so a late
 # or skipped run simply catches up on the next one.
 on:
+  # Preferred trigger: an external HTTP POST to the repository_dispatch API.
+  # GitHub's own cron is best-effort and is frequently delayed under load, so
+  # an outside scheduler gives far tighter timing. See SETUP.md for the exact
+  # request.
+  repository_dispatch:
+    types: [run-paper-trading]
+
+  # Fallback only, in case the external trigger is down. Harmless if it fires
+  # alongside the dispatch: the engine keys off trading days already recorded
+  # in the ledger, so a second run the same day finds nothing new to do.
   schedule:
     - cron: "30 12 * * 1-5"
-  workflow_dispatch:        # manual trigger, also used to keep the schedule alive
+
+  workflow_dispatch:        # manual button in the Actions tab
+    inputs:
+      force_init:
+        description: "Wipe the ledger and re-seed from scratch (DESTROYS current history)"
+        type: boolean
+        default: false
+      start_date:
+        description: "Replay start date for force_init, e.g. 2025-01-01. Ignored unless force_init is checked."
+        type: string
+        default: ""
 
 permissions:
   contents: write           # to commit the updated ledger back
@@ -60,11 +80,28 @@ jobs:
         continue-on-error: true
 
       - name: Advance paper trading
+        env:
+          FORCE_INIT: ${{ github.event.inputs.force_init }}
+          START_DATE: ${{ github.event.inputs.start_date }}
         run: |
-          if [ -f data/processed/paper_ledger.json ]; then
+          # force_init only ever comes from a HUMAN pressing "Run workflow" --
+          # repository_dispatch and the cron fallback never set it, so neither
+          # can accidentally wipe the ledger. Checked explicitly against the
+          # string "true" because workflow_dispatch boolean inputs still
+          # arrive as text.
+          if [ "$FORCE_INIT" = "true" ]; then
+            if [ -n "$START_DATE" ]; then
+              echo "Force re-init requested -- wiping ledger, replay from $START_DATE"
+              python scripts/run_paper_trading.py --init --start "$START_DATE"
+            else
+              echo "Force re-init requested -- wiping ledger, default replay window"
+              python scripts/run_paper_trading.py --init
+            fi
+          elif [ -f data/processed/paper_ledger.json ]; then
             python scripts/run_paper_trading.py
           else
-            python scripts/run_paper_trading.py --init --start 2026-07-01
+            echo "No existing ledger -- seeding for the first time"
+            python scripts/run_paper_trading.py --init --start 2025-01-01
           fi
 
       - name: Commit ledger and dashboard

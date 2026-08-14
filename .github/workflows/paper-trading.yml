@@ -64,7 +64,7 @@ jobs:
           if [ -f data/processed/paper_ledger.json ]; then
             python scripts/run_paper_trading.py
           else
-            python scripts/run_paper_trading.py --init --start 2025-01-01
+            python scripts/run_paper_trading.py --init --start 2026-07-01
           fi
 
       - name: Commit ledger and dashboard

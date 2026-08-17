@@ -31,6 +31,7 @@ COMPONENT_COLORS = {
     "regime_only": "#E69F00",        # orange
     "fundamentals_only": "#0072B2",  # blue
     "combined": "#009E73",           # green
+    "fundamentals_beta_rotated": "#009E73",  # green — THE strategy in the lean build
     "geometric_overlay_only": "#CC79A7",  # reddish-purple — only appears when the signal is enabled
     "trend": "#D55E00",              # vermillion — scripts/run_technical_backtest.py
     "mean_reversion": "#56B4E9",     # sky blue — scripts/run_technical_backtest.py

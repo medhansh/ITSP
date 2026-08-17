@@ -153,7 +153,7 @@ def step_fundamentals(cfg: dict, args: argparse.Namespace, universe_csv: str) ->
             symbols,
             sources=fcfg["sources"], source_priority=fcfg["source_priority"],
             min_delay_seconds=fcfg["min_delay_seconds"], cache_dir=fcfg["cache_dir"],
-            cache_ttl_days=fcfg["cache_ttl_days"], trendlyne_mapping_path=fcfg["trendlyne_mapping_path"],
+            cache_ttl_days=fcfg["cache_ttl_days"],
         )
         Path(snapshot_out).parent.mkdir(parents=True, exist_ok=True)
         snapshot.to_csv(snapshot_out)
@@ -517,6 +517,16 @@ def main() -> None:
         print(f"\n[beta_rotation] WARNING: rotation_strength={rot_strength:g} is set but the "
               f"fundamentals_beta_rotated component is MISSING -- the rotation did not run. "
               f"Check the [beta_rotation] log lines above for why.")
+
+    # Two poster-ready charts: benchmark vs. the strategy only, large fonts,
+    # nothing else on the axes. Skipped (not failed) if the rotated component
+    # never ran, since there is then nothing to compare against the benchmark.
+    if cfg["backtesting"].get("poster_charts", True) and "fundamentals_beta_rotated" in result["attribution_table_full"].index:
+        from src.backtesting.poster_charts import plot_poster_charts
+
+        paths = plot_poster_charts(result["component_results"], out_dir=f"{out_dir}/poster")
+        print(f"\n[poster] {paths['equity_curve']}")
+        print(f"[poster] {paths['rolling_sharpe']}")
 
 
 if __name__ == "__main__":

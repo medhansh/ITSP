@@ -76,7 +76,6 @@ def cmd_fundamentals(args, cfg) -> None:
         min_delay_seconds=fcfg["min_delay_seconds"],
         cache_dir=fcfg["cache_dir"],
         cache_ttl_days=fcfg["cache_ttl_days"],
-        trendlyne_mapping_path=fcfg["trendlyne_mapping_path"],
     )
     Path(args.out_snapshot).parent.mkdir(parents=True, exist_ok=True)
     snapshot.to_csv(args.out_snapshot)

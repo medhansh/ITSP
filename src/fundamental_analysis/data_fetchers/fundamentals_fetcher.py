@@ -8,8 +8,6 @@ individual source fetchers live in their own modules:
   - screener_fetcher.py — primary source; best financial-statement coverage.
   - yfinance_fetcher.py — fallback; best analyst-estimate coverage; also the
     price-panel source used by regime_detection and backtesting.
-  - trendlyne_fetcher.py — supplementary only; most of its useful data is
-    paywalled (see that module's docstring for exactly what's free).
 
 See docs/data_sourcing_spec.md for the full per-field coverage table, the
 scraping-etiquette notes, and the look-ahead-bias caveat that applies when
@@ -22,6 +20,7 @@ import pandas as pd
 
 from src.common.logging_utils import get_logger
 from src.common.scraping_utils import DiskCache, build_session
+from src.fundamental_analysis.data_fetchers import screener_fetcher, yfinance_fetcher
 from src.fundamental_analysis.data_fetchers.merge import merge_sources
 
 logger = get_logger(__name__)
@@ -50,17 +49,16 @@ SNAPSHOT_SCHEMA = [
 
 HISTORY_SCHEMA = ["symbol", "fiscal_year", "revenue", "net_income", "eps"]
 
-DEFAULT_SOURCE_PRIORITY = ["screener", "yfinance", "trendlyne"]
+DEFAULT_SOURCE_PRIORITY = ["screener", "yfinance"]
 
 
 def fetch_fundamentals(
     symbols: list[str],
-    sources: list[str] = ("screener", "yfinance", "trendlyne"),
+    sources: list[str] = ("screener", "yfinance"),
     source_priority: list[str] | None = None,
     min_delay_seconds: float = 2.0,
     cache_dir: str = "data/raw/.cache",
     cache_ttl_days: float = 7.0,
-    trendlyne_mapping_path: str = "data/universe/trendlyne_id_map.csv",
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Fetch fundamentals for ``symbols`` from every source in ``sources``,
     then merge field-by-field using ``source_priority`` (defaults to
@@ -91,12 +89,11 @@ def fetch_fundamentals(
     if "yfinance" in sources:
         logger.info("Fetching fundamentals from yfinance for %d symbols", len(symbols))
         source_dataframes["yfinance"] = yfinance_fetcher.fetch_multiple(symbols)
-    if "trendlyne" in sources:
-        logger.info("Fetching supplementary fundamentals from Trendlyne for %d symbols", len(symbols))
-        source_dataframes["trendlyne"] = trendlyne_fetcher.fetch_multiple(
-            symbols, session=session, cache=cache, min_delay_seconds=min_delay_seconds,
-            mapping_path=trendlyne_mapping_path,
-        )
+    # Trendlyne was dropped from the lean build: it is supplementary-only
+    # and most of its useful fields are paywalled (see the module docstring
+    # this project shipped before the cut). Passing "trendlyne" in `sources`
+    # now has no effect rather than raising, so an old config value here is
+    # silently harmless instead of a crash.
 
     merged, provenance = merge_sources(source_dataframes, source_priority)
     merged = merged.reindex(columns=SNAPSHOT_SCHEMA)

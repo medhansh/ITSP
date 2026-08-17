@@ -323,12 +323,13 @@ data_fetchers:
   price_start_date: "2015-01-01"
   benchmark_ticker: "^CRSLDX"       # NIFTY500 Total Return proxy on Yahoo Finance — verify before relying on it
   fundamentals:
-    sources: ["screener", "yfinance", "trendlyne"]   # which sources to query
-    source_priority: ["screener", "yfinance", "trendlyne"]  # field-level fallback order when merging
+    sources: ["screener", "yfinance"]   # which sources to query -- trendlyne dropped in the
+                                       # lean build (supplementary only; most useful fields
+                                       # were paywalled anyway)
+    source_priority: ["screener", "yfinance"]  # field-level fallback order when merging
     min_delay_seconds: 2.0          # politeness delay between requests to the same domain
     cache_dir: "data/raw/.cache"
     cache_ttl_days: 7
-    trendlyne_mapping_path: "data/universe/trendlyne_id_map.csv"
   options:                          # see src/fundamental_analysis/data_fetchers/options_fetcher.py —
                                      # NO free bulk NSE options source is wired in; this section only
                                      # controls where run_full_pipeline.py looks for/caches a
@@ -538,6 +539,9 @@ backtesting:
                                      # effect between exposure timing and stock selection.
     - benchmark
     - fundamentals_beta_rotated
+  poster_charts: true                # writes two large benchmark-vs-strategy PNGs to
+                                     # reports/poster/ (equity curve, rolling Sharpe) --
+                                     # see src/backtesting/poster_charts.py
   report_components:                 # which components appear in the printed summary and the
                                      # markdown report. The FULL decomposition is always written to
                                      # reports/tables/attribution_table_full.csv regardless; this

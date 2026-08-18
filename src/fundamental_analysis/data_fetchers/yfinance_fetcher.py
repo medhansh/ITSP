@@ -274,3 +274,47 @@ def fetch_benchmark_series(
     series = ohlcv["close"].rename("close")
     series.index.name = "date"
     return series
+
+
+def fetch_india_vix_series(
+    vix_ticker: str = "^INDIAVIX",
+    start: str = "2015-01-01",
+    end: str | None = None,
+    downloader: Callable[[list[str], str, str | None], pd.DataFrame] | None = None,
+) -> pd.Series:
+    """Daily India VIX close level, as a standalone Series (name ``"vix"``).
+
+    This is a core production input: the shipped default regime source
+    (``regime_detection.production_regime_source: "vix_bucket_contemporaneous"``,
+    see ``src/regime_detection/vix_regime.py`` and
+    ``docs/regime_detection_spec.md``'s "VIX-bucket regime" section) is
+    built directly from it. Kept separate from
+    ``regime_detection.data_loader.load_from_yfinance`` (which bundles VIX
+    together with the benchmark index download, for the GMM regime feature
+    matrix specifically) so the two consumers can be refreshed
+    independently.
+
+    Uses the same dependency-injected ``downloader`` pattern as every other
+    fetcher here, and the same ``_download_ticker_ohlcv``-shaped single-
+    ticker handling as ``fetch_benchmark_ohlcv`` — reuses that function
+    directly rather than duplicating the MultiIndex-column-shape handling.
+
+    Returns an empty float Series (name ``"vix"``, never raises) if yfinance
+    has no data for ``vix_ticker`` — callers decide whether that's fatal.
+    India VIX has a shorter history than most benchmark indices (available
+    on NSE since late 2007, but Yahoo Finance's backfill depth for
+    ``^INDIAVIX`` specifically should be spot-checked against ``start``).
+    """
+    ohlcv = fetch_benchmark_ohlcv(vix_ticker, start, end, downloader)
+    if ohlcv.empty or "close" not in ohlcv.columns:
+        logger.warning(
+            "yfinance returned no data for VIX ticker %s -- the production regime source "
+            "(regime_detection.production_regime_source='vix_bucket_contemporaneous') cannot run "
+            "without it. Verify the ticker is still valid on Yahoo Finance, or set "
+            "production_regime_source: 'gmm' as a temporary fallback.",
+            vix_ticker,
+        )
+        return pd.Series(dtype=float, name="vix")
+    series = ohlcv["close"].rename("vix")
+    series.index.name = "date"
+    return series

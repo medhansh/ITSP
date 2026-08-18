@@ -7,6 +7,57 @@ universe:
   benchmark_symbol: "NIFTY50"       # benchmark for relative-return style features
 
 regime_detection:
+  production_regime_source: "gmm"  # WHICH series feeds exposure_by_regime,
+                                     # beta_rotation.stress_by_regime, AND (when
+                                     # technical_signals.blend.stress_mode: "rigid") the
+                                     # technical_momentum blend ladder. This is the single most
+                                     # consequential regime-detection setting in this file.
+                                     #   "vix_bucket_contemporaneous"  <- CURRENT, default.
+                                     #                 Same-day India VIX bucket (see
+                                     #                 vix_bucket_regime below) + asymmetric
+                                     #                 downgrade hysteresis. Walk-forward tested
+                                     #                 against the GMM(4) price-feature regime
+                                     #                 (below) and showed a real, if moderate and
+                                     #                 small-n, edge -- see
+                                     #                 docs/regime_detection_spec.md's "VIX-bucket
+                                     #                 regime" section for the full evidence,
+                                     #                 including what else was tried (a VIX-
+                                     #                 forecasting classifier arm, a GMM+VIX hybrid
+                                     #                 gate -- neither chosen) and the caveat on
+                                     #                 not pushing min_days_to_downgrade higher
+                                     #                 without re-validating.
+                                     #   "gmm"       = the original/legacy source: the GMM(4)
+                                     #                 price-feature regime (model: block below).
+                                     #                 Kept fully available as an explicit
+                                     #                 fallback, not deleted -- set this if VIX
+                                     #                 data is unavailable or you want to compare
+                                     #                 against the pre-VIX-work baseline.
+  vix_bucket_regime:                 # only used when production_regime_source: "vix_bucket_contemporaneous"
+                                     # -- see src/regime_detection/vix_regime.py's
+                                     # build_production_vix_regime and apply_bucket_hysteresis.
+    n_buckets: 4                    # FIXED (not swept) at exactly what was walk-forward validated.
+                                     # sweep_bucket_counts/choose_bucket_count exist in vix_regime.py
+                                     # for research use but are not called in production -- re-run
+                                     # that sweep and re-validate via walk-forward before changing
+                                     # this, don't just swap in whatever a fresh sweep suggests.
+    log_transform: false            # cluster on log(VIX) instead of raw VIX level. Not validated
+                                     # as superior -- left at the tested default.
+    random_state: 42
+    min_days_to_downgrade: 10       # asymmetric hysteresis: a bucket DOWNGRADE only takes effect
+                                     # once VIX has stayed at/below the calmer level for this many
+                                     # CONSECUTIVE days; a bucket UPGRADE is always accepted
+                                     # instantly, no delay. Chosen from a walk-forward sweep across
+                                     # 0-72: most folds' own individual improvement plateaued or
+                                     # reversed by roughly 10-15, while the aggregate mean kept
+                                     # climbing well past that, driven by just one or two folds
+                                     # whose extreme values (min_days=72) later produced a fold
+                                     # REVERSING sign relative to its own best setting -- a sign of
+                                     # overfitting to specific historical years, not a genuinely
+                                     # better setting. 10 sits at the edge of the broadly-supported
+                                     # range rather than at the (unreliable) aggregate maximum.
+                                     # Do not casually raise this without re-running the walk-forward
+                                     # sweep and checking the SAME per-fold breakdown, not just the
+                                     # aggregate mean.
   lookback_years: 10
   feature_windows:                 # trading-day windows for rolling features
     returns: [5, 21, 63]
@@ -320,8 +371,25 @@ fundamental_analysis:
 
 data_fetchers:
   price_source: "yfinance"          # only supported price source currently
-  price_start_date: "2015-01-01"
+  price_start_date: "2015-01-01"    # the single biggest lever for MORE (genuinely independent, not
+                                     # just overlapping) walk-forward folds is pushing this earlier if
+                                     # the underlying data supports it -- India VIX (^INDIAVIX) has
+                                     # published history back to late 2007 on NSE, though yfinance's
+                                     # own backfill depth for it specifically should be spot-checked
+                                     # (see yfinance_fetcher.fetch_india_vix_series's docstring)
+                                     # before relying on an earlier date here. NIFTY500-constituent
+                                     # stock-level price history is the more likely binding
+                                     # constraint -- many current constituents won't have listed
+                                     # history reaching much before 2015 anyway.
   benchmark_ticker: "^CRSLDX"       # NIFTY500 Total Return proxy on Yahoo Finance — verify before relying on it
+  vix_ticker: "^INDIAVIX"           # India VIX -- feeds the production regime source (see
+                                     # regime_detection.production_regime_source, default
+                                     # "vix_bucket_contemporaneous"). Fetched via
+                                     # yfinance_fetcher.fetch_india_vix_series; NOT the same code
+                                     # path as regime_detection.data_loader.load_from_yfinance
+                                     # (which bundles VIX together with the benchmark index
+                                     # download, for the GMM regime feature matrix specifically) --
+                                     # this ticker is fetched standalone so the two stay decoupled.
   fundamentals:
     sources: ["screener", "yfinance"]   # which sources to query -- trendlyne dropped in the
                                        # lean build (supplementary only; most useful fields
@@ -381,20 +449,30 @@ technical_signals:
                                      # regime vs 4 in the stressed one) and does not share its
                                      # lookback with the monthly rebalance interval.
     ma_window: 63
-    stress_mode: "continuous"       # "continuous" = rolling percentile of trailing realized
-                                     # volatility (smooth, uses every date); "rigid" = discrete
-                                     # regime ladder (a step function whose stressed level rests
-                                     # on ~4 rebalance dates).
-                                     # Walk-forward could NOT separate them: continuous beat rigid
-                                     # on Sharpe in 4/6 folds (ichimoku leg) and 3/6 (mom121 leg),
-                                     # mean deltas +0.036 and +0.020 -- a coin flip. Continuous is
-                                     # chosen on PRINCIPLE, not on evidence: it uses all 139
-                                     # rebalance dates rather than resting on 4, and it matches the
-                                     # separate finding that the feature space is a volatility
-                                     # continuum rather than separable states (DBSCAN finds exactly
-                                     # one cluster at every eps; silhouette prefers n=2 at every
-                                     # backend). Do not report continuous as empirically superior.
+    stress_mode: "rigid"            # WHICH stress SOURCE weights the momentum/reversal blend.
+                                     # "rigid"       = the regime_detection.production_regime_source
+                                     #                 series' own ladder (see that config block
+                                     #                 above) -- VIX-bucket regime by default as of
+                                     #                 this build. <- CURRENT
+                                     # "continuous"  = rolling percentile of trailing REALIZED
+                                     #                 volatility (smooth, uses every date),
+                                     #                 independent of whichever regime source is
+                                     #                 configured above.
+                                     #
+                                     # Walk-forward on the ORIGINAL GMM-only "rigid" vs "continuous"
+                                     # comparison could not separate them (mean Sharpe deltas
+                                     # +0.036/+0.020, a coin flip either way). The VIX-bucket regime
+                                     # (see regime_detection.production_regime_source) is a
+                                     # different, later, and better-evidenced result: walk-forward
+                                     # testing against the GMM regime showed a real (if modest,
+                                     # small-n) edge -- see docs/regime_detection_spec.md's
+                                     # "VIX-bucket regime" section for the full writeup, including
+                                     # what was tried and NOT chosen (a VIX-forecasting classifier
+                                     # arm, a GMM+VIX hybrid gate) and the caveat on how far the
+                                     # hysteresis parameter can be pushed before results stop
+                                     # generalizing.
     vol_window: 21                  # trailing window for the realized-volatility stress measure
+                                     # (only used when stress_mode: "continuous")
     max_reversal_weight: 1.0        # reversal weight at maximum stress. 1.0 = full flip to pure
                                      # reversal at peak stress, which is what the measured IC sign
                                      # flip implies (momentum IC goes NEGATIVE under stress:

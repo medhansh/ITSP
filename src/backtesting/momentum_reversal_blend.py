@@ -151,6 +151,31 @@ def build_blend(
     return blended
 
 
+def _ladder_from_labels(labels: pd.Series, n_labels: int | None = None) -> dict:
+    """Shared helper: evenly-spaced 0..1 ladder from a set of ordinal
+    integer labels (0 = calmest .. max = most stressed) -- e.g. GMM regime
+    labels or (as of this build) the VIX-bucket regime labels
+    ``regime_detection.vix_regime.build_production_vix_regime`` produces.
+    ``stress_from_regime`` below is the only current caller, but this stays
+    factored out as a general-purpose ladder builder in case a future
+    regime source needs the same 0..1 mapping.
+
+    ``n_labels`` (optional): the FULL bucket/regime count the label set was
+    fit with, even if not every label was actually observed in ``labels``
+    (e.g. a short window that happened not to touch the most stressed
+    bucket). When given, the ladder spans ``0..n_labels-1`` rather than
+    just the observed min/max, so a ladder built from a calm window and one
+    built from a stressed window stay on the SAME 0..1 scale. Defaults to
+    the observed unique label set.
+    """
+    if n_labels is not None:
+        distinct = list(range(n_labels))
+    else:
+        distinct = sorted(pd.Series(labels.dropna().unique()).tolist())
+    return ({lab: i / (len(distinct) - 1) for i, lab in enumerate(distinct)}
+            if len(distinct) > 1 else {distinct[0]: 0.0})
+
+
 def stress_from_regime(regime: pd.Series, index: pd.DatetimeIndex) -> pd.Series:
     """RIGID stress: regime label mapped onto an evenly spaced 0..1 ladder.
 
@@ -159,9 +184,7 @@ def stress_from_regime(regime: pd.Series, index: pd.DatetimeIndex) -> pd.Series:
     this arm's behavior in exactly the situation it is designed for is
     determined by a very small number of observations.
     """
-    labels = sorted(pd.Series(regime.dropna().unique()).tolist())
-    mapping = ({lab: i / (len(labels) - 1) for i, lab in enumerate(labels)}
-               if len(labels) > 1 else {labels[0]: 0.0})
+    mapping = _ladder_from_labels(regime.dropna())
     return regime.reindex(index, method="ffill").map(mapping).fillna(0.0)
 
 

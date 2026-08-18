@@ -7,6 +7,106 @@ learning over market-wide (not single-stock) features, so downstream strategy lo
 can condition on "what kind of market are we in" rather than assuming one static
 approach works everywhere in time.
 
+## VIX-bucket regime (production default, replacing GMM for exposure scaling / beta rotation / blend ladder)
+
+`regime_detection.production_regime_source` controls which series feeds
+`exposure_by_regime`, `beta_rotation.stress_by_regime`, and (when
+`technical_signals.blend.stress_mode: "rigid"`) the `technical_momentum`
+blend ladder — i.e. every consumer of "the" regime label, not just one
+signal-weighting input. As of this build the default is
+**`"vix_bucket_contemporaneous"`**, replacing the GMM(4) price-feature
+regime described below, which remains available as an explicit fallback
+(`production_regime_source: "gmm"`).
+
+**What it is.** Same-day India VIX, bucketed via a 1D GMM fit directly on
+VIX level (`src/regime_detection/vix_regime.py`, `n_buckets=4` fixed, not
+swept per run — matching what was actually validated), then passed through
+an asymmetric hysteresis filter (`apply_bucket_hysteresis`): a bucket
+UPGRADE (more stressed) is always accepted instantly; a bucket DOWNGRADE
+(calmer) only takes effect once VIX has stayed at or below the calmer
+level for `min_days_to_downgrade` consecutive days (currently **10**, see
+below). Fit on all available VIX history up to each date — no train/test
+split in production, since "production" means using everything known up
+to today.
+
+**Why this replaced GMM.** A walk-forward comparison (fit each regime
+source only on each fold's training window, score on the held-out test
+window) found the price-feature GMM regime was prone to a specific
+failure mode: flagging elevated stress during calendar years where India
+VIX's own level was among the *lowest* in the sample (e.g. one fold spent
+98% of its days in a non-calmest GMM state despite that year's mean VIX
+being the second-lowest of any fold tested) — plausibly choppy/range-bound
+price action producing elevated short-window realized-volatility features
+without corresponding genuine options-implied fear. The VIX-bucket regime
+does not make this mistake by construction, since it only ever reacts to
+VIX itself. Across a 6-fold non-overlapping walk-forward, the VIX-bucket
+arm's mean per-fold Sharpe delta versus GMM was positive but modest and
+not conclusively different from zero at that sample size (bootstrap 90%
+CI approximately [-0.10, +0.23] before hysteresis tuning) — this is a
+real, evidenced, but not overwhelming edge, not a landslide.
+
+**What was tried and NOT chosen** (documented so nobody re-tries these
+blind):
+- **A VIX-bucket forecasting arm** (`vix_bucket_supervised` in earlier
+  development): an N-days-ahead gradient-boosted classifier forecasting
+  the VIX bucket, rather than using today's contemporaneous bucket
+  directly. Consistently underperformed the simple contemporaneous
+  version — worse aggregate Sharpe, roughly double the turnover, and a
+  specific, repeatable failure during the COVID fold (the classifier,
+  trained on pre-2020 data, mistimed entry/exit around the fastest,
+  largest single shock in the sample). The added forecasting complexity
+  did not earn its keep; this project's "always test a cheap control
+  before the complex version" discipline paid off here.
+- **A GMM+VIX hybrid gate**: GMM's regime label, vetoed to calmest unless
+  VIX's contemporaneous bucket confirmed elevation. Motivated by wanting
+  "the best of both" (GMM's apparent edge in some crisis folds, VIX's
+  edge in false-positive-stress folds), and deliberately designed to avoid
+  the specific failure mode that made `consensus_governor` (below) a
+  confirmed negative — this gate is asymmetric (instant entry, only the
+  exit is ever delayed) rather than symmetric hysteresis, and its
+  confirming signal is externally observed (VIX) rather than a second
+  view of the same price data GMM already used. Despite that, on real
+  walk-forward data it came out WEAKER than the plain VIX-bucket-only
+  arm (mean fold delta +0.002 vs the plain arm's +0.070), because a pure
+  veto mechanism can only ever suppress GMM, never correct a genuinely
+  bad GMM call, and gave back most of its crisis-fold protection anyway.
+  Not pursued further.
+
+**Why `min_days_to_downgrade: 10`, specifically — and the risk of pushing
+it higher.** A sweep across `min_days_to_downgrade ∈ {0..72}` showed most
+INDIVIDUAL folds' own improvement plateauing or reversing somewhere around
+10-20: e.g. the COVID fold's delta improved from a loss to a solid win by
+`min_days≈10`, but had reversed to a LOSS again by `min_days=72`, despite
+the coarse "was the regime ever calm" diagnostic reporting the exact same
+(fully saturated) reading at both settings — the specific bucket LEVEL the
+hysteresis locks onto, not just whether it's "elevated at all," continued
+changing well past the point where that diagnostic looked stable. The
+aggregate mean kept climbing well past `min_days=20`, but that climb was
+increasingly the product of one or two folds reaching values 2-3x larger
+than anything else in the whole sweep — the signature of overfitting a
+handful of historical years' exact shape, not a genuinely better general
+setting. `min_days_to_downgrade: 10` sits at the edge of the range where
+improvement was broad-based across folds, deliberately short of the
+aggregate-maximizing value. **Do not raise this casually** — re-run the
+full walk-forward sweep and inspect the per-fold breakdown (not just the
+aggregate mean) before changing it, and treat any setting above roughly
+15-20 as unvalidated regardless of what the aggregate number shows.
+
+**Known gaps in this evidence, honestly stated:**
+- The walk-forward comparison used 6 non-overlapping folds (2020-2025) --
+  a small sample for any of the above to be statistically decisive. An
+  overlapping-fold re-run (more folds, but no longer independent
+  observations) showed the same broad direction but did not tighten the
+  uncertainty in any way that should be over-interpreted.
+- The comparison held point-in-time fundamental scoring, beta-panel
+  construction, and every other pipeline stage fixed across regime
+  sources -- it isolates the regime source specifically, not the whole
+  strategy end-to-end.
+- Not yet re-validated after this session's default-config change (i.e.
+  this documentation reflects the comparison's findings; a full
+  `run_full_pipeline.py` run under the new default has not itself been
+  re-run and re-reported here).
+
 ## Feature set (`src/regime_detection/features.py`)
 
 | Feature | Rationale |

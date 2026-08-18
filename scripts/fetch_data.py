@@ -24,6 +24,10 @@ Usage:
     # Multi-year history (Screener P&L, for the growth dimension)
     python scripts/fetch_data.py history --universe-csv data/universe/nifty500_list.csv \\
         --out data/raw/fundamentals_history.csv
+
+    # India VIX (yfinance) -- production regime-detection input (see
+    # regime_detection.production_regime_source in configs/config.yaml)
+    python scripts/fetch_data.py vix --out data/raw/vix.csv
 """
 from __future__ import annotations
 
@@ -118,6 +122,24 @@ def cmd_quarterly_history(args, cfg) -> None:
     print(f"Saved quarterly PIT history ({quarterly.shape}) to {args.out}")
 
 
+def cmd_vix(args, cfg) -> None:
+    """Fetch India VIX as a standalone series -- the production regime
+    source (regime_detection.production_regime_source in
+    configs/config.yaml, default 'vix_bucket_contemporaneous') is built
+    directly from it. Separate from the bundled VIX fetch inside
+    regime_detection.data_loader.load_from_yfinance (that one feeds the
+    GMM price-feature clustering matrix specifically)."""
+    dcfg = cfg["data_fetchers"]
+    vix_ticker = dcfg.get("vix_ticker", "^INDIAVIX")
+    vix = yfinance_fetcher.fetch_india_vix_series(vix_ticker=vix_ticker, start=dcfg["price_start_date"])
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    vix.to_csv(args.out)
+    if vix.empty:
+        print(f"WARNING: yfinance returned no data for {vix_ticker} -- {args.out} is empty.")
+    else:
+        print(f"Saved India VIX series ({len(vix)} days, {vix.index.min().date()}..{vix.index.max().date()}) to {args.out}")
+
+
 def cmd_sector_prices(args, cfg) -> None:
     """Fetch sector index price history for the geometric wedge-product
     crash-risk signal — see src/regime_detection/geometric_signal.py."""
@@ -170,6 +192,12 @@ def main() -> None:
     )
     p_sector.add_argument("--out", default="data/raw/sector_prices.csv")
     p_sector.set_defaults(func=cmd_sector_prices)
+
+    p_vix = subparsers.add_parser(
+        "vix", help="Fetch India VIX for the production regime source (regime_detection.production_regime_source)"
+    )
+    p_vix.add_argument("--out", default="data/raw/vix.csv")
+    p_vix.set_defaults(func=cmd_vix)
 
     args = parser.parse_args()
     cfg = load_config(args.config)

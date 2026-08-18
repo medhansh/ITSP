@@ -37,6 +37,17 @@ def load_inputs(cfg):
     for col in ("known_date", "period_end"):
         if col in qh.columns:
             qh[col] = pd.to_datetime(qh[col], errors="coerce")
+    # data/processed/regime_history.csv is written by
+    # scripts/run_full_pipeline.py's step_production_regime -- whichever
+    # source regime_detection.production_regime_source selects there (VIX-
+    # bucket by default, GMM as an explicit fallback) is what shows up
+    # here. Paper trading intentionally has no regime-construction logic of
+    # its own; it always mirrors whatever the last full pipeline run
+    # validated, by reading this one shared file. That means: re-run
+    # `python scripts/run_full_pipeline.py` (which re-fetches VIX and
+    # rebuilds this file) before a live paper-trading session that needs
+    # today's regime reflected -- an existing but easy-to-miss requirement,
+    # not something --init/daily append handles on its own.
     rh = Path("data/processed/regime_history.csv")
     regime = (pd.read_csv(rh, index_col=0, parse_dates=True)["regime"] if rh.exists() else None)
     return sp, bm, snap, qh, regime

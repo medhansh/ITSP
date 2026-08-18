@@ -73,8 +73,8 @@ jobs:
           # Quarterly filings change a few times a year, so re-scraping them
           # daily is wasted requests against Screener and a good way to get
           # rate-limited. Weekly is well inside the update frequency.
-          if [ "$(date -u +%u)" = "1" ] || [ ! -f data/raw/fundamentals_snapshot.csv ]; then
-            python scripts/fetch_data.py fundamentals || echo "fundamentals refresh failed"
+          if [ "$(date -u +%u)" = "1" ]; then
+            python scripts/fetch_data.py fundamentals || echo "fundamentals refresh failed, using cached"
             python scripts/fetch_data.py quarterly-history || true
           fi
         continue-on-error: true
@@ -116,13 +116,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
-
-      - uses: actions/cache@v4
-        with:
-          path: data/raw
-          key: data-raw-${{ github.run_id }}
-          restore-keys: |
-            data-raw-
 
   deploy:
     needs: run

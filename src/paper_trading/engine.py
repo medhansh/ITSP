@@ -52,10 +52,10 @@ def build_conviction_panel(cfg, stock_prices, benchmark_prices, regime):
                                      ma_window=b.get("ma_window", 63))
     stress = (stress_from_volatility(benchmark_prices, stock_prices.index,
                                      vol_window=b.get("vol_window", 21))
-              if b.get("stress_mode", "rigid") == "continuous"
+              if b.get("stress_mode", "continuous") == "continuous"
               else stress_from_regime(regime, stock_prices.index))
     return build_blend(momentum, reversal, stress,
-                       mode=b.get("stress_mode", "rigid"),
+                       mode=b.get("stress_mode", "continuous"),
                        max_reversal_weight=b.get("max_reversal_weight", 1.0))
 
 

@@ -111,47 +111,6 @@ def step_prices(cfg: dict, args: argparse.Namespace, universe_csv: str) -> tuple
     return stocks_out, bench_out
 
 
-def step_vix(cfg: dict, args: argparse.Namespace) -> str:
-    """Fetch India VIX as its own standalone CSV. This is a core production
-    input: the shipped default regime source
-    (``regime_detection.production_regime_source: "vix_bucket_contemporaneous"``)
-    is built directly from it -- see ``main()``'s regime-source selection
-    and ``docs/regime_detection_spec.md``'s "VIX-bucket regime" section for
-    the walk-forward evidence behind that default.
-
-    Kept as its own file (``data/raw/vix.csv``) rather than merged as a
-    column onto ``benchmark_prices.csv``, so the two VIX consumers in this
-    codebase -- this one, and ``regime_detection.data_loader.load_from_yfinance``'s
-    bundled fetch for the (separate, price-feature) GMM regime clustering
-    feature matrix -- stay decoupled; either can be refreshed/swapped
-    without touching the other's file.
-    """
-    vix_out = "data/raw/vix.csv"
-    if args.offline:
-        logger.info("[vix] --offline: using existing VIX file as-is")
-        return vix_out
-    if not _stale(vix_out, 1, args.force_refresh):
-        logger.info("[vix] VIX series is fresh (< 1 day old) — skipping re-fetch")
-        return vix_out
-
-    from src.fundamental_analysis.data_fetchers import yfinance_fetcher
-
-    dcfg = cfg["data_fetchers"]
-    vix_ticker = dcfg.get("vix_ticker", "^INDIAVIX")
-    logger.info("[vix] fetching %s via yfinance", vix_ticker)
-    vix = yfinance_fetcher.fetch_india_vix_series(vix_ticker=vix_ticker, start=dcfg["price_start_date"])
-    Path(vix_out).parent.mkdir(parents=True, exist_ok=True)
-    vix.to_csv(vix_out)
-    if vix.empty:
-        logger.warning(
-            "[vix] fetch returned no data — the production regime source "
-            "(regime_detection.production_regime_source='vix_bucket_contemporaneous') cannot run "
-            "without it. Set production_regime_source: 'gmm' in config as a temporary fallback, "
-            "or fix the fetch."
-        )
-    return vix_out
-
-
 def step_sector_prices(cfg: dict, args: argparse.Namespace) -> str | None:
     geo_cfg = cfg["regime_detection"].get("geometric_signal", {})
     if not geo_cfg.get("enabled"):
@@ -250,20 +209,11 @@ def step_conviction_panel(cfg, stock_prices, benchmark_prices, regime):
       ``mom121``   -- plain 12-1 momentum: trailing 12-month return skipping
                       the most recent month.
       ``blend``    -- 12-1 momentum blended with a mean-reversion signal,
-                      weighted by market stress. WHICH stress source is
-                      controlled by ``technical_signals.blend.stress_mode``:
-                      ``"continuous"`` (rolling realized-volatility
-                      percentile) or ``"rigid"`` (the ``regime`` argument's
-                      own ladder -- see ``momentum_reversal_blend.stress_from_regime``).
-                      This function is agnostic to WHERE ``regime`` came
-                      from -- as of this build that's the VIX-bucket regime
-                      (see ``main()``'s regime-source selection and
-                      ``docs/regime_detection_spec.md``), not GMM; the
-                      ladder mechanics here are unchanged either way.
+                      weighted by market stress.
 
-    **Why the default source changed (mom121 vs ichimoku).** A direct
-    information-coefficient measurement (scripts/diagnose_signal_ic_by_regime.py)
-    found the Ichimoku conviction score has essentially NO cross-sectional
+    **Why the default changed.** A direct information-coefficient
+    measurement (scripts/diagnose_signal_ic_by_regime.py) found the
+    Ichimoku conviction score has essentially NO cross-sectional
     predictive power on this universe: IC -0.0010, t = -0.10, correct sign
     on 49.6% of rebalance dates. Plain 12-1 momentum measured IC +0.0383,
     t = 2.88. Walk-forward backtesting confirmed it: swapping Ichimoku for
@@ -292,7 +242,7 @@ def step_conviction_panel(cfg, stock_prices, benchmark_prices, regime):
         panel = momentum
     elif source == "blend":
         b_cfg = ts_cfg.get("blend", {})
-        mode = b_cfg.get("stress_mode", "rigid")
+        mode = b_cfg.get("stress_mode", "continuous")
         reversal = build_reversal_panel(
             stock_prices, kind=b_cfg.get("reversal_kind", "dist_from_ma"),
             ma_window=b_cfg.get("ma_window", 63),
@@ -302,12 +252,8 @@ def step_conviction_panel(cfg, stock_prices, benchmark_prices, regime):
                 benchmark_prices, stock_prices.index,
                 vol_window=b_cfg.get("vol_window", 21),
             )
-        elif mode == "rigid":
-            stress = stress_from_regime(regime, stock_prices.index)
         else:
-            raise ValueError(
-                f"technical_signals.blend.stress_mode must be 'rigid' or 'continuous' -- got {mode!r}."
-            )
+            stress = stress_from_regime(regime, stock_prices.index)
         logger.info("[conviction] source=blend (12-1 momentum x %s reversal, stress_mode=%s)",
                     b_cfg.get("reversal_kind", "dist_from_ma"), mode)
         panel = build_blend(momentum, reversal, stress, mode=mode,
@@ -372,88 +318,12 @@ def step_beta_panel(cfg: dict, stock_prices: pd.DataFrame, benchmark_prices: pd.
 
 
 def step_regime(cfg: dict, price_csv: str, sector_price_csv: str | None) -> pd.DataFrame:
-    """Fits the GMM (or KMeans/HMM) price-feature regime model -- always
-    run regardless of ``regime_detection.production_regime_source``,
-    because ``consensus_governor``/``geometric_signal`` (if enabled) are
-    both built on top of ITS regime, not the VIX-bucket one. Saved to
-    ``data/processed/gmm_regime_history.csv`` -- NOT ``regime_history.csv``,
-    which is reserved for whichever series ``main()`` actually selects as
-    THE production regime (see that selection logic and
-    ``docs/regime_detection_spec.md``'s "VIX-bucket regime" section for why
-    that's a different series by default now).
-    """
-    logger.info("[regime] fitting GMM price-feature regime model (sector signal %s)",
-                "enabled" if sector_price_csv else "disabled")
+    logger.info("[regime] fitting regime model (sector signal %s)", "enabled" if sector_price_csv else "disabled")
     result, model = run_regime_pipeline(cfg["regime_detection"], price_csv, sector_price_csv=sector_price_csv)
     Path("data/processed").mkdir(parents=True, exist_ok=True)
-    result.to_csv("data/processed/gmm_regime_history.csv")
+    result.to_csv("data/processed/regime_history.csv")
     model.save("data/processed/regime_model.joblib")
     return result
-
-
-def step_production_regime(cfg: dict, gmm_regime_result: pd.DataFrame, index: pd.DatetimeIndex,
-                            vix: pd.Series | None) -> pd.Series:
-    """Selects and returns THE regime series used everywhere downstream --
-    exposure_by_regime, beta_rotation.stress_by_regime, and (when
-    stress_mode='rigid') the technical_momentum blend ladder -- per
-    ``regime_detection.production_regime_source``.
-
-    ``"vix_bucket_contemporaneous"`` (default): same-day VIX bucket +
-    asymmetric downgrade hysteresis, fit on all available VIX history. This
-    is the walk-forward-validated choice -- see
-    ``docs/regime_detection_spec.md``'s "VIX-bucket regime" section for the
-    evidence and exactly what was and wasn't tested.
-
-    ``"gmm"``: the legacy/fallback path -- ``gmm_regime_result["regime"]``
-    unchanged, exactly what this pipeline used before the VIX-bucket work.
-    Available as an explicit opt-out, not deleted, per this project's usual
-    convention of keeping prior approaches selectable and documented rather
-    than removed outright.
-
-    Writes the CHOSEN series to ``data/processed/regime_history.csv`` (a
-    "regime" column, DatetimeIndex) -- this is the ONE file
-    ``scripts/run_paper_trading.py`` reads, so paper trading always sees
-    exactly the same regime source as the backtest that validated it,
-    without needing any changes on the paper-trading side.
-    """
-    source = cfg["regime_detection"].get("production_regime_source", "vix_bucket_contemporaneous")
-    if source == "vix_bucket_contemporaneous":
-        if vix is None or vix.empty:
-            raise ValueError(
-                "regime_detection.production_regime_source='vix_bucket_contemporaneous' but no "
-                "(or empty) VIX series was supplied -- run `python scripts/fetch_data.py vix` "
-                "first, or set production_regime_source: 'gmm' as a temporary fallback."
-            )
-        from src.regime_detection.vix_regime import build_production_vix_regime
-
-        vb_cfg = cfg["regime_detection"].get("vix_bucket_regime", {})
-        regime = build_production_vix_regime(
-            vix, index,
-            n_buckets=vb_cfg.get("n_buckets", 4),
-            log_transform=vb_cfg.get("log_transform", False),
-            random_state=vb_cfg.get("random_state", 42),
-            min_days_to_downgrade=vb_cfg.get("min_days_to_downgrade", 0),
-        )
-        logger.info(
-            "[regime] PRODUCTION source = vix_bucket_contemporaneous (n_buckets=%d, "
-            "min_days_to_downgrade=%d) -- %.1f%% of days non-calmest. See "
-            "docs/regime_detection_spec.md's 'VIX-bucket regime' section for the walk-forward "
-            "evidence behind this default.",
-            vb_cfg.get("n_buckets", 4), vb_cfg.get("min_days_to_downgrade", 0),
-            100.0 * float((regime > 0).mean()),
-        )
-    elif source == "gmm":
-        regime = gmm_regime_result["regime"]
-        logger.info("[regime] PRODUCTION source = gmm (legacy/fallback, set explicitly in config)")
-    else:
-        raise ValueError(
-            f"regime_detection.production_regime_source must be 'vix_bucket_contemporaneous' or "
-            f"'gmm' -- got {source!r}."
-        )
-
-    Path("data/processed").mkdir(parents=True, exist_ok=True)
-    regime.to_frame("regime").to_csv("data/processed/regime_history.csv")
-    return regime
 
 
 def step_pit_fundamentals(
@@ -575,12 +445,6 @@ def main() -> None:
     universe_csv = step_universe(cfg, args)
     stock_price_csv, benchmark_price_csv = step_prices(cfg, args, universe_csv)
     sector_price_csv = step_sector_prices(cfg, args)
-    production_source = cfg["regime_detection"].get("production_regime_source", "vix_bucket_contemporaneous")
-    vix = None
-    if production_source == "vix_bucket_contemporaneous":
-        vix_csv = step_vix(cfg, args)
-        if Path(vix_csv).exists():
-            vix = pd.read_csv(vix_csv, index_col=0, parse_dates=True)["vix"]
     snapshot_csv, quarterly_csv = step_fundamentals(cfg, args, universe_csv)
     options_history, earnings_calendar = step_options(cfg, args)
 
@@ -588,16 +452,15 @@ def main() -> None:
     benchmark_prices = pd.read_csv(benchmark_price_csv, index_col=0, parse_dates=True)["close"]
 
     regime_result = step_regime(cfg, benchmark_price_csv, sector_price_csv)
-    regime = step_production_regime(cfg, regime_result, stock_prices.index, vix)
+    regime = regime_result["regime"]
     active_regime = regime_result.get("active_regime")
     if active_regime is not None:
         n_transitional = int((active_regime == "transitional").sum())
         n_switches = int((active_regime != active_regime.shift()).sum())
-        raw_switches = int((regime_result["regime"] != regime_result["regime"].shift()).sum())
+        raw_switches = int((regime != regime.shift()).sum())
         logger.info(
-            "[regime] consensus governor active (on the GMM series, independent of the production "
-            "regime source above): %d/%d days transitional, %d active_regime switches vs %d raw "
-            "GMM regime switches",
+            "[regime] consensus governor active: %d/%d days transitional, %d active_regime "
+            "switches vs %d raw regime switches",
             n_transitional, len(active_regime), n_switches, raw_switches,
         )
     geometric_crash_flag = regime_result.get("geometric_crash_risk_flag")
@@ -612,7 +475,7 @@ def main() -> None:
     # so the technical_momentum dimension's conviction panel can be threaded
     # why this reordering was necessary.
     conviction_panel = step_conviction_panel(
-        cfg, stock_prices, benchmark_prices, regime,
+        cfg, stock_prices, benchmark_prices, regime_result["regime"],
     )
     if conviction_panel is not None:
         logger.info(
@@ -623,7 +486,7 @@ def main() -> None:
     scores_by_date = step_pit_fundamentals(
         cfg, snapshot_csv, quarterly_csv, options_history, earnings_calendar, stock_prices.index,
         conviction_panel=conviction_panel,
-        regime=regime,
+        regime=regime_result.get("regime_name", regime_result.get("regime")),
     )
 
     beta_panel = step_beta_panel(cfg, stock_prices, benchmark_prices)

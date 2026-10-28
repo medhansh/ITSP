@@ -7,287 +7,287 @@
       "quantity": 35,
       "avg_price": 302.5571315220424,
       "entry_date": "2026-07-01",
-      "last_price": 244.3000030517578
+      "last_price": 244.5
     },
     "ZFCVINDIA": {
       "symbol": "ZFCVINDIA",
       "quantity": 3,
       "avg_price": 2433.199951171875,
       "entry_date": "2026-07-01",
-      "last_price": 2134.0
+      "last_price": 2097.300048828125
     },
     "IOB": {
       "symbol": "IOB",
       "quantity": 312,
       "avg_price": 34.29855687801655,
       "entry_date": "2026-07-01",
-      "last_price": 29.18000030517578
+      "last_price": 29.020000457763672
     },
     "TATAINVEST": {
       "symbol": "TATAINVEST",
       "quantity": 15,
       "avg_price": 665.289990234375,
       "entry_date": "2026-07-01",
-      "last_price": 556.7000122070312
+      "last_price": 561.5499877929688
     },
     "ITC": {
       "symbol": "ITC",
       "quantity": 37,
       "avg_price": 288.0108056970545,
       "entry_date": "2026-07-01",
-      "last_price": 260.0
+      "last_price": 259.5
     },
     "LUPIN": {
       "symbol": "LUPIN",
       "quantity": 4,
       "avg_price": 2399.60009765625,
       "entry_date": "2026-07-01",
-      "last_price": 1952.0
+      "last_price": 1972.699951171875
     },
     "HINDCOPPER": {
       "symbol": "HINDCOPPER",
       "quantity": 19,
       "avg_price": 494.9500122070313,
       "entry_date": "2026-07-01",
-      "last_price": 407.3500061035156
+      "last_price": 409.1499938964844
     },
     "HBLENGINE": {
       "symbol": "HBLENGINE",
       "quantity": 15,
       "avg_price": 795.506669108073,
       "entry_date": "2026-07-01",
-      "last_price": 788.0
+      "last_price": 809.9500122070312
     },
     "GESHIP": {
       "symbol": "GESHIP",
       "quantity": 7,
       "avg_price": 1408.1428745814733,
       "entry_date": "2026-07-01",
-      "last_price": 1550.9000244140625
+      "last_price": 1559.9000244140625
     },
     "NATIONALUM": {
       "symbol": "NATIONALUM",
       "quantity": 27,
       "avg_price": 333.72222222222223,
       "entry_date": "2026-07-01",
-      "last_price": 308.20001220703125
+      "last_price": 323.5
     },
     "CAPLIPOINT": {
       "symbol": "CAPLIPOINT",
       "quantity": 3,
       "avg_price": 2538.199951171875,
       "entry_date": "2026-07-01",
-      "last_price": 2352.39990234375
+      "last_price": 2362.800048828125
     },
     "MMTC": {
       "symbol": "MMTC",
       "quantity": 161,
       "avg_price": 67.35217398886356,
       "entry_date": "2026-07-01",
-      "last_price": 51.11000061035156
+      "last_price": 51.41999816894531
     },
     "IDBI": {
       "symbol": "IDBI",
       "quantity": 109,
       "avg_price": 84.41000366210938,
       "entry_date": "2026-07-01",
-      "last_price": 78.22000122070312
+      "last_price": 77.58999633789062
     },
     "HINDZINC": {
       "symbol": "HINDZINC",
       "quantity": 16,
       "avg_price": 528.7000122070312,
       "entry_date": "2026-07-01",
-      "last_price": 492.5
+      "last_price": 506.79998779296875
     },
     "NATCOPHARM": {
       "symbol": "NATCOPHARM",
       "quantity": 11,
       "avg_price": 926.7454556551846,
       "entry_date": "2026-07-01",
-      "last_price": 794.5499877929688
+      "last_price": 793.0
     },
     "POWERGRID": {
       "symbol": "POWERGRID",
       "quantity": 38,
       "avg_price": 286.2065887451172,
       "entry_date": "2026-07-01",
-      "last_price": 251.75
+      "last_price": 251.39999389648438
     },
     "NAM-INDIA": {
       "symbol": "NAM-INDIA",
       "quantity": 8,
       "avg_price": 1213.199951171875,
       "entry_date": "2026-07-01",
-      "last_price": 943.0
+      "last_price": 922.5
     },
     "TATAELXSI": {
       "symbol": "TATAELXSI",
       "quantity": 2,
       "avg_price": 3671.10009765625,
       "entry_date": "2026-07-01",
-      "last_price": 3723.39990234375
+      "last_price": 3755.0
     },
     "ACUTAAS": {
       "symbol": "ACUTAAS",
       "quantity": 3,
       "avg_price": 3535.9667154947915,
       "entry_date": "2026-07-01",
-      "last_price": 3793.300048828125
+      "last_price": 3710.0
     },
     "HDFCAMC": {
       "symbol": "HDFCAMC",
       "quantity": 3,
       "avg_price": 2759.60009765625,
       "entry_date": "2026-07-01",
-      "last_price": 2267.699951171875
+      "last_price": 2300.0
     },
     "ABSLAMC": {
       "symbol": "ABSLAMC",
       "quantity": 9,
       "avg_price": 1169.5555962456597,
       "entry_date": "2026-07-01",
-      "last_price": 878.5499877929688
+      "last_price": 866.75
     },
     "AIAENG": {
       "symbol": "AIAENG",
       "quantity": 2,
       "avg_price": 4800.0,
       "entry_date": "2026-07-01",
-      "last_price": 3593.60009765625
+      "last_price": 3608.0
     },
     "IGIL": {
       "symbol": "IGIL",
       "quantity": 29,
       "avg_price": 359.8603505101697,
       "entry_date": "2026-07-01",
-      "last_price": 392.54998779296875
+      "last_price": 398.45001220703125
     },
     "GMDCLTD": {
       "symbol": "GMDCLTD",
       "quantity": 17,
       "avg_price": 605.7411534926471,
       "entry_date": "2026-07-01",
-      "last_price": 439.6499938964844
+      "last_price": 436.3500061035156
     },
     "HEROMOTOCO": {
       "symbol": "HEROMOTOCO",
       "quantity": 1,
       "avg_price": 4867.10009765625,
       "entry_date": "2026-07-01",
-      "last_price": 5218.5
+      "last_price": 5322.5
     },
     "DELHIVERY": {
       "symbol": "DELHIVERY",
       "quantity": 21,
       "avg_price": 505.6904645647322,
       "entry_date": "2026-07-01",
-      "last_price": 382.0
+      "last_price": 385.0
     },
     "TCS": {
       "symbol": "TCS",
       "quantity": 4,
       "avg_price": 2068.10009765625,
       "entry_date": "2026-07-01",
-      "last_price": 2496.89990234375
+      "last_price": 2460.0
     },
     "JSWSTEEL": {
       "symbol": "JSWSTEEL",
       "quantity": 7,
       "avg_price": 1223.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 1252.699951171875
+      "last_price": 1241.199951171875
     },
     "IDEA": {
       "symbol": "IDEA",
       "quantity": 717,
       "avg_price": 14.315843706007128,
       "entry_date": "2026-07-01",
-      "last_price": 12.109999656677246
+      "last_price": 11.859999656677246
     },
     "NTPC": {
       "symbol": "NTPC",
       "quantity": 30,
       "avg_price": 355.7133331298828,
       "entry_date": "2026-07-01",
-      "last_price": 301.79998779296875
+      "last_price": 303.75
     },
     "HONASA": {
       "symbol": "HONASA",
       "quantity": 21,
       "avg_price": 469.5,
       "entry_date": "2026-07-01",
-      "last_price": 451.8999938964844
+      "last_price": 451.1000061035156
     },
     "INFY": {
       "symbol": "INFY",
       "quantity": 8,
       "avg_price": 1040.9000244140625,
       "entry_date": "2026-07-01",
-      "last_price": 1163.0
+      "last_price": 1123.1500244140625
     },
     "TATASTEEL": {
       "symbol": "TATASTEEL",
       "quantity": 54,
       "avg_price": 187.53666517469617,
       "entry_date": "2026-07-01",
-      "last_price": 171.4199981689453
+      "last_price": 169.27000427246094
     },
     "SCHAEFFLER": {
       "symbol": "SCHAEFFLER",
       "quantity": 2,
       "avg_price": 4107.0,
       "entry_date": "2026-07-01",
-      "last_price": 3670.199951171875
+      "last_price": 3635.60009765625
     },
     "INDIANB": {
       "symbol": "INDIANB",
       "quantity": 11,
       "avg_price": 815.0999755859375,
       "entry_date": "2026-07-01",
-      "last_price": 840.0
+      "last_price": 839.7999877929688
     },
     "BHARTIARTL": {
       "symbol": "BHARTIARTL",
       "quantity": 5,
       "avg_price": 1875.0,
       "entry_date": "2026-07-01",
-      "last_price": 1978.800048828125
+      "last_price": 1948.0999755859375
     },
     "SUNTV": {
       "symbol": "SUNTV",
       "quantity": 21,
       "avg_price": 509.876211983817,
       "entry_date": "2026-07-01",
-      "last_price": 634.5499877929688
+      "last_price": 630.8499755859375
     },
     "BANKINDIA": {
       "symbol": "BANKINDIA",
       "quantity": 70,
       "avg_price": 144.83086373465403,
       "entry_date": "2026-07-01",
-      "last_price": 132.02000427246094
+      "last_price": 132.89999389648438
     },
     "UCOBANK": {
       "symbol": "UCOBANK",
       "quantity": 410,
       "avg_price": 26.92595088772658,
       "entry_date": "2026-07-01",
-      "last_price": 22.360000610351562
+      "last_price": 22.100000381469727
     },
     "EICHERMOT": {
       "symbol": "EICHERMOT",
       "quantity": 1,
       "avg_price": 7250.0,
       "entry_date": "2026-07-01",
-      "last_price": 7165.0
+      "last_price": 7300.0
     },
     "BANKBARODA": {
       "symbol": "BANKBARODA",
       "quantity": 42,
       "avg_price": 258.4499998546782,
       "entry_date": "2026-07-01",
-      "last_price": 233.92999267578125
+      "last_price": 231.82000732421875
     },
     "CAMS": {
       "symbol": "CAMS",
@@ -301,175 +301,175 @@
       "quantity": 52,
       "avg_price": 168.1199951171875,
       "entry_date": "2026-07-01",
-      "last_price": 171.1999969482422
+      "last_price": 162.0
     },
     "PNB": {
       "symbol": "PNB",
       "quantity": 87,
       "avg_price": 106.91000366210938,
       "entry_date": "2026-07-01",
-      "last_price": 121.2699966430664
+      "last_price": 120.30999755859375
     },
     "WIPRO": {
       "symbol": "WIPRO",
       "quantity": 55,
       "avg_price": 174.27999988902698,
       "entry_date": "2026-07-01",
-      "last_price": 187.0
+      "last_price": 184.5
     },
     "BSE": {
       "symbol": "BSE",
       "quantity": 3,
       "avg_price": 3637.13330078125,
       "entry_date": "2026-07-01",
-      "last_price": 3441.10009765625
+      "last_price": 3485.0
     },
     "HINDUNILVR": {
       "symbol": "HINDUNILVR",
       "quantity": 5,
       "avg_price": 2167.440087890625,
       "entry_date": "2026-07-01",
-      "last_price": 1818.0
+      "last_price": 1815.800048828125
     },
     "CANBK": {
       "symbol": "CANBK",
       "quantity": 80,
       "avg_price": 126.60099935531616,
       "entry_date": "2026-07-01",
-      "last_price": 118.01000213623047
+      "last_price": 117.81999969482422
     },
     "CUMMINSIND": {
       "symbol": "CUMMINSIND",
       "quantity": 1,
       "avg_price": 5578.5,
       "entry_date": "2026-07-01",
-      "last_price": 4532.0
+      "last_price": 4620.0
     },
     "GLAXO": {
       "symbol": "GLAXO",
       "quantity": 3,
       "avg_price": 2415.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 2472.39990234375
+      "last_price": 2498.0
     },
     "IGL": {
       "symbol": "IGL",
       "quantity": 67,
       "avg_price": 155.53358527795592,
       "entry_date": "2026-07-01",
-      "last_price": 139.52000427246094
+      "last_price": 140.66000366210938
     },
     "SBIN": {
       "symbol": "SBIN",
       "quantity": 9,
       "avg_price": 1051.5999755859375,
       "entry_date": "2026-07-01",
-      "last_price": 945.0999755859375
+      "last_price": 956.7999877929688
     },
     "HDFCBANK": {
       "symbol": "HDFCBANK",
       "quantity": 14,
       "avg_price": 786.0500226702009,
       "entry_date": "2026-07-01",
-      "last_price": 680.2000122070312
+      "last_price": 685.2999877929688
     },
     "ENGINERSIN": {
       "symbol": "ENGINERSIN",
       "quantity": 36,
       "avg_price": 233.78637001731178,
       "entry_date": "2026-07-01",
-      "last_price": 250.1999969482422
+      "last_price": 256.3500061035156
     },
     "NESTLEIND": {
       "symbol": "NESTLEIND",
       "quantity": 7,
       "avg_price": 1445.057094029018,
       "entry_date": "2026-07-01",
-      "last_price": 1180.5
+      "last_price": 1168.0
     },
     "BEL": {
       "symbol": "BEL",
       "quantity": 24,
       "avg_price": 414.1079882812501,
       "entry_date": "2026-07-01",
-      "last_price": 367.95001220703125
+      "last_price": 363.3500061035156
     },
     "JSWCEMENT": {
       "symbol": "JSWCEMENT",
       "quantity": 80,
       "avg_price": 135.41363010406494,
       "entry_date": "2026-07-01",
-      "last_price": 116.61000061035156
+      "last_price": 115.18000030517578
     },
     "TMCV": {
       "symbol": "TMCV",
       "quantity": 21,
       "avg_price": 440.5,
       "entry_date": "2026-07-01",
-      "last_price": 399.20001220703125
+      "last_price": 399.70001220703125
     },
     "TRAVELFOOD": {
       "symbol": "TRAVELFOOD",
       "quantity": 7,
       "avg_price": 1339.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 1135.5
+      "last_price": 1141.5999755859375
     },
     "IEX": {
       "symbol": "IEX",
       "quantity": 84,
       "avg_price": 123.09047589983258,
       "entry_date": "2026-07-01",
-      "last_price": 103.48999786376953
+      "last_price": 102.70999908447266
     },
     "OBEROIRLTY": {
       "symbol": "OBEROIRLTY",
       "quantity": 5,
       "avg_price": 1864.699951171875,
       "entry_date": "2026-07-01",
-      "last_price": 1619.0
+      "last_price": 1601.0
     },
     "BHEL": {
       "symbol": "BHEL",
       "quantity": 23,
       "avg_price": 401.9500122070313,
       "entry_date": "2026-07-01",
-      "last_price": 399.8999938964844
+      "last_price": 405.29998779296875
     },
     "DLF": {
       "symbol": "DLF",
       "quantity": 14,
       "avg_price": 658.2000122070312,
       "entry_date": "2026-07-01",
-      "last_price": 671.0
+      "last_price": 666.2999877929688
     },
     "RADICO": {
       "symbol": "RADICO",
       "quantity": 2,
       "avg_price": 3972.39990234375,
       "entry_date": "2026-07-01",
-      "last_price": 4290.0
+      "last_price": 4135.10009765625
     },
     "GLAND": {
       "symbol": "GLAND",
       "quantity": 3,
       "avg_price": 2446.199951171875,
       "entry_date": "2026-07-01",
-      "last_price": 2960.300048828125
+      "last_price": 3049.0
     },
     "CDSL": {
       "symbol": "CDSL",
       "quantity": 7,
       "avg_price": 1350.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 1222.0
+      "last_price": 1232.0
     },
     "THELEELA": {
       "symbol": "THELEELA",
       "quantity": 17,
       "avg_price": 476.25,
       "entry_date": "2026-07-01",
-      "last_price": 593.25
+      "last_price": 605.2000122070312
     },
     "JBCHEPHARM": {
       "symbol": "JBCHEPHARM",
@@ -483,203 +483,203 @@
       "quantity": 10,
       "avg_price": 772.3499755859375,
       "entry_date": "2026-07-01",
-      "last_price": 837.1500244140625
+      "last_price": 832.1500244140625
     },
     "ICICIBANK": {
       "symbol": "ICICIBANK",
       "quantity": 7,
       "avg_price": 1405.4285714285713,
       "entry_date": "2026-07-01",
-      "last_price": 1386.9000244140625
+      "last_price": 1377.5999755859375
     },
     "SUNPHARMA": {
       "symbol": "SUNPHARMA",
       "quantity": 5,
       "avg_price": 1871.0,
       "entry_date": "2026-07-01",
-      "last_price": 1751.199951171875
+      "last_price": 1757.5
     },
     "TENNIND": {
       "symbol": "TENNIND",
       "quantity": 19,
       "avg_price": 595.8263357062089,
       "entry_date": "2026-07-01",
-      "last_price": 445.79998779296875
+      "last_price": 438.3500061035156
     },
     "JSWDULUX": {
       "symbol": "JSWDULUX",
       "quantity": 3,
       "avg_price": 3259.699951171875,
       "entry_date": "2026-07-01",
-      "last_price": 280.3999938964844
+      "last_price": 276.5
     },
     "EMAMILTD": {
       "symbol": "EMAMILTD",
       "quantity": 26,
       "avg_price": 391.2172957200271,
       "entry_date": "2026-08-03",
-      "last_price": 368.8999938964844
+      "last_price": 372.79998779296875
     },
     "CCL": {
       "symbol": "CCL",
       "quantity": 9,
       "avg_price": 1119.5666639539932,
       "entry_date": "2026-08-03",
-      "last_price": 909.2999877929688
+      "last_price": 938.5
     },
     "CARTRADE": {
       "symbol": "CARTRADE",
       "quantity": 3,
       "avg_price": 2805.39990234375,
       "entry_date": "2026-08-03",
-      "last_price": 2821.199951171875
+      "last_price": 2464.5
     },
     "ZENTEC": {
       "symbol": "ZENTEC",
       "quantity": 5,
       "avg_price": 1683.4000244140625,
       "entry_date": "2026-08-03",
-      "last_price": 1562.4000244140625
+      "last_price": 1568.800048828125
     },
     "PHOENIXLTD": {
       "symbol": "PHOENIXLTD",
       "quantity": 5,
       "avg_price": 1932.300048828125,
       "entry_date": "2026-08-03",
-      "last_price": 1905.0
+      "last_price": 1899.300048828125
     },
     "AUROPHARMA": {
       "symbol": "AUROPHARMA",
       "quantity": 5,
       "avg_price": 1585.9000244140625,
       "entry_date": "2026-08-03",
-      "last_price": 1627.5
+      "last_price": 1644.800048828125
     },
     "CHENNPETRO": {
       "symbol": "CHENNPETRO",
       "quantity": 7,
       "avg_price": 1387.0,
       "entry_date": "2026-09-01",
-      "last_price": 1573.800048828125
+      "last_price": 1521.4000244140625
     },
     "HAL": {
       "symbol": "HAL",
       "quantity": 2,
       "avg_price": 4807.60009765625,
       "entry_date": "2026-09-01",
-      "last_price": 4855.0
+      "last_price": 4850.0
     },
     "LAURUSLABS": {
       "symbol": "LAURUSLABS",
       "quantity": 5,
       "avg_price": 1861.5999755859373,
       "entry_date": "2026-09-01",
-      "last_price": 2142.0
+      "last_price": 2181.89990234375
     },
     "CLEAN": {
       "symbol": "CLEAN",
       "quantity": 12,
       "avg_price": 827.0999755859375,
       "entry_date": "2026-09-01",
-      "last_price": 744.0
+      "last_price": 738.25
     },
     "NAVINFLUOR": {
       "symbol": "NAVINFLUOR",
       "quantity": 1,
       "avg_price": 8636.0,
       "entry_date": "2026-09-01",
-      "last_price": 8254.0
+      "last_price": 8501.0
     },
     "JPPOWER": {
       "symbol": "JPPOWER",
       "quantity": 609,
       "avg_price": 16.559999465942383,
       "entry_date": "2026-09-01",
-      "last_price": 13.1899995803833
+      "last_price": 12.970000267028809
     },
     "DCMSHRIRAM": {
       "symbol": "DCMSHRIRAM",
       "quantity": 9,
       "avg_price": 1030.4000244140625,
       "entry_date": "2026-09-01",
-      "last_price": 913.9500122070312
+      "last_price": 912.5
     },
     "INDGN": {
       "symbol": "INDGN",
       "quantity": 16,
       "avg_price": 605.4000244140625,
       "entry_date": "2026-09-01",
-      "last_price": 599.9500122070312
+      "last_price": 598.9500122070312
     },
     "WELCORP": {
       "symbol": "WELCORP",
       "quantity": 3,
       "avg_price": 2553.60009765625,
       "entry_date": "2026-09-01",
-      "last_price": 2474.10009765625
+      "last_price": 2564.300048828125
     },
     "RITES": {
       "symbol": "RITES",
       "quantity": 46,
       "avg_price": 216.3800048828125,
       "entry_date": "2026-09-01",
-      "last_price": 197.6699981689453
+      "last_price": 196.57000732421875
     },
     "CEATLTD": {
       "symbol": "CEATLTD",
       "quantity": 2,
       "avg_price": 3400.199951171875,
       "entry_date": "2026-09-01",
-      "last_price": 3146.199951171875
+      "last_price": 3134.699951171875
     },
     "CONCORDBIO": {
       "symbol": "CONCORDBIO",
       "quantity": 6,
       "avg_price": 1484.300048828125,
       "entry_date": "2026-09-01",
-      "last_price": 1375.300048828125
+      "last_price": 1268.5
     },
     "HCLTECH": {
       "symbol": "HCLTECH",
       "quantity": 7,
       "avg_price": 1351.4000244140625,
       "entry_date": "2026-09-01",
-      "last_price": 1420.0
+      "last_price": 1400.5
     },
     "KIRLOSENG": {
       "symbol": "KIRLOSENG",
       "quantity": 4,
       "avg_price": 2138.300048828125,
       "entry_date": "2026-09-01",
-      "last_price": 1888.4000244140625
+      "last_price": 1911.300048828125
     },
     "ABB": {
       "symbol": "ABB",
       "quantity": 1,
       "avg_price": 7396.0,
       "entry_date": "2026-09-01",
-      "last_price": 6550.0
+      "last_price": 6490.0
     },
     "ELGIEQUIP": {
       "symbol": "ELGIEQUIP",
       "quantity": 16,
       "avg_price": 628.9000244140625,
       "entry_date": "2026-09-01",
-      "last_price": 521.8499755859375
+      "last_price": 513.7000122070312
     },
     "ECLERX": {
       "symbol": "ECLERX",
       "quantity": 5,
       "avg_price": 1973.800048828125,
       "entry_date": "2026-09-01",
-      "last_price": 1896.699951171875
+      "last_price": 1866.199951171875
     },
     "ANANDRATHI": {
       "symbol": "ANANDRATHI",
       "quantity": 4,
       "avg_price": 2197.0,
       "entry_date": "2026-09-01",
-      "last_price": 2259.0
+      "last_price": 2264.60009765625
     }
   },
   "fills": [
@@ -3086,6 +3086,12 @@
     {
       "date": "2026-10-27",
       "nav": 943378.8345248022,
+      "cash": 100788.45564144038,
+      "n_positions": 97
+    },
+    {
+      "date": "2026-10-28",
+      "nav": 941356.6465193548,
       "cash": 100788.45564144038,
       "n_positions": 97
     }

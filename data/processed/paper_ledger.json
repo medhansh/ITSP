@@ -1,685 +1,671 @@
 {
-  "cash": 100788.45564144038,
+  "cash": 134874.85566813583,
   "starting_capital": 1000000.0,
   "positions": {
     "SCI": {
       "symbol": "SCI",
-      "quantity": 35,
-      "avg_price": 302.5571315220424,
+      "quantity": 36,
+      "avg_price": 299.01229394650926,
       "entry_date": "2026-07-01",
-      "last_price": 244.39999389648438
+      "last_price": 261.07000732421875
     },
     "ZFCVINDIA": {
       "symbol": "ZFCVINDIA",
-      "quantity": 3,
-      "avg_price": 2433.199951171875,
+      "quantity": 4,
+      "avg_price": 2375.2249755859375,
       "entry_date": "2026-07-01",
-      "last_price": 2101.5
+      "last_price": 2292.300048828125
     },
     "IOB": {
       "symbol": "IOB",
-      "quantity": 312,
-      "avg_price": 34.29855687801655,
+      "quantity": 322,
+      "avg_price": 34.11035814629145,
       "entry_date": "2026-07-01",
-      "last_price": 28.739999771118164
-    },
-    "TATAINVEST": {
-      "symbol": "TATAINVEST",
-      "quantity": 15,
-      "avg_price": 665.289990234375,
-      "entry_date": "2026-07-01",
-      "last_price": 562.7999877929688
+      "last_price": 30.559999465942383
     },
     "ITC": {
       "symbol": "ITC",
-      "quantity": 37,
-      "avg_price": 288.0108056970545,
+      "quantity": 34,
+      "avg_price": 287.9864798880912,
       "entry_date": "2026-07-01",
-      "last_price": 265.6000061035156
-    },
-    "LUPIN": {
-      "symbol": "LUPIN",
-      "quantity": 4,
-      "avg_price": 2399.60009765625,
-      "entry_date": "2026-07-01",
-      "last_price": 2011.0
-    },
-    "HINDCOPPER": {
-      "symbol": "HINDCOPPER",
-      "quantity": 19,
-      "avg_price": 494.9500122070313,
-      "entry_date": "2026-07-01",
-      "last_price": 400.8500061035156
-    },
-    "HBLENGINE": {
-      "symbol": "HBLENGINE",
-      "quantity": 15,
-      "avg_price": 795.506669108073,
-      "entry_date": "2026-07-01",
-      "last_price": 799.3499755859375
-    },
-    "GESHIP": {
-      "symbol": "GESHIP",
-      "quantity": 7,
-      "avg_price": 1408.1428745814733,
-      "entry_date": "2026-07-01",
-      "last_price": 1593.5999755859375
-    },
-    "NATIONALUM": {
-      "symbol": "NATIONALUM",
-      "quantity": 27,
-      "avg_price": 333.72222222222223,
-      "entry_date": "2026-07-01",
-      "last_price": 314.54998779296875
-    },
-    "CAPLIPOINT": {
-      "symbol": "CAPLIPOINT",
-      "quantity": 3,
-      "avg_price": 2538.199951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 2325.60009765625
-    },
-    "MMTC": {
-      "symbol": "MMTC",
-      "quantity": 161,
-      "avg_price": 67.35217398886356,
-      "entry_date": "2026-07-01",
-      "last_price": 50.439998626708984
-    },
-    "IDBI": {
-      "symbol": "IDBI",
-      "quantity": 109,
-      "avg_price": 84.41000366210938,
-      "entry_date": "2026-07-01",
-      "last_price": 80.31999969482422
-    },
-    "HINDZINC": {
-      "symbol": "HINDZINC",
-      "quantity": 16,
-      "avg_price": 528.7000122070312,
-      "entry_date": "2026-07-01",
-      "last_price": 505.79998779296875
-    },
-    "NATCOPHARM": {
-      "symbol": "NATCOPHARM",
-      "quantity": 11,
-      "avg_price": 926.7454556551846,
-      "entry_date": "2026-07-01",
-      "last_price": 782.4000244140625
-    },
-    "POWERGRID": {
-      "symbol": "POWERGRID",
-      "quantity": 38,
-      "avg_price": 286.2065887451172,
-      "entry_date": "2026-07-01",
-      "last_price": 265.0
-    },
-    "NAM-INDIA": {
-      "symbol": "NAM-INDIA",
-      "quantity": 8,
-      "avg_price": 1213.199951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 905.0
-    },
-    "TATAELXSI": {
-      "symbol": "TATAELXSI",
-      "quantity": 2,
-      "avg_price": 3671.10009765625,
-      "entry_date": "2026-07-01",
-      "last_price": 3790.0
-    },
-    "ACUTAAS": {
-      "symbol": "ACUTAAS",
-      "quantity": 3,
-      "avg_price": 3535.9667154947915,
-      "entry_date": "2026-07-01",
-      "last_price": 4003.60009765625
-    },
-    "HDFCAMC": {
-      "symbol": "HDFCAMC",
-      "quantity": 3,
-      "avg_price": 2759.60009765625,
-      "entry_date": "2026-07-01",
-      "last_price": 2309.5
-    },
-    "ABSLAMC": {
-      "symbol": "ABSLAMC",
-      "quantity": 9,
-      "avg_price": 1169.5555962456597,
-      "entry_date": "2026-07-01",
-      "last_price": 805.5
-    },
-    "AIAENG": {
-      "symbol": "AIAENG",
-      "quantity": 2,
-      "avg_price": 4800.0,
-      "entry_date": "2026-07-01",
-      "last_price": 3595.89990234375
-    },
-    "IGIL": {
-      "symbol": "IGIL",
-      "quantity": 29,
-      "avg_price": 359.8603505101697,
-      "entry_date": "2026-07-01",
-      "last_price": 397.75
-    },
-    "GMDCLTD": {
-      "symbol": "GMDCLTD",
-      "quantity": 17,
-      "avg_price": 605.7411534926471,
-      "entry_date": "2026-07-01",
-      "last_price": 411.6499938964844
-    },
-    "HEROMOTOCO": {
-      "symbol": "HEROMOTOCO",
-      "quantity": 1,
-      "avg_price": 4867.10009765625,
-      "entry_date": "2026-07-01",
-      "last_price": 5167.0
-    },
-    "DELHIVERY": {
-      "symbol": "DELHIVERY",
-      "quantity": 21,
-      "avg_price": 505.6904645647322,
-      "entry_date": "2026-07-01",
-      "last_price": 386.0
-    },
-    "TCS": {
-      "symbol": "TCS",
-      "quantity": 4,
-      "avg_price": 2068.10009765625,
-      "entry_date": "2026-07-01",
-      "last_price": 2502.60009765625
+      "last_price": 283.1499938964844
     },
     "JSWSTEEL": {
       "symbol": "JSWSTEEL",
       "quantity": 7,
       "avg_price": 1223.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 1246.0
+      "last_price": 1357.0999755859375
     },
-    "IDEA": {
-      "symbol": "IDEA",
-      "quantity": 717,
-      "avg_price": 14.315843706007128,
+    "LUPIN": {
+      "symbol": "LUPIN",
+      "quantity": 4,
+      "avg_price": 2399.60009765625,
       "entry_date": "2026-07-01",
-      "last_price": 11.829999923706055
+      "last_price": 1988.0999755859375
     },
-    "NTPC": {
-      "symbol": "NTPC",
-      "quantity": 30,
-      "avg_price": 355.7133331298828,
+    "HBLENGINE": {
+      "symbol": "HBLENGINE",
+      "quantity": 11,
+      "avg_price": 795.6400024414063,
       "entry_date": "2026-07-01",
-      "last_price": 316.25
+      "last_price": 839.25
     },
-    "HONASA": {
-      "symbol": "HONASA",
-      "quantity": 21,
-      "avg_price": 469.5,
+    "GESHIP": {
+      "symbol": "GESHIP",
+      "quantity": 6,
+      "avg_price": 1405.2857317243304,
       "entry_date": "2026-07-01",
-      "last_price": 442.1000061035156
+      "last_price": 1428.699951171875
+    },
+    "TATAINVEST": {
+      "symbol": "TATAINVEST",
+      "quantity": 17,
+      "avg_price": 649.7106525196749,
+      "entry_date": "2026-07-01",
+      "last_price": 572.2000122070312
+    },
+    "NATIONALUM": {
+      "symbol": "NATIONALUM",
+      "quantity": 29,
+      "avg_price": 333.31206854458514,
+      "entry_date": "2026-07-01",
+      "last_price": 325.75
     },
     "INFY": {
       "symbol": "INFY",
       "quantity": 8,
-      "avg_price": 1040.9000244140625,
+      "avg_price": 1038.6333550347222,
       "entry_date": "2026-07-01",
-      "last_price": 1185.0
+      "last_price": 1181.4000244140625
     },
-    "TATASTEEL": {
-      "symbol": "TATASTEEL",
-      "quantity": 54,
-      "avg_price": 187.53666517469617,
-      "entry_date": "2026-07-01",
-      "last_price": 167.60000610351562
-    },
-    "SCHAEFFLER": {
-      "symbol": "SCHAEFFLER",
+    "ACUTAAS": {
+      "symbol": "ACUTAAS",
       "quantity": 2,
-      "avg_price": 4107.0,
+      "avg_price": 3535.9667154947915,
       "entry_date": "2026-07-01",
-      "last_price": 3574.0
+      "last_price": 3786.60009765625
     },
-    "INDIANB": {
-      "symbol": "INDIANB",
-      "quantity": 11,
-      "avg_price": 815.0999755859375,
-      "entry_date": "2026-07-01",
-      "last_price": 865.5
-    },
-    "BHARTIARTL": {
-      "symbol": "BHARTIARTL",
-      "quantity": 5,
-      "avg_price": 1875.0,
-      "entry_date": "2026-07-01",
-      "last_price": 1973.699951171875
-    },
-    "SUNTV": {
-      "symbol": "SUNTV",
-      "quantity": 21,
-      "avg_price": 509.876211983817,
-      "entry_date": "2026-07-01",
-      "last_price": 607.5499877929688
-    },
-    "BANKINDIA": {
-      "symbol": "BANKINDIA",
-      "quantity": 70,
-      "avg_price": 144.83086373465403,
-      "entry_date": "2026-07-01",
-      "last_price": 132.86000061035156
-    },
-    "UCOBANK": {
-      "symbol": "UCOBANK",
-      "quantity": 410,
-      "avg_price": 26.92595088772658,
-      "entry_date": "2026-07-01",
-      "last_price": 22.059999465942383
-    },
-    "EICHERMOT": {
-      "symbol": "EICHERMOT",
-      "quantity": 1,
-      "avg_price": 7250.0,
-      "entry_date": "2026-07-01",
-      "last_price": 7220.0
-    },
-    "BANKBARODA": {
-      "symbol": "BANKBARODA",
-      "quantity": 42,
-      "avg_price": 258.4499998546782,
-      "entry_date": "2026-07-01",
-      "last_price": 238.60000610351562
-    },
-    "CAMS": {
-      "symbol": "CAMS",
-      "quantity": 13,
-      "avg_price": 794.6000225360577,
-      "entry_date": "2026-07-01",
-      "last_price": 653.5999755859375
-    },
-    "SAIL": {
-      "symbol": "SAIL",
-      "quantity": 52,
-      "avg_price": 168.1199951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 161.0
-    },
-    "PNB": {
-      "symbol": "PNB",
-      "quantity": 87,
-      "avg_price": 106.91000366210938,
-      "entry_date": "2026-07-01",
-      "last_price": 122.8499984741211
-    },
-    "WIPRO": {
-      "symbol": "WIPRO",
-      "quantity": 55,
-      "avg_price": 174.27999988902698,
-      "entry_date": "2026-07-01",
-      "last_price": 198.30999755859375
-    },
-    "BSE": {
-      "symbol": "BSE",
+    "TCS": {
+      "symbol": "TCS",
       "quantity": 3,
-      "avg_price": 3637.13330078125,
+      "avg_price": 2068.10009765625,
       "entry_date": "2026-07-01",
-      "last_price": 3510.39990234375
+      "last_price": 2498.5
     },
-    "HINDUNILVR": {
-      "symbol": "HINDUNILVR",
-      "quantity": 5,
-      "avg_price": 2167.440087890625,
+    "VEDL": {
+      "symbol": "VEDL",
+      "quantity": 38,
+      "avg_price": 275.18947962710735,
       "entry_date": "2026-07-01",
-      "last_price": 1864.5999755859375
+      "last_price": 261.75
     },
-    "CANBK": {
-      "symbol": "CANBK",
-      "quantity": 80,
-      "avg_price": 126.60099935531616,
+    "HINDZINC": {
+      "symbol": "HINDZINC",
+      "quantity": 17,
+      "avg_price": 528.7000122070312,
       "entry_date": "2026-07-01",
-      "last_price": 117.54000091552734
+      "last_price": 568.0999755859375
+    },
+    "NAM-INDIA": {
+      "symbol": "NAM-INDIA",
+      "quantity": 9,
+      "avg_price": 1196.288845486111,
+      "entry_date": "2026-07-01",
+      "last_price": 1065.199951171875
+    },
+    "ABSLAMC": {
+      "symbol": "ABSLAMC",
+      "quantity": 11,
+      "avg_price": 1104.4909446022727,
+      "entry_date": "2026-07-01",
+      "last_price": 878.9500122070312
+    },
+    "MCX": {
+      "symbol": "MCX",
+      "quantity": 2,
+      "avg_price": 2923.199951171875,
+      "entry_date": "2026-07-01",
+      "last_price": 3528.0
+    },
+    "MMTC": {
+      "symbol": "MMTC",
+      "quantity": 180,
+      "avg_price": 66.00005560980904,
+      "entry_date": "2026-07-01",
+      "last_price": 53.33000183105469
+    },
+    "NATCOPHARM": {
+      "symbol": "NATCOPHARM",
+      "quantity": 12,
+      "avg_price": 914.1541646321615,
+      "entry_date": "2026-07-01",
+      "last_price": 807.0
     },
     "CUMMINSIND": {
       "symbol": "CUMMINSIND",
-      "quantity": 1,
-      "avg_price": 5578.5,
+      "quantity": 2,
+      "avg_price": 5114.25,
       "entry_date": "2026-07-01",
-      "last_price": 4452.60009765625
+      "last_price": 4048.800048828125
+    },
+    "CAPLIPOINT": {
+      "symbol": "CAPLIPOINT",
+      "quantity": 3,
+      "avg_price": 2538.199951171875,
+      "entry_date": "2026-07-01",
+      "last_price": 2382.5
+    },
+    "DELHIVERY": {
+      "symbol": "DELHIVERY",
+      "quantity": 22,
+      "avg_price": 494.53748830159503,
+      "entry_date": "2026-07-01",
+      "last_price": 428.0
+    },
+    "HDFCAMC": {
+      "symbol": "HDFCAMC",
+      "quantity": 3,
+      "avg_price": 2656.2000732421875,
+      "entry_date": "2026-07-01",
+      "last_price": 2649.800048828125
+    },
+    "TATAELXSI": {
+      "symbol": "TATAELXSI",
+      "quantity": 2,
+      "avg_price": 3482.4000651041665,
+      "entry_date": "2026-07-01",
+      "last_price": 3855.0
+    },
+    "IGIL": {
+      "symbol": "IGIL",
+      "quantity": 23,
+      "avg_price": 357.9350067138672,
+      "entry_date": "2026-07-01",
+      "last_price": 407.3999938964844
+    },
+    "HONASA": {
+      "symbol": "HONASA",
+      "quantity": 20,
+      "avg_price": 469.5,
+      "entry_date": "2026-07-01",
+      "last_price": 466.3999938964844
+    },
+    "ANTHEM": {
+      "symbol": "ANTHEM",
+      "quantity": 11,
+      "avg_price": 779.5817982066761,
+      "entry_date": "2026-07-01",
+      "last_price": 915.5499877929688
+    },
+    "POWERGRID": {
+      "symbol": "POWERGRID",
+      "quantity": 36,
+      "avg_price": 286.46487509237755,
+      "entry_date": "2026-07-01",
+      "last_price": 259.8999938964844
+    },
+    "JSWCEMENT": {
+      "symbol": "JSWCEMENT",
+      "quantity": 77,
+      "avg_price": 133.7952369867369,
+      "entry_date": "2026-07-01",
+      "last_price": 123.41000366210938
     },
     "GLAXO": {
       "symbol": "GLAXO",
       "quantity": 3,
       "avg_price": 2415.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 2494.300048828125
+      "last_price": 2524.800048828125
     },
-    "IGL": {
-      "symbol": "IGL",
-      "quantity": 67,
-      "avg_price": 155.53358527795592,
+    "CARTRADE": {
+      "symbol": "CARTRADE",
+      "quantity": 3,
+      "avg_price": 2742.0,
       "entry_date": "2026-07-01",
-      "last_price": 139.19000244140625
+      "last_price": 2700.0
     },
-    "SBIN": {
-      "symbol": "SBIN",
-      "quantity": 9,
-      "avg_price": 1051.5999755859375,
+    "SCHAEFFLER": {
+      "symbol": "SCHAEFFLER",
+      "quantity": 2,
+      "avg_price": 4107.0,
       "entry_date": "2026-07-01",
-      "last_price": 961.8499755859375
+      "last_price": 3519.699951171875
     },
-    "HDFCBANK": {
-      "symbol": "HDFCBANK",
-      "quantity": 14,
-      "avg_price": 786.0500226702009,
+    "ANANDRATHI": {
+      "symbol": "ANANDRATHI",
+      "quantity": 4,
+      "avg_price": 1989.699951171875,
       "entry_date": "2026-07-01",
-      "last_price": 692.7999877929688
+      "last_price": 2373.5
     },
-    "ENGINERSIN": {
-      "symbol": "ENGINERSIN",
-      "quantity": 36,
-      "avg_price": 233.78637001731178,
+    "WIPRO": {
+      "symbol": "WIPRO",
+      "quantity": 47,
+      "avg_price": 173.5540675793664,
       "entry_date": "2026-07-01",
-      "last_price": 251.85000610351562
+      "last_price": 198.0
+    },
+    "UCOBANK": {
+      "symbol": "UCOBANK",
+      "quantity": 418,
+      "avg_price": 26.83665032820268,
+      "entry_date": "2026-07-01",
+      "last_price": 23.84000015258789
+    },
+    "IDBI": {
+      "symbol": "IDBI",
+      "quantity": 121,
+      "avg_price": 83.86620160567858,
+      "entry_date": "2026-07-01",
+      "last_price": 79.5
+    },
+    "HEROMOTOCO": {
+      "symbol": "HEROMOTOCO",
+      "quantity": 1,
+      "avg_price": 4867.10009765625,
+      "entry_date": "2026-07-01",
+      "last_price": 5513.0
+    },
+    "EICHERMOT": {
+      "symbol": "EICHERMOT",
+      "quantity": 1,
+      "avg_price": 7250.0,
+      "entry_date": "2026-07-01",
+      "last_price": 7669.5
+    },
+    "INDIANB": {
+      "symbol": "INDIANB",
+      "quantity": 11,
+      "avg_price": 815.0999755859375,
+      "entry_date": "2026-07-01",
+      "last_price": 902.0
+    },
+    "NTPC": {
+      "symbol": "NTPC",
+      "quantity": 29,
+      "avg_price": 355.8799997965495,
+      "entry_date": "2026-07-01",
+      "last_price": 323.45001220703125
+    },
+    "BANKINDIA": {
+      "symbol": "BANKINDIA",
+      "quantity": 70,
+      "avg_price": 144.51611751980252,
+      "entry_date": "2026-07-01",
+      "last_price": 138.57000732421875
+    },
+    "CAMS": {
+      "symbol": "CAMS",
+      "quantity": 13,
+      "avg_price": 785.9643031529018,
+      "entry_date": "2026-07-01",
+      "last_price": 712.0
+    },
+    "DLF": {
+      "symbol": "DLF",
+      "quantity": 13,
+      "avg_price": 658.2000122070312,
+      "entry_date": "2026-07-01",
+      "last_price": 752.9000244140625
+    },
+    "INDGN": {
+      "symbol": "INDGN",
+      "quantity": 15,
+      "avg_price": 514.4500122070312,
+      "entry_date": "2026-07-01",
+      "last_price": 609.75
     },
     "NESTLEIND": {
       "symbol": "NESTLEIND",
       "quantity": 7,
-      "avg_price": 1445.057094029018,
+      "avg_price": 1443.17138671875,
       "entry_date": "2026-07-01",
-      "last_price": 1167.0
+      "last_price": 1282.0999755859375
+    },
+    "NLCINDIA": {
+      "symbol": "NLCINDIA",
+      "quantity": 41,
+      "avg_price": 301.5495121653487,
+      "entry_date": "2026-07-01",
+      "last_price": 237.61000061035156
+    },
+    "PNB": {
+      "symbol": "PNB",
+      "quantity": 78,
+      "avg_price": 106.91000366210938,
+      "entry_date": "2026-07-01",
+      "last_price": 126.55000305175781
+    },
+    "CYIENT": {
+      "symbol": "CYIENT",
+      "quantity": 8,
+      "avg_price": 879.4500122070312,
+      "entry_date": "2026-07-01",
+      "last_price": 1108.300048828125
+    },
+    "SAIL": {
+      "symbol": "SAIL",
+      "quantity": 56,
+      "avg_price": 168.57088824680872,
+      "entry_date": "2026-07-01",
+      "last_price": 171.60000610351562
+    },
+    "SBIN": {
+      "symbol": "SBIN",
+      "quantity": 9,
+      "avg_price": 1042.2399780273438,
+      "entry_date": "2026-07-01",
+      "last_price": 1018.5
+    },
+    "COALINDIA": {
+      "symbol": "COALINDIA",
+      "quantity": 23,
+      "avg_price": 435.86865455516863,
+      "entry_date": "2026-07-01",
+      "last_price": 400.0
+    },
+    "GMDCLTD": {
+      "symbol": "GMDCLTD",
+      "quantity": 22,
+      "avg_price": 573.6090753728694,
+      "entry_date": "2026-07-01",
+      "last_price": 463.70001220703125
+    },
+    "AJANTPHARM": {
+      "symbol": "AJANTPHARM",
+      "quantity": 2,
+      "avg_price": 3345.300048828125,
+      "entry_date": "2026-07-01",
+      "last_price": 3307.699951171875
+    },
+    "AIAENG": {
+      "symbol": "AIAENG",
+      "quantity": 2,
+      "avg_price": 4800.0,
+      "entry_date": "2026-07-01",
+      "last_price": 3113.60009765625
+    },
+    "INDIAMART": {
+      "symbol": "INDIAMART",
+      "quantity": 6,
+      "avg_price": 1846.000020345052,
+      "entry_date": "2026-07-01",
+      "last_price": 1547.0999755859375
+    },
+    "TMCV": {
+      "symbol": "TMCV",
+      "quantity": 23,
+      "avg_price": 438.92173966117525,
+      "entry_date": "2026-07-01",
+      "last_price": 425.5
     },
     "BEL": {
       "symbol": "BEL",
       "quantity": 24,
-      "avg_price": 414.1079882812501,
+      "avg_price": 412.9376689941406,
       "entry_date": "2026-07-01",
-      "last_price": 369.8999938964844
-    },
-    "JSWCEMENT": {
-      "symbol": "JSWCEMENT",
-      "quantity": 80,
-      "avg_price": 135.41363010406494,
-      "entry_date": "2026-07-01",
-      "last_price": 115.5
-    },
-    "TMCV": {
-      "symbol": "TMCV",
-      "quantity": 21,
-      "avg_price": 440.5,
-      "entry_date": "2026-07-01",
-      "last_price": 396.3500061035156
-    },
-    "TRAVELFOOD": {
-      "symbol": "TRAVELFOOD",
-      "quantity": 7,
-      "avg_price": 1339.800048828125,
-      "entry_date": "2026-07-01",
-      "last_price": 1152.5
+      "last_price": 396.0
     },
     "IEX": {
       "symbol": "IEX",
-      "quantity": 84,
-      "avg_price": 123.09047589983258,
+      "quantity": 86,
+      "avg_price": 121.42695684018342,
       "entry_date": "2026-07-01",
-      "last_price": 100.9000015258789
+      "last_price": 109.5
     },
-    "OBEROIRLTY": {
-      "symbol": "OBEROIRLTY",
-      "quantity": 5,
-      "avg_price": 1864.699951171875,
+    "TRAVELFOOD": {
+      "symbol": "TRAVELFOOD",
+      "quantity": 8,
+      "avg_price": 1322.862548828125,
       "entry_date": "2026-07-01",
-      "last_price": 1646.5
+      "last_price": 1174.800048828125
+    },
+    "CHENNPETRO": {
+      "symbol": "CHENNPETRO",
+      "quantity": 6,
+      "avg_price": 1134.0999755859375,
+      "entry_date": "2026-07-01",
+      "last_price": 1441.800048828125
+    },
+    "YESBANK": {
+      "symbol": "YESBANK",
+      "quantity": 614,
+      "avg_price": 21.856872974855502,
+      "entry_date": "2026-07-01",
+      "last_price": 17.200000762939453
     },
     "BHEL": {
       "symbol": "BHEL",
       "quantity": 23,
-      "avg_price": 401.9500122070313,
+      "avg_price": 401.8652290675951,
       "entry_date": "2026-07-01",
-      "last_price": 387.6000061035156
+      "last_price": 418.79998779296875
     },
-    "DLF": {
-      "symbol": "DLF",
-      "quantity": 14,
-      "avg_price": 658.2000122070312,
+    "HDFCBANK": {
+      "symbol": "HDFCBANK",
+      "quantity": 13,
+      "avg_price": 785.2571629115513,
       "entry_date": "2026-07-01",
-      "last_price": 691.5499877929688
+      "last_price": 788.25
     },
-    "RADICO": {
-      "symbol": "RADICO",
+    "INDUSTOWER": {
+      "symbol": "INDUSTOWER",
+      "quantity": 24,
+      "avg_price": 383.5673076923077,
+      "entry_date": "2026-07-01",
+      "last_price": 383.1000061035156
+    },
+    "BSE": {
+      "symbol": "BSE",
       "quantity": 2,
-      "avg_price": 3972.39990234375,
+      "avg_price": 3612.4666341145835,
       "entry_date": "2026-07-01",
-      "last_price": 4086.699951171875
-    },
-    "GLAND": {
-      "symbol": "GLAND",
-      "quantity": 3,
-      "avg_price": 2446.199951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 3095.89990234375
+      "last_price": 3800.0
     },
     "CDSL": {
       "symbol": "CDSL",
       "quantity": 7,
       "avg_price": 1350.800048828125,
       "entry_date": "2026-07-01",
-      "last_price": 1263.0
-    },
-    "THELEELA": {
-      "symbol": "THELEELA",
-      "quantity": 17,
-      "avg_price": 476.25,
-      "entry_date": "2026-07-01",
-      "last_price": 634.25
-    },
-    "JBCHEPHARM": {
-      "symbol": "JBCHEPHARM",
-      "quantity": 4,
-      "avg_price": 2321.199951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 2408.89990234375
-    },
-    "ANTHEM": {
-      "symbol": "ANTHEM",
-      "quantity": 10,
-      "avg_price": 772.3499755859375,
-      "entry_date": "2026-07-01",
-      "last_price": 828.7999877929688
-    },
-    "ICICIBANK": {
-      "symbol": "ICICIBANK",
-      "quantity": 7,
-      "avg_price": 1405.4285714285713,
-      "entry_date": "2026-07-01",
-      "last_price": 1398.0
-    },
-    "SUNPHARMA": {
-      "symbol": "SUNPHARMA",
-      "quantity": 5,
-      "avg_price": 1871.0,
-      "entry_date": "2026-07-01",
-      "last_price": 1777.699951171875
-    },
-    "TENNIND": {
-      "symbol": "TENNIND",
-      "quantity": 19,
-      "avg_price": 595.8263357062089,
-      "entry_date": "2026-07-01",
-      "last_price": 431.70001220703125
-    },
-    "JSWDULUX": {
-      "symbol": "JSWDULUX",
-      "quantity": 3,
-      "avg_price": 3259.699951171875,
-      "entry_date": "2026-07-01",
-      "last_price": 264.3999938964844
-    },
-    "EMAMILTD": {
-      "symbol": "EMAMILTD",
-      "quantity": 26,
-      "avg_price": 391.2172957200271,
-      "entry_date": "2026-08-03",
-      "last_price": 359.75
+      "last_price": 1331.4000244140625
     },
     "CCL": {
       "symbol": "CCL",
-      "quantity": 9,
-      "avg_price": 1119.5666639539932,
-      "entry_date": "2026-08-03",
-      "last_price": 932.0
+      "quantity": 10,
+      "avg_price": 1151.89501953125,
+      "entry_date": "2026-07-01",
+      "last_price": 967.0999755859375
     },
-    "CARTRADE": {
-      "symbol": "CARTRADE",
-      "quantity": 3,
-      "avg_price": 2805.39990234375,
-      "entry_date": "2026-08-03",
-      "last_price": 2189.800048828125
-    },
-    "ZENTEC": {
-      "symbol": "ZENTEC",
+    "OBEROIRLTY": {
+      "symbol": "OBEROIRLTY",
       "quantity": 5,
-      "avg_price": 1683.4000244140625,
+      "avg_price": 1778.800048828125,
       "entry_date": "2026-08-03",
-      "last_price": 1588.4000244140625
-    },
-    "PHOENIXLTD": {
-      "symbol": "PHOENIXLTD",
-      "quantity": 5,
-      "avg_price": 1932.300048828125,
-      "entry_date": "2026-08-03",
-      "last_price": 1957.199951171875
-    },
-    "AUROPHARMA": {
-      "symbol": "AUROPHARMA",
-      "quantity": 5,
-      "avg_price": 1585.9000244140625,
-      "entry_date": "2026-08-03",
-      "last_price": 1681.4000244140625
-    },
-    "CHENNPETRO": {
-      "symbol": "CHENNPETRO",
-      "quantity": 7,
-      "avg_price": 1387.0,
-      "entry_date": "2026-09-01",
-      "last_price": 1511.5
+      "last_price": 1739.0
     },
     "HAL": {
       "symbol": "HAL",
-      "quantity": 2,
-      "avg_price": 4807.60009765625,
-      "entry_date": "2026-09-01",
-      "last_price": 4853.7001953125
-    },
-    "LAURUSLABS": {
-      "symbol": "LAURUSLABS",
-      "quantity": 5,
-      "avg_price": 1861.5999755859373,
-      "entry_date": "2026-09-01",
-      "last_price": 2405.5
-    },
-    "CLEAN": {
-      "symbol": "CLEAN",
-      "quantity": 12,
-      "avg_price": 827.0999755859375,
-      "entry_date": "2026-09-01",
-      "last_price": 715.5999755859375
-    },
-    "NAVINFLUOR": {
-      "symbol": "NAVINFLUOR",
       "quantity": 1,
-      "avg_price": 8636.0,
+      "avg_price": 4780.0,
       "entry_date": "2026-09-01",
-      "last_price": 8680.0
+      "last_price": 4980.0
+    },
+    "HINDCOPPER": {
+      "symbol": "HINDCOPPER",
+      "quantity": 23,
+      "avg_price": 503.3739212699558,
+      "entry_date": "2026-09-01",
+      "last_price": 421.1499938964844
+    },
+    "ICICIBANK": {
+      "symbol": "ICICIBANK",
+      "quantity": 6,
+      "avg_price": 1426.5,
+      "entry_date": "2026-09-01",
+      "last_price": 1571.199951171875
     },
     "JPPOWER": {
       "symbol": "JPPOWER",
-      "quantity": 609,
-      "avg_price": 16.559999465942383,
+      "quantity": 704,
+      "avg_price": 16.06478766419671,
       "entry_date": "2026-09-01",
-      "last_price": 12.720000267028809
+      "last_price": 13.859999656677246
     },
     "DCMSHRIRAM": {
       "symbol": "DCMSHRIRAM",
-      "quantity": 9,
-      "avg_price": 1030.4000244140625,
+      "quantity": 10,
+      "avg_price": 1014.7299987792969,
       "entry_date": "2026-09-01",
-      "last_price": 874.0
-    },
-    "INDGN": {
-      "symbol": "INDGN",
-      "quantity": 16,
-      "avg_price": 605.4000244140625,
-      "entry_date": "2026-09-01",
-      "last_price": 586.7999877929688
-    },
-    "WELCORP": {
-      "symbol": "WELCORP",
-      "quantity": 3,
-      "avg_price": 2553.60009765625,
-      "entry_date": "2026-09-01",
-      "last_price": 2341.60009765625
-    },
-    "RITES": {
-      "symbol": "RITES",
-      "quantity": 46,
-      "avg_price": 216.3800048828125,
-      "entry_date": "2026-09-01",
-      "last_price": 188.27999877929688
-    },
-    "CEATLTD": {
-      "symbol": "CEATLTD",
-      "quantity": 2,
-      "avg_price": 3400.199951171875,
-      "entry_date": "2026-09-01",
-      "last_price": 3087.199951171875
-    },
-    "CONCORDBIO": {
-      "symbol": "CONCORDBIO",
-      "quantity": 6,
-      "avg_price": 1484.300048828125,
-      "entry_date": "2026-09-01",
-      "last_price": 1245.5999755859375
-    },
-    "HCLTECH": {
-      "symbol": "HCLTECH",
-      "quantity": 7,
-      "avg_price": 1351.4000244140625,
-      "entry_date": "2026-09-01",
-      "last_price": 1428.0999755859375
-    },
-    "KIRLOSENG": {
-      "symbol": "KIRLOSENG",
-      "quantity": 4,
-      "avg_price": 2138.300048828125,
-      "entry_date": "2026-09-01",
-      "last_price": 1796.0999755859375
+      "last_price": 898.5999755859375
     },
     "ABB": {
       "symbol": "ABB",
       "quantity": 1,
-      "avg_price": 7396.0,
+      "avg_price": 7447.5,
       "entry_date": "2026-09-01",
-      "last_price": 6413.0
+      "last_price": 6774.0
+    },
+    "CEATLTD": {
+      "symbol": "CEATLTD",
+      "quantity": 2,
+      "avg_price": 3347.800048828125,
+      "entry_date": "2026-09-01",
+      "last_price": 3545.800048828125
+    },
+    "CONCORDBIO": {
+      "symbol": "CONCORDBIO",
+      "quantity": 15,
+      "avg_price": 712.206689453125,
+      "entry_date": "2026-09-01",
+      "last_price": 632.5999755859375
+    },
+    "NMDC": {
+      "symbol": "NMDC",
+      "quantity": 138,
+      "avg_price": 73.41883839040563,
+      "entry_date": "2026-10-01",
+      "last_price": 70.4000015258789
+    },
+    "RECLTD": {
+      "symbol": "RECLTD",
+      "quantity": 33,
+      "avg_price": 295.3121152935606,
+      "entry_date": "2026-10-01",
+      "last_price": 296.6499938964844
+    },
+    "IPCALAB": {
+      "symbol": "IPCALAB",
+      "quantity": 4,
+      "avg_price": 1951.300048828125,
+      "entry_date": "2026-10-01",
+      "last_price": 1941.800048828125
+    },
+    "IOC": {
+      "symbol": "IOC",
+      "quantity": 68,
+      "avg_price": 130.5,
+      "entry_date": "2026-10-01",
+      "last_price": 146.25
     },
     "ELGIEQUIP": {
       "symbol": "ELGIEQUIP",
-      "quantity": 16,
-      "avg_price": 628.9000244140625,
-      "entry_date": "2026-09-01",
-      "last_price": 509.04998779296875
+      "quantity": 17,
+      "avg_price": 587.7411893956802,
+      "entry_date": "2026-10-01",
+      "last_price": 556.9000244140625
+    },
+    "LTM": {
+      "symbol": "LTM",
+      "quantity": 2,
+      "avg_price": 4010.0,
+      "entry_date": "2026-10-01",
+      "last_price": 4338.0
+    },
+    "ATUL": {
+      "symbol": "ATUL",
+      "quantity": 1,
+      "avg_price": 5073.0,
+      "entry_date": "2026-11-02",
+      "last_price": 5232.5
+    },
+    "FINCABLES": {
+      "symbol": "FINCABLES",
+      "quantity": 8,
+      "avg_price": 1140.0999755859375,
+      "entry_date": "2026-11-02",
+      "last_price": 1091.0
     },
     "ECLERX": {
       "symbol": "ECLERX",
       "quantity": 5,
-      "avg_price": 1973.800048828125,
-      "entry_date": "2026-09-01",
-      "last_price": 1556.699951171875
+      "avg_price": 1578.0,
+      "entry_date": "2026-11-02",
+      "last_price": 1600.5999755859375
     },
-    "ANANDRATHI": {
-      "symbol": "ANANDRATHI",
-      "quantity": 4,
-      "avg_price": 2197.0,
-      "entry_date": "2026-09-01",
-      "last_price": 2252.0
+    "HEXT": {
+      "symbol": "HEXT",
+      "quantity": 18,
+      "avg_price": 499.3999938964844,
+      "entry_date": "2026-11-02",
+      "last_price": 503.5
+    },
+    "JSWDULUX": {
+      "symbol": "JSWDULUX",
+      "quantity": 36,
+      "avg_price": 260.25,
+      "entry_date": "2026-11-02",
+      "last_price": 272.1000061035156
+    },
+    "ERIS": {
+      "symbol": "ERIS",
+      "quantity": 8,
+      "avg_price": 1177.699951171875,
+      "entry_date": "2026-11-02",
+      "last_price": 1234.0999755859375
+    },
+    "USHAMART": {
+      "symbol": "USHAMART",
+      "quantity": 20,
+      "avg_price": 460.75,
+      "entry_date": "2026-11-02",
+      "last_price": 477.3999938964844
+    },
+    "RITES": {
+      "symbol": "RITES",
+      "quantity": 48,
+      "avg_price": 193.13999938964844,
+      "entry_date": "2026-11-02",
+      "last_price": 194.72000122070312
+    },
+    "RHIM": {
+      "symbol": "RHIM",
+      "quantity": 26,
+      "avg_price": 355.6499938964844,
+      "entry_date": "2026-11-02",
+      "last_price": 359.79998779296875
+    },
+    "CLEAN": {
+      "symbol": "CLEAN",
+      "quantity": 14,
+      "avg_price": 658.7999877929688,
+      "entry_date": "2026-11-02",
+      "last_price": 668.9500122070312
+    },
+    "GROWW": {
+      "symbol": "GROWW",
+      "quantity": 45,
+      "avg_price": 205.97999572753906,
+      "entry_date": "2026-11-02",
+      "last_price": 215.0800018310547
+    },
+    "RBLBANK": {
+      "symbol": "RBLBANK",
+      "quantity": 26,
+      "avg_price": 350.20001220703125,
+      "entry_date": "2026-11-02",
+      "last_price": 379.0
     }
   },
   "fills": [
@@ -709,14 +695,6 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "TATAINVEST",
-      "side": "BUY",
-      "quantity": 14,
-      "price": 667.5499877929688,
-      "costs": 15.75896204002661
-    },
-    {
-      "date": "2026-07-01",
       "symbol": "ITC",
       "side": "BUY",
       "quantity": 34,
@@ -725,19 +703,19 @@
     },
     {
       "date": "2026-07-01",
+      "symbol": "JSWSTEEL",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1223.800048828125,
+      "costs": 16.508827689082032
+    },
+    {
+      "date": "2026-07-01",
       "symbol": "LUPIN",
       "side": "BUY",
       "quantity": 4,
       "price": 2399.60009765625,
       "costs": 16.18507229708203
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HINDCOPPER",
-      "side": "BUY",
-      "quantity": 20,
-      "price": 494.9500122070313,
-      "costs": 16.691951585676275
     },
     {
       "date": "2026-07-01",
@@ -757,195 +735,19 @@
     },
     {
       "date": "2026-07-01",
+      "symbol": "TATAINVEST",
+      "side": "BUY",
+      "quantity": 14,
+      "price": 667.5499877929688,
+      "costs": 15.75896204002661
+    },
+    {
+      "date": "2026-07-01",
       "symbol": "NATIONALUM",
       "side": "BUY",
       "quantity": 30,
       "price": 332.25,
       "costs": 16.807457655
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "CAPLIPOINT",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 2538.199951171875,
-      "costs": 12.839936252594239
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "MMTC",
-      "side": "BUY",
-      "quantity": 147,
-      "price": 67.75,
-      "costs": 16.793546290500004
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "IDBI",
-      "side": "BUY",
-      "quantity": 118,
-      "price": 84.41000366210938,
-      "costs": 16.795452454546997
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HINDZINC",
-      "side": "BUY",
-      "quantity": 18,
-      "price": 528.7000122070312,
-      "costs": 16.04713872210864
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "NATCOPHARM",
-      "side": "BUY",
-      "quantity": 10,
-      "price": 934.5,
-      "costs": 15.757781970000002
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "POWERGRID",
-      "side": "BUY",
-      "quantity": 34,
-      "price": 288.20001220703125,
-      "costs": 16.522992028649657
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "NAM-INDIA",
-      "side": "BUY",
-      "quantity": 8,
-      "price": 1213.199951171875,
-      "costs": 16.36583440691797
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "MCX",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 2923.199951171875,
-      "costs": 14.787527282594239
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "TATAELXSI",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 3671.10009765625,
-      "costs": 12.380608866541015
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ACUTAAS",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 3691.800048828125,
-      "costs": 12.450418458270507
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HDFCAMC",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 2759.60009765625,
-      "costs": 13.959928302811523
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ABSLAMC",
-      "side": "BUY",
-      "quantity": 8,
-      "price": 1191.300048828125,
-      "costs": 16.07040892908203
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "AIAENG",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 4800.0,
-      "costs": 16.1877696
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "IOC",
-      "side": "BUY",
-      "quantity": 70,
-      "price": 141.6199951171875,
-      "costs": 16.716232252053224
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "IGIL",
-      "side": "BUY",
-      "quantity": 27,
-      "price": 361.3500061035156,
-      "costs": 16.451579935581485
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "GMDCLTD",
-      "side": "BUY",
-      "quantity": 16,
-      "price": 608.8499755859375,
-      "costs": 16.42653854291797
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HEROMOTOCO",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 4867.10009765625,
-      "costs": 16.414061458541017
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "DELHIVERY",
-      "side": "BUY",
-      "quantity": 19,
-      "price": 509.2999877929688,
-      "costs": 16.317102743107547
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "TCS",
-      "side": "BUY",
-      "quantity": 4,
-      "price": 2068.10009765625,
-      "costs": 13.949136621082031
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "JSWSTEEL",
-      "side": "BUY",
-      "quantity": 8,
-      "price": 1223.800048828125,
-      "costs": 16.508827689082032
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "IDEA",
-      "side": "BUY",
-      "quantity": 690,
-      "price": 14.479999542236328,
-      "costs": 16.847420678593828
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "NTPC",
-      "side": "BUY",
-      "quantity": 27,
-      "price": 358.25,
-      "costs": 16.3104425415
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HONASA",
-      "side": "BUY",
-      "quantity": 21,
-      "price": 469.5,
-      "costs": 16.625345247000002
     },
     {
       "date": "2026-07-01",
@@ -957,139 +759,83 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "TATASTEEL",
-      "side": "BUY",
-      "quantity": 53,
-      "price": 187.6699981689453,
-      "costs": 16.772063607618684
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "SCHAEFFLER",
+      "symbol": "ACUTAAS",
       "side": "BUY",
       "quantity": 2,
-      "price": 4107.0,
-      "costs": 13.850660364000001
+      "price": 3691.800048828125,
+      "costs": 12.450418458270507
     },
     {
       "date": "2026-07-01",
-      "symbol": "INDIANB",
-      "side": "BUY",
-      "quantity": 12,
-      "price": 815.0999755859375,
-      "costs": 16.493313257188476
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BHARTIARTL",
-      "side": "BUY",
-      "quantity": 5,
-      "price": 1875.0,
-      "costs": 15.808368750000001
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "SUNTV",
-      "side": "BUY",
-      "quantity": 19,
-      "price": 514.9000244140625,
-      "costs": 16.49651836278491
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BANKINDIA",
-      "side": "BUY",
-      "quantity": 68,
-      "price": 144.9600067138672,
-      "costs": 16.621602595114624
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "UCOBANK",
-      "side": "BUY",
-      "quantity": 368,
-      "price": 27.149999618530277,
-      "costs": 16.84742097448615
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "EICHERMOT",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 7250.0,
-      "costs": 12.225138500000002
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BANKBARODA",
-      "side": "BUY",
-      "quantity": 38,
-      "price": 260.25,
-      "costs": 16.675932027
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "CAMS",
-      "side": "BUY",
-      "quantity": 12,
-      "price": 798.1500244140625,
-      "costs": 16.15033587681152
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "SAIL",
-      "side": "BUY",
-      "quantity": 59,
-      "price": 168.1199951171875,
-      "costs": 16.725810106302
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "PNB",
-      "side": "BUY",
-      "quantity": 93,
-      "price": 106.91000366210938,
-      "costs": 16.765521788668398
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "WIPRO",
-      "side": "BUY",
-      "quantity": 57,
-      "price": 174.0,
-      "costs": 16.723989468
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BSE",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 3834.699951171875,
-      "costs": 12.932341519729494
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "HINDUNILVR",
+      "symbol": "TCS",
       "side": "BUY",
       "quantity": 4,
-      "price": 2210.60009765625,
-      "costs": 14.910285441082031
+      "price": 2068.10009765625,
+      "costs": 13.949136621082031
     },
     {
       "date": "2026-07-01",
-      "symbol": "NAVA",
+      "symbol": "VEDL",
       "side": "BUY",
-      "quantity": 16,
-      "price": 620.0999755859375,
-      "costs": 16.730059222917973
+      "quantity": 36,
+      "price": 276.1000061035156,
+      "costs": 16.760412320108642
     },
     {
       "date": "2026-07-01",
-      "symbol": "CANBK",
+      "symbol": "HINDZINC",
       "side": "BUY",
-      "quantity": 78,
-      "price": 126.63999938964844,
-      "costs": 16.656405449643128
+      "quantity": 18,
+      "price": 528.7000122070312,
+      "costs": 16.04713872210864
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "NAM-INDIA",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1213.199951171875,
+      "costs": 16.36583440691797
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "IOC",
+      "side": "BUY",
+      "quantity": 70,
+      "price": 141.6199951171875,
+      "costs": 16.716232252053224
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ABSLAMC",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1191.300048828125,
+      "costs": 16.07040892908203
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "MCX",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 2923.199951171875,
+      "costs": 14.787527282594239
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "MMTC",
+      "side": "BUY",
+      "quantity": 147,
+      "price": 67.75,
+      "costs": 16.793546290500004
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "NATCOPHARM",
+      "side": "BUY",
+      "quantity": 10,
+      "price": 934.5,
+      "costs": 15.757781970000002
     },
     {
       "date": "2026-07-01",
@@ -1101,67 +847,75 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "GLAXO",
+      "symbol": "CAPLIPOINT",
       "side": "BUY",
-      "quantity": 4,
-      "price": 2415.800048828125,
-      "costs": 16.294339412541017
+      "quantity": 3,
+      "price": 2538.199951171875,
+      "costs": 12.839936252594239
     },
     {
       "date": "2026-07-01",
-      "symbol": "IGL",
+      "symbol": "DELHIVERY",
       "side": "BUY",
-      "quantity": 64,
-      "price": 155.8000030517578,
-      "costs": 16.813697020541017
+      "quantity": 19,
+      "price": 509.29998779296875,
+      "costs": 16.317102743107544
     },
     {
       "date": "2026-07-01",
-      "symbol": "SBIN",
+      "symbol": "HDFCAMC",
       "side": "BUY",
-      "quantity": 9,
-      "price": 1051.5999755859375,
-      "costs": 15.959116983891358
+      "quantity": 3,
+      "price": 2759.60009765625,
+      "costs": 13.959928302811523
     },
     {
       "date": "2026-07-01",
-      "symbol": "HDFCBANK",
+      "symbol": "TATAELXSI",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 3671.10009765625,
+      "costs": 12.380608866541015
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "IGIL",
+      "side": "BUY",
+      "quantity": 27,
+      "price": 361.3500061035156,
+      "costs": 16.451579935581485
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "HONASA",
+      "side": "BUY",
+      "quantity": 21,
+      "price": 469.5,
+      "costs": 16.625345247000002
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ANTHEM",
       "side": "BUY",
       "quantity": 12,
-      "price": 795.9000244140625,
-      "costs": 16.104807774811523
+      "price": 772.3499755859375,
+      "costs": 15.628279319188477
     },
     {
       "date": "2026-07-01",
-      "symbol": "ENGINERSIN",
+      "symbol": "IDEA",
       "side": "BUY",
-      "quantity": 42,
-      "price": 234.2100067138672,
-      "costs": 16.587102116806093
+      "quantity": 690,
+      "price": 14.479999542236328,
+      "costs": 16.847420678593828
     },
     {
       "date": "2026-07-01",
-      "symbol": "NESTLEIND",
+      "symbol": "POWERGRID",
       "side": "BUY",
-      "quantity": 6,
-      "price": 1446.199951171875,
-      "costs": 14.631719753188477
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ERIS",
-      "side": "BUY",
-      "quantity": 6,
-      "price": 1448.699951171875,
-      "costs": 14.657013143188475
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BEL",
-      "side": "BUY",
-      "quantity": 24,
-      "price": 415.0499877929688,
-      "costs": 16.79683393718848
+      "quantity": 34,
+      "price": 288.20001220703125,
+      "costs": 16.522992028649657
     },
     {
       "date": "2026-07-01",
@@ -1173,27 +927,243 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "CHALET",
+      "symbol": "GLAXO",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 2415.800048828125,
+      "costs": 16.294339412541017
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CARTRADE",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 2742.0,
+      "costs": 13.870895076000002
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "SCHAEFFLER",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4107.0,
+      "costs": 13.850660364000001
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ANANDRATHI",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1989.699951171875,
+      "costs": 16.775418949323733
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "WIPRO",
+      "side": "BUY",
+      "quantity": 57,
+      "price": 174.0,
+      "costs": 16.723989468
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "UCOBANK",
+      "side": "BUY",
+      "quantity": 368,
+      "price": 27.149999618530273,
+      "costs": 16.847420974486145
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "IDBI",
+      "side": "BUY",
+      "quantity": 118,
+      "price": 84.41000366210938,
+      "costs": 16.795452454546997
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ERIS",
+      "side": "BUY",
+      "quantity": 6,
+      "price": 1448.699951171875,
+      "costs": 14.657013143188475
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "HEROMOTOCO",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4867.10009765625,
+      "costs": 16.414061458541017
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "EICHERMOT",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 7250.0,
+      "costs": 12.225138500000002
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "INDIANB",
+      "side": "BUY",
+      "quantity": 12,
+      "price": 815.0999755859375,
+      "costs": 16.493313257188476
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "NTPC",
+      "side": "BUY",
+      "quantity": 27,
+      "price": 358.25,
+      "costs": 16.3104425415
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "BANKINDIA",
+      "side": "BUY",
+      "quantity": 68,
+      "price": 144.9600067138672,
+      "costs": 16.621602595114624
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CAMS",
+      "side": "BUY",
+      "quantity": 12,
+      "price": 798.1500244140625,
+      "costs": 16.15033587681152
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "DLF",
+      "side": "BUY",
+      "quantity": 15,
+      "price": 658.2000122070312,
+      "costs": 16.648109606757203
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "INDGN",
+      "side": "BUY",
+      "quantity": 19,
+      "price": 514.4500122070312,
+      "costs": 16.482100739392454
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "NESTLEIND",
+      "side": "BUY",
+      "quantity": 6,
+      "price": 1446.199951171875,
+      "costs": 14.631719753188477
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "NLCINDIA",
+      "side": "BUY",
+      "quantity": 31,
+      "price": 315.0,
+      "costs": 16.465996890000003
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "PNB",
+      "side": "BUY",
+      "quantity": 93,
+      "price": 106.91000366210938,
+      "costs": 16.765521788668398
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CYIENT",
       "side": "BUY",
       "quantity": 11,
-      "price": 837.0999755859375,
-      "costs": 15.526937177756102
+      "price": 879.4500122070312,
+      "costs": 16.31246623912195
     },
     {
       "date": "2026-07-01",
-      "symbol": "BATAINDIA",
+      "symbol": "NAVA",
       "side": "BUY",
-      "quantity": 14,
-      "price": 698.5499877929688,
-      "costs": 16.49078412402661
+      "quantity": 16,
+      "price": 620.0999755859375,
+      "costs": 16.730059222917973
     },
     {
       "date": "2026-07-01",
-      "symbol": "JMFINANCIL",
+      "symbol": "BANKBARODA",
       "side": "BUY",
-      "quantity": 77,
-      "price": 129.25999450683594,
-      "costs": 16.78304038929086
+      "quantity": 38,
+      "price": 260.25,
+      "costs": 16.675932027
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "TATASTEEL",
+      "side": "BUY",
+      "quantity": 53,
+      "price": 187.6699981689453,
+      "costs": 16.772063607618684
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "SAIL",
+      "side": "BUY",
+      "quantity": 59,
+      "price": 168.1199951171875,
+      "costs": 16.725810106302
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "SBIN",
+      "side": "BUY",
+      "quantity": 9,
+      "price": 1051.5999755859375,
+      "costs": 15.959116983891358
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CANBK",
+      "side": "BUY",
+      "quantity": 78,
+      "price": 126.63999938964844,
+      "costs": 16.656405449643128
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "COALINDIA",
+      "side": "BUY",
+      "quantity": 22,
+      "price": 438.8999938964844,
+      "costs": 16.28186078437805
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "GMDCLTD",
+      "side": "BUY",
+      "quantity": 16,
+      "price": 608.8499755859375,
+      "costs": 16.42653854291797
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "AJANTPHARM",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 3345.300048828125,
+      "costs": 11.281863840270507
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "AIAENG",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4800.0,
+      "costs": 16.1877696
     },
     {
       "date": "2026-07-01",
@@ -1213,11 +1183,19 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "TRAVELFOOD",
+      "symbol": "BEL",
       "side": "BUY",
-      "quantity": 7,
-      "price": 1339.800048828125,
-      "costs": 15.81443973994678
+      "quantity": 24,
+      "price": 415.04998779296875,
+      "costs": 16.79683393718848
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ADANIPORTS",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1883.199951171875,
+      "costs": 15.87750360432373
     },
     {
       "date": "2026-07-01",
@@ -1229,51 +1207,163 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "OBEROIRLTY",
+      "symbol": "SUNTV",
       "side": "BUY",
-      "quantity": 5,
-      "price": 1864.699951171875,
-      "costs": 15.721527699323731
+      "quantity": 19,
+      "price": 514.9000244140625,
+      "costs": 16.49651836278491
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "TRAVELFOOD",
+      "side": "BUY",
+      "quantity": 7,
+      "price": 1339.800048828125,
+      "costs": 15.81443973994678
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CHENNPETRO",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1134.0999755859375,
+      "costs": 15.298790923458986
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ADANIPOWER",
+      "side": "BUY",
+      "quantity": 44,
+      "price": 224.5500030517578,
+      "costs": 16.660250351621947
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "YESBANK",
+      "side": "BUY",
+      "quantity": 412,
+      "price": 24.25,
+      "costs": 16.847083966
     },
     {
       "date": "2026-07-01",
       "symbol": "BHEL",
       "side": "BUY",
       "quantity": 24,
-      "price": 401.9500122070313,
+      "price": 401.95001220703125,
       "costs": 16.266685470811524
     },
     {
       "date": "2026-07-01",
-      "symbol": "DLF",
+      "symbol": "JMFINANCIL",
       "side": "BUY",
-      "quantity": 15,
-      "price": 658.2000122070312,
-      "costs": 16.648109606757203
+      "quantity": 77,
+      "price": 129.25999450683594,
+      "costs": 16.78304038929086
     },
     {
       "date": "2026-07-01",
-      "symbol": "RADICO",
+      "symbol": "CENTRALBK",
+      "side": "BUY",
+      "quantity": 307,
+      "price": 32.54999923706055,
+      "costs": 16.85020308914808
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "HDFCBANK",
+      "side": "BUY",
+      "quantity": 12,
+      "price": 795.9000244140625,
+      "costs": 16.104807774811523
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "INDUSTOWER",
+      "side": "BUY",
+      "quantity": 26,
+      "price": 383.75,
+      "costs": 16.824319915000004
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "BATAINDIA",
+      "side": "BUY",
+      "quantity": 14,
+      "price": 698.5499877929688,
+      "costs": 16.49078412402661
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "LTM",
       "side": "BUY",
       "quantity": 2,
-      "price": 3972.39990234375,
-      "costs": 13.396727995458983
+      "price": 3680.699951171875,
+      "costs": 12.412983911729494
     },
     {
       "date": "2026-07-01",
-      "symbol": "GLAND",
+      "symbol": "PVRINOX",
+      "side": "BUY",
+      "quantity": 10,
+      "price": 985.4000244140625,
+      "costs": 16.61607141567627
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "HINDUNILVR",
       "side": "BUY",
       "quantity": 4,
-      "price": 2446.199951171875,
-      "costs": 16.499383835458982
+      "price": 2210.60009765625,
+      "costs": 14.910285441082031
     },
     {
       "date": "2026-07-01",
-      "symbol": "RBLBANK",
+      "symbol": "THELEELA",
       "side": "BUY",
-      "quantity": 28,
-      "price": 355.5,
-      "costs": 16.784693604
+      "quantity": 20,
+      "price": 476.25,
+      "costs": 16.061302650000002
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "BLS",
+      "side": "BUY",
+      "quantity": 39,
+      "price": 252.6999969482422,
+      "costs": 16.61826289710782
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "GICRE",
+      "side": "BUY",
+      "quantity": 27,
+      "price": 359.6499938964844,
+      "costs": 16.37418160641852
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "CHALET",
+      "side": "BUY",
+      "quantity": 11,
+      "price": 837.0999755859375,
+      "costs": 15.526937177756102
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "BSE",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 3834.699951171875,
+      "costs": 12.932341519729494
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "ZENSARTECH",
+      "side": "BUY",
+      "quantity": 21,
+      "price": 467.3500061035156,
+      "costs": 16.54921235923004
     },
     {
       "date": "2026-07-01",
@@ -1301,147 +1391,43 @@
     },
     {
       "date": "2026-07-01",
-      "symbol": "ECLERX",
+      "symbol": "SIGNATURE",
       "side": "BUY",
-      "quantity": 7,
-      "price": 1391.300048828125,
-      "costs": 16.422324212946776
+      "quantity": 13,
+      "price": 763.5,
+      "costs": 16.736636163
     },
     {
       "date": "2026-07-01",
-      "symbol": "VBL",
+      "symbol": "ENGINERSIN",
+      "side": "BUY",
+      "quantity": 42,
+      "price": 234.2100067138672,
+      "costs": 16.587102116806093
+    },
+    {
+      "date": "2026-07-01",
+      "symbol": "USHAMART",
       "side": "BUY",
       "quantity": 19,
-      "price": 510.6499938964844,
-      "costs": 16.360354635553776
+      "price": 502.3999938964844,
+      "costs": 16.096038710053772
     },
     {
       "date": "2026-07-01",
-      "symbol": "CHENNPETRO",
-      "side": "BUY",
-      "quantity": 8,
-      "price": 1134.0999755859375,
-      "costs": 15.298790923458986
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "THELEELA",
-      "side": "BUY",
-      "quantity": 20,
-      "price": 476.25,
-      "costs": 16.061302650000002
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "JBCHEPHARM",
+      "symbol": "KIRLOSENG",
       "side": "BUY",
       "quantity": 4,
-      "price": 2321.199951171875,
-      "costs": 15.656270835458985
+      "price": 2321.39990234375,
+      "costs": 15.65761948691797
     },
     {
       "date": "2026-07-01",
-      "symbol": "ELECON",
-      "side": "BUY",
-      "quantity": 18,
-      "price": 540.5,
-      "costs": 16.405292754
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ANTHEM",
-      "side": "BUY",
-      "quantity": 12,
-      "price": 772.3499755859375,
-      "costs": 15.628279319188477
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "INDGN",
-      "side": "BUY",
-      "quantity": 19,
-      "price": 514.4500122070312,
-      "costs": 16.482100739392454
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "BPCL",
-      "side": "BUY",
-      "quantity": 32,
-      "price": 310.45001220703125,
-      "costs": 16.75164423308203
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "TECHM",
-      "side": "BUY",
-      "quantity": 7,
-      "price": 1421.300048828125,
-      "costs": 16.776431672946778
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ICICIBANK",
-      "side": "BUY",
-      "quantity": 7,
-      "price": 1400.0,
-      "costs": 16.5250148
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "KAJARIACER",
+      "symbol": "CCL",
       "side": "BUY",
       "quantity": 8,
-      "price": 1204.0,
-      "costs": 16.241728832
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "LAURUSLABS",
-      "side": "BUY",
-      "quantity": 6,
-      "price": 1528.0,
-      "costs": 15.459319968
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "SUNPHARMA",
-      "side": "BUY",
-      "quantity": 5,
-      "price": 1871.0,
-      "costs": 15.77464423
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "CHAMBLFERT",
-      "side": "BUY",
-      "quantity": 20,
-      "price": 477.0499877929688,
-      "costs": 16.088281854323732
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "TENNIND",
-      "side": "BUY",
-      "quantity": 16,
-      "price": 605.9000244140625,
-      "costs": 16.346949993082035
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "JSWDULUX",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 3259.699951171875,
-      "costs": 16.48977242959424
-    },
-    {
-      "date": "2026-07-01",
-      "symbol": "ADANIPOWER",
-      "side": "BUY",
-      "quantity": 44,
-      "price": 224.5500030517578,
-      "costs": 16.660250351621947
+      "price": 1186.4000244140625,
+      "costs": 16.004308540541015
     },
     {
       "date": "2026-08-03",
@@ -1455,9 +1441,17 @@
       "date": "2026-08-03",
       "symbol": "IOB",
       "side": "SELL",
-      "quantity": 1,
+      "quantity": 2,
       "price": 34.290000915527344,
-      "costs": 0.052677190946456905
+      "costs": 0.10535438189291381
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "JSWSTEEL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1300.0,
+      "costs": 1.9970938000000003
     },
     {
       "date": "2026-08-03",
@@ -1477,11 +1471,11 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "IDBI",
+      "symbol": "INFY",
       "side": "SELL",
       "quantity": 1,
-      "price": 84.55000305175781,
-      "costs": 0.12988791298818975
+      "price": 1167.5,
+      "costs": 1.793543855
     },
     {
       "date": "2026-08-03",
@@ -1493,75 +1487,11 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "HEROMOTOCO",
+      "symbol": "IOC",
       "side": "SELL",
       "quantity": 1,
-      "price": 5548.0,
-      "costs": 8.522981847999999
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "JSWSTEEL",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 1300.0,
-      "costs": 1.9970938000000003
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "INFY",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 1167.5,
-      "costs": 1.793543855
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "TATASTEEL",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 190.9499969482422,
-      "costs": 0.2933423500118103
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "INDIANB",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 845.0,
-      "costs": 1.2981109700000002
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "SAIL",
-      "side": "SELL",
-      "quantity": 2,
-      "price": 173.5500030517578,
-      "costs": 0.5332240539763795
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "PNB",
-      "side": "SELL",
-      "quantity": 6,
-      "price": 113.98999786376952,
-      "costs": 1.0506863907496031
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "WIPRO",
-      "side": "SELL",
-      "quantity": 4,
-      "price": 186.3000030517578,
-      "costs": 1.1447956339527587
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "CANBK",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 128.0,
-      "costs": 0.196636928
+      "price": 141.60000610351562,
+      "costs": 0.2175296109763794
     },
     {
       "date": "2026-08-03",
@@ -1573,6 +1503,86 @@
     },
     {
       "date": "2026-08-03",
+      "symbol": "ANANDRATHI",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 2034.0,
+      "costs": 3.1246836840000003
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "WIPRO",
+      "side": "SELL",
+      "quantity": 4,
+      "price": 186.3000030517578,
+      "costs": 1.1447956339527587
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "IDBI",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 84.55000305175781,
+      "costs": 0.12988791298818975
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "HEROMOTOCO",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 5548.0,
+      "costs": 8.522981847999999
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "INDIANB",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 845.0,
+      "costs": 1.2981109700000002
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "INDGN",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 553.75,
+      "costs": 1.701370295
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "PNB",
+      "side": "SELL",
+      "quantity": 7,
+      "price": 113.98999786376953,
+      "costs": 1.2258007892078706
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "TATASTEEL",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 190.9499969482422,
+      "costs": 0.5866847000236206
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "SAIL",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 173.5500030517578,
+      "costs": 0.5332240539763795
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "CANBK",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 128.0,
+      "costs": 0.196636928
+    },
+    {
+      "date": "2026-08-03",
       "symbol": "IEX",
       "side": "SELL",
       "quantity": 4,
@@ -1581,19 +1591,75 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "GLAND",
+      "symbol": "CHENNPETRO",
       "side": "SELL",
       "quantity": 1,
-      "price": 2583.10009765625,
-      "costs": 3.9682255306220706
+      "price": 1325.699951171875,
+      "costs": 2.036574733188965
     },
     {
       "date": "2026-08-03",
-      "symbol": "RBLBANK",
+      "symbol": "INDUSTOWER",
       "side": "SELL",
-      "quantity": 28,
-      "price": 380.5499877929688,
-      "costs": 16.369101995322758
+      "quantity": 1,
+      "price": 390.0,
+      "costs": 0.5991281399999999
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "BATAINDIA",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 709.5499877929688,
+      "costs": 1.0900291395472412
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "LTM",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 4559.0,
+      "costs": 14.007308668
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "PVRINOX",
+      "side": "SELL",
+      "quantity": 10,
+      "price": 1188.0999755859375,
+      "costs": 18.251900730944826
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "THELEELA",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 500.1000061035156,
+      "costs": 0.7682666319763796
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "BLS",
+      "side": "SELL",
+      "quantity": 39,
+      "price": 247.9499969482422,
+      "costs": 14.855382048460601
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "GICRE",
+      "side": "SELL",
+      "quantity": 27,
+      "price": 359.70001220703125,
+      "costs": 14.919673795724485
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "ZENSARTECH",
+      "side": "SELL",
+      "quantity": 21,
+      "price": 511.79998779296875,
+      "costs": 16.511049408992065
     },
     {
       "date": "2026-08-03",
@@ -1613,83 +1679,11 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "ECLERX",
+      "symbol": "SIGNATURE",
       "side": "SELL",
-      "quantity": 7,
-      "price": 1919.199951171875,
-      "costs": 20.638274049322753
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "CHENNPETRO",
-      "side": "SELL",
-      "quantity": 8,
-      "price": 1325.699951171875,
-      "costs": 16.29259786551172
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "THELEELA",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 500.1000061035156,
-      "costs": 0.7682666319763796
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "INDGN",
-      "side": "SELL",
-      "quantity": 19,
-      "price": 553.75,
-      "costs": 16.1630178025
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "BPCL",
-      "side": "SELL",
-      "quantity": 32,
-      "price": 324.0,
-      "costs": 15.927591168
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "TECHM",
-      "side": "SELL",
-      "quantity": 7,
-      "price": 1648.5,
-      "costs": 17.727279927
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "ICICIBANK",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 1454.5999755859375,
-      "costs": 2.2345943020944827
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "LAURUSLABS",
-      "side": "SELL",
-      "quantity": 6,
-      "price": 1850.0,
-      "costs": 17.052108599999997
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "SCI",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 300.8999938964844,
-      "costs": 0.5073853931080932
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "HBLENGINE",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 729.2000122070312,
-      "costs": 1.2295960197838132
+      "quantity": 13,
+      "price": 818.3499755859375,
+      "costs": 16.34321662472827
     },
     {
       "date": "2026-08-03",
@@ -1701,27 +1695,27 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "MMTC",
+      "symbol": "HBLENGINE",
       "side": "BUY",
-      "quantity": 9,
-      "price": 63.650001525878906,
-      "costs": 0.96595458725679
+      "quantity": 1,
+      "price": 729.2000122070312,
+      "costs": 1.2295960197838132
     },
     {
       "date": "2026-08-03",
       "symbol": "ABSLAMC",
       "side": "BUY",
       "quantity": 1,
-      "price": 995.5999755859376,
-      "costs": 1.6788065644323735
+      "price": 995.5999755859375,
+      "costs": 1.6788065644323726
     },
     {
       "date": "2026-08-03",
-      "symbol": "POWERGRID",
+      "symbol": "MMTC",
       "side": "BUY",
-      "quantity": 1,
-      "price": 283.3999938964844,
-      "costs": 0.4778764381080933
+      "quantity": 8,
+      "price": 63.650001525878906,
+      "costs": 0.8586262997838134
     },
     {
       "date": "2026-08-03",
@@ -1733,75 +1727,11 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "GMDCLTD",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 556.0,
-      "costs": 0.9375416560000001
-    },
-    {
-      "date": "2026-08-03",
       "symbol": "IDEA",
       "side": "BUY",
-      "quantity": 80,
-      "price": 12.899999618530272,
-      "costs": 1.7401851805404658
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "UCOBANK",
-      "side": "BUY",
-      "quantity": 9,
-      "price": 26.32999992370605,
-      "costs": 0.39958497406216037
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "NTPC",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 343.6499938964844,
-      "costs": 0.5794715546080933
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "BANKINDIA",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 140.44000244140625,
-      "costs": 0.47362716711352537
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "BANKBARODA",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 245.0,
-      "costs": 0.82625074
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "HDFCBANK",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 742.0,
-      "costs": 1.251179692
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "CHALET",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 825.6500244140625,
-      "costs": 1.3922325380676273
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "BEL",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 391.5,
-      "costs": 0.6601574790000001
+      "quantity": 78,
+      "price": 12.899999618530273,
+      "costs": 1.6966805510269545
     },
     {
       "date": "2026-08-03",
@@ -1813,27 +1743,19 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "ELECON",
+      "symbol": "UCOBANK",
       "side": "BUY",
-      "quantity": 5,
-      "price": 429.5499877929688,
-      "costs": 3.6215917885809334
+      "quantity": 8,
+      "price": 26.329999923706055,
+      "costs": 0.3551866436108093
     },
     {
       "date": "2026-08-03",
-      "symbol": "NAVA",
+      "symbol": "NLCINDIA",
       "side": "BUY",
       "quantity": 1,
-      "price": 571.7000122070312,
-      "costs": 0.9640154247838135
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "ENGINERSIN",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 224.88999938964844,
-      "costs": 0.7584307282216185
+      "price": 300.70001220703125,
+      "costs": 0.5070481787838135
     },
     {
       "date": "2026-08-03",
@@ -1845,51 +1767,75 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "JMFINANCIL",
+      "symbol": "BANKINDIA",
       "side": "BUY",
-      "quantity": 3,
-      "price": 123.58000183105467,
-      "costs": 0.6251514365027161
+      "quantity": 2,
+      "price": 140.44000244140625,
+      "costs": 0.47362716711352537
     },
     {
       "date": "2026-08-03",
-      "symbol": "VBL",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 439.0,
-      "costs": 2.2207596419999995
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "CHAMBLFERT",
+      "symbol": "COALINDIA",
       "side": "BUY",
       "quantity": 1,
-      "price": 454.6000061035156,
-      "costs": 0.7665583498919067
+      "price": 417.6000061035156,
+      "costs": 0.7041679878919066
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "NTPC",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 343.6499938964844,
+      "costs": 0.5794715546080933
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "BANKBARODA",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 245.0,
+      "costs": 0.82625074
     },
     {
       "date": "2026-08-03",
       "symbol": "YESBANK",
       "side": "BUY",
-      "quantity": 432,
+      "quantity": 18,
       "price": 23.0,
-      "costs": 16.754341536
+      "costs": 0.698097564
     },
     {
       "date": "2026-08-03",
-      "symbol": "EMAMILTD",
+      "symbol": "NAVA",
       "side": "BUY",
-      "quantity": 25,
-      "price": 391.7999877929688,
-      "costs": 16.516583155404668
+      "quantity": 1,
+      "price": 571.7000122070312,
+      "costs": 0.9640154247838135
     },
     {
       "date": "2026-08-03",
-      "symbol": "CCL",
+      "symbol": "BEL",
       "side": "BUY",
-      "quantity": 8,
-      "price": 1122.0,
-      "costs": 15.135564576000002
+      "quantity": 1,
+      "price": 391.5,
+      "costs": 0.6601574790000001
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "GMDCLTD",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 556.0,
+      "costs": 0.9375416560000001
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "HDFCBANK",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 742.0,
+      "costs": 1.251179692
     },
     {
       "date": "2026-08-03",
@@ -1901,59 +1847,59 @@
     },
     {
       "date": "2026-08-03",
-      "symbol": "CARTRADE",
+      "symbol": "ELECON",
       "side": "BUY",
-      "quantity": 3,
-      "price": 2805.39990234375,
-      "costs": 14.191614767188478
+      "quantity": 23,
+      "price": 429.54998779296875,
+      "costs": 16.659322227472295
     },
     {
       "date": "2026-08-03",
-      "symbol": "ZENTEC",
+      "symbol": "CHALET",
       "side": "BUY",
-      "quantity": 5,
-      "price": 1683.4000244140625,
-      "costs": 14.192964447838136
+      "quantity": 1,
+      "price": 825.6500244140625,
+      "costs": 1.3922325380676273
     },
     {
       "date": "2026-08-03",
-      "symbol": "FINCABLES",
+      "symbol": "CENTRALBK",
       "side": "BUY",
       "quantity": 10,
-      "price": 993.25,
-      "costs": 16.748439745
+      "price": 31.229999542236328,
+      "costs": 0.5266083720810699
     },
     {
       "date": "2026-08-03",
-      "symbol": "PHOENIXLTD",
+      "symbol": "KPRMILL",
       "side": "BUY",
-      "quantity": 5,
-      "price": 1932.300048828125,
-      "costs": 16.29147291067627
+      "quantity": 9,
+      "price": 1057.300048828125,
+      "costs": 16.045621489217282
     },
     {
       "date": "2026-08-03",
-      "symbol": "AUROPHARMA",
-      "side": "BUY",
-      "quantity": 6,
-      "price": 1585.9000244140625,
-      "costs": 16.04511512740576
-    },
-    {
-      "date": "2026-08-03",
-      "symbol": "TENNIND",
+      "symbol": "ENGINERSIN",
       "side": "BUY",
       "quantity": 2,
-      "price": 550.5499877929688,
-      "costs": 1.856703407432373
+      "price": 224.88999938964844,
+      "costs": 0.7584307282216185
     },
     {
       "date": "2026-08-03",
-      "symbol": "PIDILITIND",
+      "symbol": "HEXT",
       "side": "BUY",
-      "quantity": 6,
-      "price": 1620.0,
-      "costs": 16.39011672
+      "quantity": 17,
+      "price": 554.9500122070312,
+      "costs": 15.908109367824832
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "JMFINANCIL",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 123.58000183105469,
+      "costs": 0.6251514365027162
     },
     {
       "date": "2026-08-03",
@@ -1964,1184 +1910,2321 @@
       "costs": 14.288235599323732
     },
     {
-      "date": "2026-09-01",
-      "symbol": "HINDCOPPER",
-      "side": "SELL",
+      "date": "2026-08-03",
+      "symbol": "OBEROIRLTY",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1778.800048828125,
+      "costs": 14.99729445567627
+    },
+    {
+      "date": "2026-08-03",
+      "symbol": "POLYCAB",
+      "side": "BUY",
       "quantity": 1,
-      "price": 526.6500244140625,
-      "costs": 0.8090534604055177
+      "price": 9176.0,
+      "costs": 15.472809776
     },
     {
-      "date": "2026-09-01",
-      "symbol": "IDBI",
-      "side": "SELL",
-      "quantity": 8,
-      "price": 92.05999755859376,
-      "costs": 1.1313996944755862
+      "date": "2026-08-03",
+      "symbol": "GRANULES",
+      "side": "BUY",
+      "quantity": 11,
+      "price": 825.7000122070312,
+      "costs": 15.315485116621947
     },
     {
-      "date": "2026-09-01",
-      "symbol": "HINDZINC",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 597.0,
-      "costs": 0.9171269219999999
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "MCX",
-      "side": "SELL",
-      "quantity": 3,
-      "price": 3303.0,
-      "costs": 15.222463434000003
+      "date": "2026-08-03",
+      "symbol": "MANKIND",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 2438.0,
+      "costs": 16.444075952000002
     },
     {
       "date": "2026-09-01",
       "symbol": "IOC",
       "side": "SELL",
-      "quantity": 70,
-      "price": 136.52999877929688,
-      "costs": 14.681865373330687
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "IDEA",
-      "side": "SELL",
-      "quantity": 53,
-      "price": 14.0600004196167,
-      "costs": 1.1447649248451826
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "SAIL",
-      "side": "SELL",
-      "quantity": 5,
-      "price": 193.0,
-      "costs": 1.4824580900000002
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "NAVA",
-      "side": "SELL",
-      "quantity": 17,
-      "price": 563.5999755859375,
-      "costs": 14.718887913606201
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "ENGINERSIN",
-      "side": "SELL",
-      "quantity": 8,
-      "price": 280.04998779296875,
-      "costs": 3.4417605803779296
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "ERIS",
-      "side": "SELL",
-      "quantity": 7,
-      "price": 1299.9000244140625,
-      "costs": 13.978581504338624
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "BEL",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 411.2000122070313,
-      "costs": 0.631696149952759
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CHALET",
-      "side": "SELL",
-      "quantity": 12,
-      "price": 897.5,
-      "costs": 16.545154020000002
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "BATAINDIA",
-      "side": "SELL",
-      "quantity": 14,
-      "price": 677.3499755859375,
-      "costs": 14.567877010322754
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "JMFINANCIL",
-      "side": "SELL",
-      "quantity": 80,
-      "price": 128.25,
-      "costs": 15.76167876
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "INDIAMART",
-      "side": "SELL",
-      "quantity": 5,
-      "price": 1764.4000244140625,
-      "costs": 13.552585959527585
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "TMCV",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 464.3500061035156,
-      "costs": 0.7133465524763795
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "BHEL",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 426.5499877929688,
-      "costs": 0.6552771815472413
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "DLF",
-      "side": "SELL",
-      "quantity": 1,
-      "price": 675.1500244140625,
-      "costs": 1.0371830214055175
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "VBL",
-      "side": "SELL",
-      "quantity": 22,
-      "price": 405.8500061035156,
-      "costs": 13.716501292480348
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "THELEELA",
-      "side": "SELL",
-      "quantity": 2,
-      "price": 575.3499755859375,
-      "costs": 1.7677351831889647
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "ELECON",
-      "side": "SELL",
-      "quantity": 23,
-      "price": 412.25,
-      "costs": 14.566110875500001
+      "quantity": 69,
+      "price": 137.0,
+      "costs": 14.521944377999999
     },
     {
       "date": "2026-09-01",
       "symbol": "ANTHEM",
       "side": "SELL",
       "quantity": 2,
-      "price": 924.5,
-      "costs": 2.8404818739999995
+      "price": 934.5,
+      "costs": 2.8712063940000006
     },
     {
       "date": "2026-09-01",
-      "symbol": "KAJARIACER",
+      "symbol": "IDEA",
       "side": "SELL",
-      "quantity": 8,
-      "price": 1229.0,
-      "costs": 15.104174032000001
+      "quantity": 75,
+      "price": 14.529999732971191,
+      "costs": 1.6741022527337555
     },
     {
       "date": "2026-09-01",
-      "symbol": "CHAMBLFERT",
+      "symbol": "IDBI",
       "side": "SELL",
-      "quantity": 21,
-      "price": 412.2999877929688,
-      "costs": 13.301105181992067
+      "quantity": 7,
+      "price": 91.55000305175781,
+      "costs": 0.9844904649173278
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ERIS",
+      "side": "SELL",
+      "quantity": 7,
+      "price": 1288.9000244140625,
+      "costs": 13.860292102338622
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "DLF",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 673.5499877929688,
+      "costs": 1.0347250035472413
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "INDGN",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 600.1500244140625,
+      "costs": 0.9219660714055176
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CYIENT",
+      "side": "SELL",
+      "quantity": 3,
+      "price": 1122.199951171875,
+      "costs": 5.171858226566895
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "NAVA",
+      "side": "SELL",
+      "quantity": 17,
+      "price": 560.75,
+      "costs": 14.6444584015
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "TATASTEEL",
+      "side": "SELL",
+      "quantity": 51,
+      "price": 183.85000610351562,
+      "costs": 14.404193133295351
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "SAIL",
+      "side": "SELL",
+      "quantity": 6,
+      "price": 196.5,
+      "costs": 1.811210454
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "BEL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 405.75,
+      "costs": 0.6233236994999999
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "SUNTV",
+      "side": "SELL",
+      "quantity": 19,
+      "price": 460.6000061035156,
+      "costs": 13.44412839455121
     },
     {
       "date": "2026-09-01",
       "symbol": "ADANIPOWER",
       "side": "SELL",
       "quantity": 47,
-      "price": 204.3600006103516,
-      "costs": 14.755327875988987
+      "price": 207.6999969482422,
+      "costs": 14.996484369055084
     },
     {
       "date": "2026-09-01",
-      "symbol": "YESBANK",
-      "side": "SELL",
-      "quantity": 432,
-      "price": 22.100000381469727,
-      "costs": 14.666657120362245
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "FINCABLES",
-      "side": "SELL",
-      "quantity": 10,
-      "price": 1248.300048828125,
-      "costs": 19.176709908110354
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "AUROPHARMA",
+      "symbol": "BHEL",
       "side": "SELL",
       "quantity": 1,
-      "price": 1683.300048828125,
-      "costs": 2.5859293008110353
+      "price": 427.5,
+      "costs": 0.656736615
     },
     {
       "date": "2026-09-01",
-      "symbol": "PIDILITIND",
+      "symbol": "JMFINANCIL",
       "side": "SELL",
-      "quantity": 6,
-      "price": 1643.5,
-      "costs": 15.148724586
+      "quantity": 80,
+      "price": 129.38999938964844,
+      "costs": 15.901782496188964
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CENTRALBK",
+      "side": "SELL",
+      "quantity": 317,
+      "price": 30.3700008392334,
+      "costs": 14.789693616232936
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "BATAINDIA",
+      "side": "SELL",
+      "quantity": 13,
+      "price": 670.4500122070312,
+      "costs": 13.389515625885863
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "HINDUNILVR",
+      "side": "SELL",
+      "quantity": 4,
+      "price": 1975.0,
+      "costs": 12.1361854
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "THELEELA",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 569.9000244140625,
+      "costs": 1.7509904698110352
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CHALET",
+      "side": "SELL",
+      "quantity": 12,
+      "price": 897.9500122070312,
+      "costs": 16.55344986543311
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ENGINERSIN",
+      "side": "SELL",
+      "quantity": 8,
+      "price": 276.6000061035156,
+      "costs": 3.3993609678110355
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ELECON",
+      "side": "SELL",
+      "quantity": 23,
+      "price": 416.6000061035156,
+      "costs": 14.719810502456728
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "KPRMILL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1167.4000244140625,
+      "costs": 1.7933902699055175
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "HEXT",
+      "side": "SELL",
+      "quantity": 17,
+      "price": 543.5999755859375,
+      "costs": 14.196571073606203
     },
     {
       "date": "2026-09-01",
       "symbol": "IPCALAB",
       "side": "SELL",
       "quantity": 5,
-      "price": 1987.5999755859373,
-      "costs": 15.26701380047241
+      "price": 1956.5,
+      "costs": 15.028130845000002
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "POLYCAB",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 8804.0,
+      "costs": 13.524933704
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "MANKIND",
+      "side": "SELL",
+      "quantity": 4,
+      "price": 2391.5,
+      "costs": 14.695537916000001
     },
     {
       "date": "2026-09-01",
       "symbol": "SCI",
       "side": "BUY",
       "quantity": 2,
-      "price": 287.5,
-      "costs": 0.9695799500000001
+      "price": 288.20001220703125,
+      "costs": 0.9719407075676268
     },
     {
       "date": "2026-09-01",
       "symbol": "IOB",
       "side": "BUY",
-      "quantity": 23,
-      "price": 32.27000045776367,
-      "costs": 1.251533817213539
+      "quantity": 20,
+      "price": 32.68000030517578,
+      "costs": 1.1021173238919069
     },
     {
       "date": "2026-09-01",
       "symbol": "ITC",
       "side": "BUY",
       "quantity": 3,
-      "price": 266.6000061035156,
-      "costs": 1.3486435856757202
+      "price": 266.29998779296875,
+      "costs": 1.3471258896485596
     },
     {
       "date": "2026-09-01",
       "symbol": "NATIONALUM",
       "side": "BUY",
       "quantity": 1,
-      "price": 372.0,
-      "costs": 0.627276072
+      "price": 370.0,
+      "costs": 0.62390362
     },
     {
       "date": "2026-09-01",
       "symbol": "MMTC",
       "side": "BUY",
-      "quantity": 5,
-      "price": 62.31999969482422,
-      "costs": 0.5254280190270234
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "POWERGRID",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 264.54998779296875,
-      "costs": 1.3382732031485596
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "BSE",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 3242.0,
-      "costs": 5.466744691999999
+      "quantity": 7,
+      "price": 62.099998474121094,
+      "costs": 0.7330024241891633
     },
     {
       "date": "2026-09-01",
       "symbol": "IGIL",
       "side": "BUY",
-      "quantity": 2,
-      "price": 339.75,
-      "costs": 1.145790567
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "JSWCEMENT",
-      "side": "BUY",
-      "quantity": 5,
-      "price": 124.75,
-      "costs": 1.0517834675000002
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "HBLENGINE",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 659.2000122070312,
-      "costs": 2.223120399567627
+      "quantity": 3,
+      "price": 327.20001220703125,
+      "costs": 1.6551995033514404
     },
     {
       "date": "2026-09-01",
       "symbol": "GESHIP",
       "side": "BUY",
       "quantity": 1,
-      "price": 1325.5999755859375,
-      "costs": 2.235261144432373
+      "price": 1305.5999755859375,
+      "costs": 2.2015366244323733
     },
     {
       "date": "2026-09-01",
-      "symbol": "TATAINVEST",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 633.6500244140625,
-      "costs": 1.0684771460676268
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CHENNPETRO",
-      "side": "BUY",
-      "quantity": 7,
-      "price": 1387.0,
-      "costs": 16.371568234
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CAMS",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 752.0,
-      "costs": 1.2680419520000004
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "HAL",
+      "symbol": "HBLENGINE",
       "side": "BUY",
       "quantity": 2,
-      "price": 4807.60009765625,
-      "costs": 16.213400564541015
+      "price": 660.2000122070312,
+      "costs": 2.226492851567627
     },
     {
       "date": "2026-09-01",
       "symbol": "NESTLEIND",
       "side": "BUY",
       "quantity": 1,
-      "price": 1438.199951171875,
-      "costs": 2.4251301508647467
+      "price": 1425.0,
+      "costs": 2.40287205
     },
     {
       "date": "2026-09-01",
       "symbol": "IEX",
       "side": "BUY",
       "quantity": 8,
-      "price": 119.1999969482422,
-      "costs": 1.607985072432373
+      "price": 118.86000061035156,
+      "costs": 1.6033985871135252
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "VEDL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 270.70001220703125,
+      "costs": 0.4564613987838135
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "POWERGRID",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 266.79998779296875,
+      "costs": 1.34965522864856
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CAMS",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 741.8499755859375,
+      "costs": 1.250926716932373
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "HAL",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4780.0,
+      "costs": 16.12032056
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "TATAINVEST",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 628.0999755859375,
+      "costs": 2.118237018864746
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "UCOBANK",
+      "side": "BUY",
+      "quantity": 36,
+      "price": 24.389999389648438,
+      "costs": 1.4805738399891357
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "BSE",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 3168.0,
+      "costs": 5.341963968000001
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "HINDCOPPER",
+      "side": "BUY",
+      "quantity": 19,
+      "price": 520.9500122070312,
+      "costs": 16.690349650392456
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ICICIBANK",
+      "side": "BUY",
+      "quantity": 7,
+      "price": 1426.5,
+      "costs": 16.837809723
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "DELHIVERY",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 454.79998779296875,
+      "costs": 1.533791128432373
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "YESBANK",
+      "side": "BUY",
+      "quantity": 24,
+      "price": 22.149999618530273,
+      "costs": 0.8963977261621398
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ADANIPORTS",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1672.699951171875,
+      "costs": 2.820550147864746
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "JSWCEMENT",
+      "side": "BUY",
+      "quantity": 6,
+      "price": 123.5999984741211,
+      "costs": 1.25050518616214
     },
     {
       "date": "2026-09-01",
       "symbol": "NATCOPHARM",
       "side": "BUY",
       "quantity": 1,
-      "price": 849.2000122070312,
-      "costs": 1.4319431397838136
+      "price": 843.25,
+      "costs": 1.4219100745
     },
     {
       "date": "2026-09-01",
-      "symbol": "ICICIBANK",
+      "symbol": "WIPRO",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 177.08999633789062,
+      "costs": 0.8958412684945678
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "JPPOWER",
+      "side": "BUY",
+      "quantity": 615,
+      "price": 16.3700008392334,
+      "costs": 16.97616543660936
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "PVRINOX",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1210.0,
+      "costs": 16.322667680000002
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "BANKBARODA",
       "side": "BUY",
       "quantity": 1,
-      "price": 1438.0,
-      "costs": 2.424792988
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "UCOBANK",
-      "side": "BUY",
-      "quantity": 33,
-      "price": 24.59000015258789,
-      "costs": 1.3683218207108232
+      "price": 241.1999969482422,
+      "costs": 0.4067177060540466
     },
     {
       "date": "2026-09-01",
       "symbol": "HDFCBANK",
       "side": "BUY",
       "quantity": 1,
-      "price": 711.9000244140625,
-      "costs": 1.200424330567627
+      "price": 700.7999877929688,
+      "costs": 1.1817071602161866
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "FEDERALBNK",
+      "side": "BUY",
+      "quantity": 28,
+      "price": 353.3500061035156,
+      "costs": 16.683183086973386
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "NLCINDIA",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 275.5,
+      "costs": 1.858221052
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "GMDCLTD",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 557.6500244140625,
+      "costs": 0.9403239700676271
     },
     {
       "date": "2026-09-01",
       "symbol": "NTPC",
       "side": "BUY",
       "quantity": 2,
-      "price": 327.5,
-      "costs": 1.1044780299999999
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "LAURUSLABS",
-      "side": "BUY",
-      "quantity": 5,
-      "price": 1861.5999755859373,
-      "costs": 15.695391402161862
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "SUNTV",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 462.1499938964844,
-      "costs": 1.5585786712161864
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "DELHIVERY",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 460.7999877929688,
-      "costs": 0.7770129202161866
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CLEAN",
-      "side": "BUY",
-      "quantity": 12,
-      "price": 827.0999755859375,
-      "costs": 16.73612980118848
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "WIPRO",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 181.6999969482422,
-      "costs": 0.6127745181080931
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "HINDUNILVR",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 1994.800048828125,
-      "costs": 3.3636837071352534
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "TATASTEEL",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 184.07000732421875,
-      "costs": 0.6207672643405763
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "NAVINFLUOR",
-      "side": "BUY",
-      "quantity": 1,
-      "price": 8636.0,
-      "costs": 14.562247736000002
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "BANKBARODA",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 237.6999969482422,
-      "costs": 0.8016318301080934
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "JPPOWER",
-      "side": "BUY",
-      "quantity": 609,
-      "price": 16.559999465942383,
-      "costs": 17.00565611061002
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "IGL",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 149.85000610351562,
-      "costs": 0.7580429291757204
+      "price": 330.0,
+      "costs": 1.11290916
     },
     {
       "date": "2026-09-01",
       "symbol": "DCMSHRIRAM",
       "side": "BUY",
       "quantity": 9,
-      "price": 1030.4000244140625,
-      "costs": 15.637385804108641
+      "price": 1028.0,
+      "costs": 15.600962952
     },
     {
       "date": "2026-09-01",
-      "symbol": "INDGN",
+      "symbol": "KOTAKBANK",
       "side": "BUY",
-      "quantity": 16,
-      "price": 605.4000244140625,
-      "costs": 16.333460185082032
+      "quantity": 23,
+      "price": 423.5,
+      "costs": 16.424684353000004
     },
     {
       "date": "2026-09-01",
-      "symbol": "WELCORP",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 2553.60009765625,
-      "costs": 12.917840634811524
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "RITES",
-      "side": "BUY",
-      "quantity": 46,
-      "price": 216.3800048828125,
-      "costs": 16.78381714522217
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CEATLTD",
-      "side": "BUY",
-      "quantity": 2,
-      "price": 3400.199951171875,
-      "costs": 11.467011125729492
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CONCORDBIO",
-      "side": "BUY",
-      "quantity": 6,
-      "price": 1484.300048828125,
-      "costs": 15.017192004811525
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "HCLTECH",
-      "side": "BUY",
-      "quantity": 7,
-      "price": 1351.4000244140625,
-      "costs": 15.951361002973387
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "CCL",
+      "symbol": "GRANULES",
       "side": "BUY",
       "quantity": 1,
-      "price": 1100.0999755859375,
-      "costs": 1.855017181432373
+      "price": 831.75,
+      "costs": 1.4025184754999998
     },
     {
       "date": "2026-09-01",
-      "symbol": "CANBK",
-      "side": "BUY",
-      "quantity": 3,
-      "price": 125.5999984741211,
-      "costs": 0.63536994908107
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "KIRLOSENG",
-      "side": "BUY",
-      "quantity": 4,
-      "price": 2138.300048828125,
-      "costs": 14.422628552541017
-    },
-    {
-      "date": "2026-09-01",
-      "symbol": "EMAMILTD",
+      "symbol": "INDUSTOWER",
       "side": "BUY",
       "quantity": 1,
-      "price": 376.6499938964844,
-      "costs": 0.6351170126080934
+      "price": 379.0,
+      "costs": 0.639079654
     },
     {
       "date": "2026-09-01",
       "symbol": "ABB",
       "side": "BUY",
       "quantity": 1,
-      "price": 7396.0,
-      "costs": 12.471327495999999
+      "price": 7447.5,
+      "costs": 12.558168134999999
     },
     {
       "date": "2026-09-01",
+      "symbol": "CEATLTD",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 3347.800048828125,
+      "costs": 16.935442455405763
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "COALINDIA",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 417.8500061035156,
+      "costs": 0.7045895443919068
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "NAVINFLUOR",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 8542.5,
+      "costs": 14.404585605000001
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "LAURUSLABS",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1864.0,
+      "costs": 15.715626320000002
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "ZENTEC",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1829.0999755859375,
+      "costs": 15.421379677161864
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "USHAMART",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 501.6000061035156,
+      "costs": 0.8458109718919067
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "BHARTIARTL",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1862.800048828125,
+      "costs": 15.70550937567627
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CONCORDBIO",
+      "side": "BUY",
+      "quantity": 13,
+      "price": 722.4000244140625,
+      "costs": 15.835686146379153
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CANBK",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 126.30000305175781,
+      "costs": 0.4259406978919067
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "CCL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1086.0999755859375,
+      "costs": 1.831410017432373
+    },
+    {
+      "date": "2026-09-01",
+      "symbol": "RADICO",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4476.2001953125,
+      "costs": 15.09577030108203
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "SCI",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 290.6000061035156,
+      "costs": 0.44642728497637935
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IOB",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 31.350000381469727,
+      "costs": 0.04816068568602371
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ITC",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 268.8999938964844,
+      "costs": 0.8261823240472412
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "HBLENGINE",
+      "side": "SELL",
+      "quantity": 3,
+      "price": 763.5999755859375,
+      "costs": 3.5191864082834474
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "GESHIP",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1559.300048828125,
+      "costs": 2.3954372768110352
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "TATAINVEST",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 621.75,
+      "costs": 0.9551485155
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IDEA",
+      "side": "SELL",
+      "quantity": 693,
+      "price": 12.739999771118164,
+      "costs": 13.563062589651341
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "NTPC",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 321.79998779296875,
+      "costs": 0.49435750804724127
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "PNB",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 112.3499984741211,
+      "costs": 0.17259498875590515
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "CANBK",
+      "side": "SELL",
+      "quantity": 79,
+      "price": 118.5,
+      "costs": 14.381379699
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "COALINDIA",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 425.1000061035156,
+      "costs": 1.306099363952759
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ADANIPORTS",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1774.0,
+      "costs": 2.725264924
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "CHENNPETRO",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1401.0,
+      "costs": 2.152252626
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "BHEL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 429.0,
+      "costs": 0.659040954
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "HDFCBANK",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 704.7999877929688,
+      "costs": 1.0827320660472413
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "INDUSTOWER",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 380.20001220703125,
+      "costs": 0.5840731439527589
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "THELEELA",
+      "side": "SELL",
+      "quantity": 17,
+      "price": 577.5999755859375,
+      "costs": 15.0845097016062
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ENGINERSIN",
+      "side": "SELL",
+      "quantity": 36,
+      "price": 307.8500061035156,
+      "costs": 17.02537860514966
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "USHAMART",
+      "side": "SELL",
+      "quantity": 20,
+      "price": 510.5,
+      "costs": 15.684867460000001
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "GRANULES",
+      "side": "SELL",
+      "quantity": 12,
+      "price": 817.25,
+      "costs": 15.065768382
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "PVRINOX",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1231.4000244140625,
+      "costs": 1.8917087339055176
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "KOTAKBANK",
+      "side": "SELL",
+      "quantity": 23,
+      "price": 416.0,
+      "costs": 14.698610368
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "CEATLTD",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 3283.0,
+      "costs": 5.043429958
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "LAURUSLABS",
+      "side": "SELL",
+      "quantity": 5,
+      "price": 1971.4000244140625,
+      "costs": 15.142579869527587
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "RADICO",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 4289.10009765625,
+      "costs": 13.17805417324414
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ZFCVINDIA",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 2201.300048828125,
+      "costs": 3.7118893761352534
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "NAM-INDIA",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1061.0,
+      "costs": 1.7890857859999998
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "NATIONALUM",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 340.0,
+      "costs": 0.5733168400000002
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "MMTC",
+      "side": "BUY",
+      "quantity": 9,
+      "price": 56.33000183105469,
+      "costs": 0.8548660230081481
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ANTHEM",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 851.9000244140625,
+      "costs": 1.436495970567627
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IEX",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 104.30000305175781,
+      "costs": 1.406987015567627
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "HDFCAMC",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 2346.0,
+      "costs": 3.9558861960000002
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "INFY",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1020.5,
+      "costs": 1.720793633
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "BEL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 384.8500061035156,
+      "costs": 0.6489440863919068
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "CAMS",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 683.8499755859375,
+      "costs": 1.1531256089323731
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "DELHIVERY",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 400.29998779296875,
+      "costs": 1.3499924944323731
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IDBI",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 86.30999755859375,
+      "costs": 0.14553816194323732
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "UCOBANK",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 23.15999984741211,
+      "costs": 0.15621197561080932
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "TATAELXSI",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 3105.0,
+      "costs": 5.2357317299999995
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "INDIAMART",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1591.5,
+      "costs": 2.683628679
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "BANKINDIA",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 133.5,
+      "costs": 0.450222342
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "SBIN",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 958.0,
+      "costs": 1.6154045080000001
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "WIPRO",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 162.13999938964844,
+      "costs": 0.8202140478324279
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "JSWCEMENT",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 111.08999633789062,
+      "costs": 0.9366142008242797
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "TRAVELFOOD",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1204.300048828125,
+      "costs": 2.030722054135254
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "YESBANK",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 21.059999465942383,
+      "costs": 0.14204767463783266
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "JPPOWER",
+      "side": "BUY",
+      "quantity": 32,
+      "price": 14.90999984741211,
+      "costs": 0.8045321408864747
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "HINDCOPPER",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 478.6499938964844,
+      "costs": 0.8071120646080933
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "ZENTEC",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 1599.5,
+      "costs": 2.6971184870000005
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "FEDERALBNK",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 327.3500061035156,
+      "costs": 0.5519860913919067
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "SAIL",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 176.9499969482422,
+      "costs": 0.8951330566621399
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "NMDC",
+      "side": "BUY",
+      "quantity": 130,
+      "price": 73.73999786376953,
+      "costs": 16.164499212918244
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "NLCINDIA",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 252.4499969482422,
+      "costs": 0.8513754971080932
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "GMDCLTD",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 487.3500061035156,
+      "costs": 0.8217822513919067
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "RECLTD",
+      "side": "BUY",
+      "quantity": 32,
+      "price": 295.6499938964844,
+      "costs": 15.953046611458984
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "CONCORDBIO",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 677.9500122070312,
+      "costs": 1.1431769372838134
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IPCALAB",
+      "side": "BUY",
+      "quantity": 4,
+      "price": 1951.300048828125,
+      "costs": 13.161331504541016
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "IOC",
+      "side": "BUY",
+      "quantity": 73,
+      "price": 130.5,
+      "costs": 16.063831989
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "HINDUNILVR",
+      "side": "BUY",
+      "quantity": 5,
+      "price": 1838.4000244140625,
+      "costs": 15.499789597838136
+    },
+    {
+      "date": "2026-10-01",
       "symbol": "ELGIEQUIP",
       "side": "BUY",
       "quantity": 16,
-      "price": 628.9000244140625,
-      "costs": 16.96748116108203
+      "price": 591.2000122070312,
+      "costs": 15.950349308541014
     },
     {
-      "date": "2026-09-01",
-      "symbol": "TENNIND",
+      "date": "2026-10-01",
+      "symbol": "TIMKEN",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 3132.300048828125,
+      "costs": 15.845297346405763
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "LTM",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 4010.0,
+      "costs": 13.523532519999998
+    },
+    {
+      "date": "2026-10-01",
+      "symbol": "PIDILITIND",
+      "side": "BUY",
+      "quantity": 6,
+      "price": 1487.699951171875,
+      "costs": 15.051590027188476
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ITC",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 273.8999938964844,
+      "costs": 0.42077229202362065
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HBLENGINE",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 812.9000244140625,
+      "costs": 1.2487981529055177
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "INFY",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1148.0999755859375,
+      "costs": 1.7637410330944825
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ACUTAAS",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 3904.0,
+      "costs": 5.997426304
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "TCS",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 2499.10009765625,
+      "costs": 3.839182546622071
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "MCX",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 3490.10009765625,
+      "costs": 5.361582512622071
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "DELHIVERY",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 412.0,
+      "costs": 1.265850224
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HDFCAMC",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 2440.0,
+      "costs": 3.7483914400000002
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "TATAELXSI",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 3716.800048828125,
+      "costs": 5.709844871811035
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "IGIL",
+      "side": "SELL",
+      "quantity": 7,
+      "price": 407.8500061035156,
+      "costs": 4.385848484334655
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HONASA",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 457.20001220703125,
+      "costs": 0.7023625459527589
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "POWERGRID",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 259.54998779296875,
+      "costs": 0.3987274395472412
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "JSWCEMENT",
+      "side": "SELL",
+      "quantity": 9,
+      "price": 121.97000122070312,
+      "costs": 1.686361383857483
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "WIPRO",
+      "side": "SELL",
+      "quantity": 12,
+      "price": 198.0,
+      "costs": 3.650072976
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BANKINDIA",
+      "side": "SELL",
+      "quantity": 2,
+      "price": 133.1699981689453,
+      "costs": 0.4091584272141724
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "CAMS",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 687.0,
+      "costs": 1.0553872620000002
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "DLF",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 709.0,
+      "costs": 1.089184234
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "INDGN",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 612.7999877929688,
+      "costs": 0.9413992740472412
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "PNB",
+      "side": "SELL",
+      "quantity": 7,
+      "price": 120.97000122070312,
+      "costs": 1.3008608276669311
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BANKBARODA",
+      "side": "SELL",
+      "quantity": 41,
+      "price": 243.3000030517578,
+      "costs": 15.324315410015778
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "SBIN",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 970.25,
+      "costs": 1.4905232765
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BEL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 380.1000061035156,
+      "costs": 0.5839195119763795
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ADANIPORTS",
+      "side": "SELL",
+      "quantity": 5,
+      "price": 1866.9000244140625,
+      "costs": 14.339901784527589
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "IEX",
+      "side": "SELL",
+      "quantity": 6,
+      "price": 109.0,
+      "costs": 1.004691804
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "INDUSTOWER",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 390.0,
+      "costs": 0.5991281399999999
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BSE",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 3665.699951171875,
+      "costs": 5.631343573188965
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "KIRLOSENG",
+      "side": "SELL",
+      "quantity": 4,
+      "price": 1717.9000244140625,
+      "costs": 10.55633073162207
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "KPRMILL",
+      "side": "SELL",
+      "quantity": 8,
+      "price": 1160.0,
+      "costs": 14.256177279999998
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HAL",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 4958.60009765625,
+      "costs": 7.61753039362207
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ICICIBANK",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 1424.5,
+      "costs": 2.1883539370000005
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "PVRINOX",
+      "side": "SELL",
+      "quantity": 7,
+      "price": 1524.0,
+      "costs": 16.388458968000002
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "FEDERALBNK",
+      "side": "SELL",
+      "quantity": 29,
+      "price": 333.75,
+      "costs": 14.868747397500002
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "NAVINFLUOR",
+      "side": "SELL",
+      "quantity": 1,
+      "price": 8530.0,
+      "costs": 13.10400778
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ZENTEC",
+      "side": "SELL",
+      "quantity": 6,
+      "price": 1710.5999755859375,
+      "costs": 15.767208948566896
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BHARTIARTL",
+      "side": "SELL",
+      "quantity": 5,
+      "price": 2065.0,
+      "costs": 15.861533450000001
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "IOC",
+      "side": "SELL",
+      "quantity": 5,
+      "price": 138.6699981689453,
+      "costs": 1.0651422830354311
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HINDUNILVR",
+      "side": "SELL",
+      "quantity": 5,
+      "price": 1962.800048828125,
+      "costs": 15.076522339055177
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "TIMKEN",
+      "side": "SELL",
+      "quantity": 3,
+      "price": 3008.300048828125,
+      "costs": 13.864286252433104
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "PIDILITIND",
+      "side": "SELL",
+      "quantity": 6,
+      "price": 1510.9000244140625,
+      "costs": 13.926503405433106
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "SCI",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 259.0299987792969,
+      "costs": 1.3103493561648563
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "IOB",
+      "side": "BUY",
+      "quantity": 15,
+      "price": 29.31999969482422,
+      "costs": 0.74160218708107
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ABSLAMC",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 811.7000122070312,
+      "costs": 2.737419329567627
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "MMTC",
+      "side": "BUY",
+      "quantity": 9,
+      "price": 52.209999084472656,
+      "costs": 0.7923407212459258
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "NATIONALUM",
       "side": "BUY",
       "quantity": 1,
-      "price": 525.2000122070312,
-      "costs": 0.8856059157838135
+      "price": 317.54998779296875,
+      "costs": 0.5354610457161865
     },
     {
-      "date": "2026-09-01",
+      "date": "2026-11-02",
+      "symbol": "VEDL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 246.89999389648438,
+      "costs": 0.41632918910809324
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "CUMMINSIND",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 4650.0,
+      "costs": 7.8409509
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "IDBI",
+      "side": "BUY",
+      "quantity": 10,
+      "price": 77.63999938964844,
+      "costs": 1.3091858561080933
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "YESBANK",
+      "side": "BUY",
+      "quantity": 156,
+      "price": 15.380000114440918,
+      "costs": 4.045728347383827
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "TATAINVEST",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 552.9000244140625,
+      "costs": 1.8646287931352539
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "UCOBANK",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 22.600000381469727,
+      "costs": 0.07621741648648835
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "BHEL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 400.0,
+      "costs": 0.6744903999999999
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "CONCORDBIO",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 613.9500122070312,
+      "costs": 1.0352584732838135
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "JPPOWER",
+      "side": "BUY",
+      "quantity": 57,
+      "price": 13.420000076293945,
+      "costs": 1.2898617237729835
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "TMCV",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 404.20001220703125,
+      "costs": 0.6815725697838135
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "GMDCLTD",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 425.6000061035156,
+      "costs": 2.1529733876757207
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "NATCOPHARM",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 781.5999755859375,
+      "costs": 1.3179542004323732
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ATUL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 5073.0,
+      "costs": 8.554224498
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "NLCINDIA",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 230.30999755859375,
+      "costs": 1.1650641178297119
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ELGIEQUIP",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 532.4000244140625,
+      "costs": 0.897746763567627
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "SAIL",
+      "side": "BUY",
+      "quantity": 2,
+      "price": 167.5,
+      "costs": 0.56488571
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "COALINDIA",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 408.0,
+      "costs": 0.6879802079999999
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "DCMSHRIRAM",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 895.2999877929688,
+      "costs": 1.5096781172161864
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "NMDC",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 68.19999694824219,
+      "costs": 0.9200048644323731
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "CCL",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 941.6500244140625,
+      "costs": 1.5878347540676272
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "FINCABLES",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1140.0999755859375,
+      "costs": 15.379729771458985
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "HINDCOPPER",
+      "side": "BUY",
+      "quantity": 3,
+      "price": 400.29998779296875,
+      "costs": 2.0249887416485595
+    },
+    {
+      "date": "2026-11-02",
       "symbol": "ECLERX",
       "side": "BUY",
       "quantity": 5,
-      "price": 1973.800048828125,
-      "costs": 16.64136480567627
+      "price": 1578.0,
+      "costs": 13.304323140000001
     },
     {
-      "date": "2026-09-01",
-      "symbol": "ANANDRATHI",
+      "date": "2026-11-02",
+      "symbol": "HEXT",
       "side": "BUY",
-      "quantity": 4,
-      "price": 2197.0,
-      "costs": 14.818554087999999
+      "quantity": 18,
+      "price": 499.3999938964844,
+      "costs": 15.15782257394568
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "JSWDULUX",
+      "side": "BUY",
+      "quantity": 36,
+      "price": 260.25,
+      "costs": 15.798251394
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "ERIS",
+      "side": "BUY",
+      "quantity": 8,
+      "price": 1177.699951171875,
+      "costs": 15.88694622291797
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "RECLTD",
+      "side": "BUY",
+      "quantity": 1,
+      "price": 284.5,
+      "costs": 0.47973129700000006
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "USHAMART",
+      "side": "BUY",
+      "quantity": 20,
+      "price": 460.75,
+      "costs": 15.538572590000001
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "RITES",
+      "side": "BUY",
+      "quantity": 48,
+      "price": 193.13999938964844,
+      "costs": 15.632529053318846
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "RHIM",
+      "side": "BUY",
+      "quantity": 26,
+      "price": 355.6499938964844,
+      "costs": 15.592362931810424
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "CLEAN",
+      "side": "BUY",
+      "quantity": 14,
+      "price": 658.7999877929688,
+      "costs": 15.552399355026612
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "GROWW",
+      "side": "BUY",
+      "quantity": 45,
+      "price": 205.97999572753906,
+      "costs": 15.629797092404935
+    },
+    {
+      "date": "2026-11-02",
+      "symbol": "RBLBANK",
+      "side": "BUY",
+      "quantity": 26,
+      "price": 350.20001220703125,
+      "costs": 15.35342551037915
     }
   ],
   "nav_history": [
     {
       "date": "2026-07-01",
-      "nav": 993876.1392591828,
-      "cash": 101062.60773261728,
+      "nav": 993728.7215923216,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-02",
-      "nav": 998486.740094983,
-      "cash": 101062.60773261728,
+      "nav": 998492.5411361601,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-03",
-      "nav": 999456.0007227296,
-      "cash": 101062.60773261728,
+      "nav": 999452.9193328765,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-06",
-      "nav": 998895.1445520753,
-      "cash": 101062.60773261728,
+      "nav": 998698.026281729,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-07",
-      "nav": 993564.5670259828,
-      "cash": 101062.60773261728,
+      "nav": 992212.8276389983,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-08",
-      "nav": 978244.518812024,
-      "cash": 101062.60773261728,
+      "nav": 977534.1794608977,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-09",
-      "nav": 986910.5156591767,
-      "cash": 101062.60773261728,
+      "nav": 986746.5690177825,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-10",
-      "nav": 998489.0578993196,
-      "cash": 101062.60773261728,
+      "nav": 1000907.0490917113,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-13",
-      "nav": 1000297.268768155,
-      "cash": 101062.60773261728,
+      "nav": 1003243.1902660277,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-14",
-      "nav": 994219.4675386781,
-      "cash": 101062.60773261728,
+      "nav": 995504.1416648772,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-15",
-      "nav": 995178.80861839,
-      "cash": 101062.60773261728,
+      "nav": 996417.0599807646,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-16",
-      "nav": 994817.0410383577,
-      "cash": 101062.60773261728,
+      "nav": 995507.9670757201,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-17",
-      "nav": 994629.6959436769,
-      "cash": 101062.60773261728,
+      "nav": 991521.7979949858,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-20",
-      "nav": 997678.1487558717,
-      "cash": 101062.60773261728,
+      "nav": 995776.3188613799,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-21",
-      "nav": 997823.3024919862,
-      "cash": 101062.60773261728,
+      "nav": 995140.994112387,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-22",
-      "nav": 989213.1690595979,
-      "cash": 101062.60773261728,
+      "nav": 985821.3402141478,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-23",
-      "nav": 979853.8582075471,
-      "cash": 101062.60773261728,
+      "nav": 977201.52258338,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-24",
-      "nav": 978457.0896452302,
-      "cash": 101062.60773261728,
+      "nav": 977630.5320457366,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-27",
-      "nav": 985837.5205229158,
-      "cash": 101062.60773261728,
+      "nav": 985889.9742015746,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-28",
-      "nav": 984355.878761136,
-      "cash": 101062.60773261728,
+      "nav": 983538.3813136962,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-29",
-      "nav": 993989.787544095,
-      "cash": 101062.60773261728,
+      "nav": 991432.3100112822,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-30",
-      "nav": 989865.9091604585,
-      "cash": 101062.60773261728,
+      "nav": 986294.471020117,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-07-31",
-      "nav": 993860.4702051515,
-      "cash": 101062.60773261728,
+      "nav": 990833.2648815062,
+      "cash": 104508.6600669768,
       "n_positions": 95
     },
     {
       "date": "2026-08-03",
-      "nav": 1006678.1540534336,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1002967.7524305221,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-04",
-      "nav": 1005663.8392207462,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1002743.6086126205,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-05",
-      "nav": 1011444.9395377475,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1006860.7878347274,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-06",
-      "nav": 1012891.4188716251,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1007192.9390512344,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-07",
-      "nav": 1012973.776194318,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1008764.5548597213,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-10",
-      "nav": 1011684.1906878788,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1005483.9894071457,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-11",
-      "nav": 1012899.4486014682,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1004708.7692438003,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-12",
-      "nav": 1015124.8373248416,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1005414.096579158,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-13",
-      "nav": 1015806.9127394992,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1006278.4602399704,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-14",
-      "nav": 1012349.7943217594,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1002742.5354219314,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-17",
-      "nav": 1013384.7568957645,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1003417.8162618515,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-18",
-      "nav": 1010960.6861769992,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1000139.9866567489,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-19",
-      "nav": 1007268.6252600986,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 997519.364124858,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-20",
-      "nav": 1011019.1341483432,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1001205.9851232406,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-21",
-      "nav": 1012643.7254073459,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1003153.7245298263,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-24",
-      "nav": 1013790.5888984043,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1004859.6375051376,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-25",
-      "nav": 1014509.7567736942,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1006880.704170787,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-26",
-      "nav": 1017302.453480466,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1010698.2935777542,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-27",
-      "nav": 1013248.798012479,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1007717.8249612686,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-28",
-      "nav": 1014242.0781256992,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1010303.1877065536,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-08-31",
-      "nav": 1008824.4910018283,
-      "cash": 113224.60765908548,
-      "n_positions": 96
+      "nav": 1007165.6692949173,
+      "cash": 125195.84688242647,
+      "n_positions": 95
     },
     {
       "date": "2026-09-01",
-      "nav": 1006139.6173779287,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1004487.3635025115,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-02",
-      "nav": 1001497.4767243185,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1000294.5755329223,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-03",
-      "nav": 1006661.9297663488,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1005416.4989652724,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-04",
-      "nav": 1006799.6352907934,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1005045.4755354018,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-07",
-      "nav": 1002506.4276854314,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1000526.704319963,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-08",
-      "nav": 1003002.686567954,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 1002139.1349554153,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-09",
-      "nav": 997394.74448841,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 996992.9213724227,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-10",
-      "nav": 998030.8043257513,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 997275.2919321151,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-11",
-      "nav": 992860.5445114889,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 993773.6718883605,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-15",
-      "nav": 977139.5843340673,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 976836.191403398,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-16",
-      "nav": 974832.1655928411,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 974936.5338258834,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-17",
-      "nav": 982391.6259915151,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 982197.7444915862,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-18",
-      "nav": 990182.1025254049,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 990773.4395752044,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-21",
-      "nav": 990674.9443918981,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 990292.2880659194,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-22",
-      "nav": 989263.7148443975,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 988661.7771005721,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-23",
-      "nav": 995921.666155509,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 995439.4590597244,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-24",
-      "nav": 985376.5029217519,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 983905.2222595306,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-25",
-      "nav": 988248.024587325,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 985844.1744918914,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-28",
-      "nav": 988248.024587325,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 970544.7178402038,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-29",
-      "nav": 968280.9152981557,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 964837.0167083831,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-09-30",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 964856.2023038955,
+      "cash": 111530.33345700217,
+      "n_positions": 95
     },
     {
       "date": "2026-10-01",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 955258.0338293471,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-05",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 964121.4239174285,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-06",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 970715.2459064879,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-07",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 966317.3230539717,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-08",
-      "nav": 968538.4232641973,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 946852.504269258,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-09",
-      "nav": 958397.0052296438,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 954110.594326631,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-12",
-      "nav": 958397.0052296438,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 956546.0027748503,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-13",
-      "nav": 958397.0052296438,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 965317.1936031737,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-14",
-      "nav": 974133.7540938177,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 969887.3022476592,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-15",
-      "nav": 967352.6642195501,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 963466.7515751281,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-16",
-      "nav": 972025.4758888998,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 967767.2061640181,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-19",
-      "nav": 972025.4758888998,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 959465.111770288,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-21",
-      "nav": 952432.9451948919,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 948797.3933168807,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-22",
-      "nav": 938888.6134201803,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 943781.7922302642,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-23",
-      "nav": 923003.0612408437,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 929581.0810314574,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-26",
-      "nav": 923003.0612408437,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 938670.180255548,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-27",
-      "nav": 943378.8345248022,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 946578.4146944442,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-28",
-      "nav": 941356.6465193548,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 943348.5141474166,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-29",
-      "nav": 941356.6465193548,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 952132.2228685775,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-10-30",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 944932.0209261336,
+      "cash": 108206.37391628402,
+      "n_positions": 95
     },
     {
       "date": "2026-11-02",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 958161.884610244,
+      "cash": 134874.85566813583,
+      "n_positions": 95
     },
     {
       "date": "2026-11-03",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 962960.1053076469,
+      "cash": 134874.85566813583,
+      "n_positions": 95
     },
     {
       "date": "2026-11-04",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 976127.5072336876,
+      "cash": 134874.85566813583,
+      "n_positions": 95
     },
     {
       "date": "2026-11-05",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 986832.9736033165,
+      "cash": 134874.85566813583,
+      "n_positions": 95
     },
     {
       "date": "2026-11-06",
-      "nav": 940166.4030796804,
-      "cash": 100788.45564144038,
-      "n_positions": 97
+      "nav": 985308.5477953636,
+      "cash": 134874.85566813583,
+      "n_positions": 95
     }
   ],
   "rebalance_dates": [
     "2026-07-01",
     "2026-08-03",
     "2026-09-01",
-    "2026-10-01"
+    "2026-10-01",
+    "2026-11-02"
   ]
 }
